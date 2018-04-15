@@ -27,26 +27,26 @@ public class Login extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String username = request.getParameter("loginUser");
 		String password = request.getParameter("loginPassword");
-
-		/*
+		RequestDispatcher dispatcher;
+		HttpSession session = request.getSession(); //new session
+		
 		//SQL Code
 		ManageUser userMngr = new ManageUser();
 		User user = userMngr.loginInfo(username, password);
 
-		if(user != null)
-		{
-		request.getSession().setAttribute("user", user);
-		response.sendRedirect("/Home.jsp");
+		if(user != null){
+			request.getSession().setAttribute("user", user);
+			session.setAttribute("connected", "true");
+			dispatcher = getServletContext().getRequestDispatcher("/Home.jsp");
+		} else{
+			session.setAttribute("connected", "false");
+			request.setAttribute("error", "Unknown user, please try again");
+			dispatcher = getServletContext().getRequestDispatcher("/Login-CreateNewAccount.jsp");
+			//request.getRequestDispatcher("/login.jsp").forward(request, response);
 		}
-		else
-		{
-		request.setAttribute("error", "Unknown user, please try again");
-		request.getRequestDispatcher("/login.jsp").forward(request, response);
-		}
-		}
-		*/
 		
-		response.getWriter().append("Served at: " + username + " " + password).append(request.getContextPath());
+		dispatcher.forward(request, response); //forward to correct page
+		//response.getWriter().append("Served at: " + username + " " + password).append(request.getContextPath());
 	}
 
 	/**
