@@ -26,6 +26,9 @@ public class CreateAccount extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher dispatcher;
+		HttpSession session = request.getSession(); //new session
+		
 		// TODO Auto-generated method stub
 		String username = 	request.getParameter("username"); 
 		String firstname =	request.getParameter("firstname");
@@ -45,8 +48,31 @@ public class CreateAccount extends HttpServlet {
 		String ccType = 	request.getParameter("ccType");
 		String expMonth = 	request.getParameter("expMonth");
 		String expYear = 	request.getParameter("expYear");
-		String all = username + " " + firstname + " " + lastname + " " + email +  " "+ phone+ " " + newPass0 + " " + newPass1 + " " + news + " " + promotions + " " + address + " " + city + " " + stateSelect + " " + zip + " " + country + " " + 
-				ccno + " " + ccType + " " + expMonth + " " + expYear;
+		
+		//int user_type, String userName, String firstName, String lastName, String pass, String address,
+		//String city, int zip, String country, int subStatus, String email, String phone, int newsSub, int promoSub,
+		//int orders
+		
+		ManageUser userMngr = new ManageUser();
+		userMngr.addUser(0, username, firstname, lastname, newPass0, address, city, zip, country, 1, email, phone, news, promotions, 0);
+		User user = userMngr.loginInfo(username, password);
+		
+		if(user != null){
+			request.getSession().setAttribute("user", user.getUserName());
+			session.setAttribute("connected", "true");
+			dispatcher = getServletContext().getRequestDispatcher("/AccountConfirmation.jsp");
+		} else{
+			session.setAttribute("connected", "false");
+			request.setAttribute("error", "Error creating account, please try again");
+			dispatcher = getServletContext().getRequestDispatcher("/Login-CreateNewAccount.jsp");
+			//request.getRequestDispatcher("/login.jsp").forward(request, response);
+		}
+		
+		dispatcher.forward(request, response); //forward to correct page
+		
+		String all = username + " " + firstname + " " + lastname + " " + email +  " "+ phone+ " " + newPass0 +
+				" " + newPass1 + " " + news + " " + promotions + " " + address + " " + city + " " + stateSelect +
+				" " + zip + " " + country + " " + ccno + " " + ccType + " " + expMonth + " " + expYear;
 		System.out.print(all);
 		response.getWriter().append("Served at: " + all).append(request.getContextPath());
 	}

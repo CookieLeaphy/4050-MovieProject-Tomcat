@@ -43,7 +43,7 @@ public class ManageUser {
 		return ID;
 	}
 
-	public User getStudent(Integer ID)
+	public User getUser(Integer ID)
 	{
 		Session session = factory.openSession();
 		User user = null;
@@ -64,7 +64,7 @@ public class ManageUser {
 		return user;
 	}
 	
-	public void deleteStudent(Integer ID)
+	public void deleteUser(Integer ID)
 	{
 		Session session = factory.openSession();
 		Transaction tx = null;

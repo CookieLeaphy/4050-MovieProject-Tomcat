@@ -35,7 +35,7 @@ public class Login extends HttpServlet {
 		User user = userMngr.loginInfo(username, password);
 
 		if(user != null){
-			request.getSession().setAttribute("user", user);
+			request.getSession().setAttribute("user", user.getUserName());
 			session.setAttribute("connected", "true");
 			dispatcher = getServletContext().getRequestDispatcher("/Home.jsp");
 		} else{
