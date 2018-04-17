@@ -58,6 +58,9 @@ public class User {
 	@Column(name="orders")
 	private int orders;
 
+	public User() {
+		this.user_type = -1;
+	}
 	public User(int user_type, String userName, String firstName, String lastName, String pass, String address,
 			String city, int zip, String country, int subStatus, String email, String phone, int newsSub, int promoSub,
 			int orders) {

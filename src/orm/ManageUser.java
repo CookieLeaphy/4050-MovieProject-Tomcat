@@ -11,7 +11,9 @@ import entity.hibernateUtil;
 import entity.User;
 
 public class ManageUser {
-
+	public ManageUser() {
+		System.out.println("Manage User Constructor Accessed");
+	}
 	private static SessionFactory factory = hibernateUtil.getSessionFactory();
 	
 	public Integer addUser(int user_type, String userName, String firstName, String lastName, String pass, String address,
@@ -28,7 +30,7 @@ public class ManageUser {
 			User user = new User(user_type, userName, firstName, lastName, pass, address,
 					city, zip, country, subStatus, email, phone, newsSub, promoSub, orders);
 			ID = (Integer)session.save(user);
-			tx.commit();
+			tx.commit();	
 		}
 		catch(HibernateException e)
 		{
@@ -90,7 +92,7 @@ public class ManageUser {
 	public User loginInfo(String userName, String pass)
 	{
 		Session session = factory.openSession();
-		User user = null;
+		User user = new User();
 		
 		try
 		{
@@ -103,6 +105,37 @@ public class ManageUser {
 					user = tmpuser;
 				}
 			}
+		}
+		catch(HibernateException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			session.close();
+		}
+		return user;
+	}
+	
+	public User setPassword(String email, String pass)
+	{
+		Session session = factory.openSession();
+		User user = new User();
+		Transaction tx = null;
+		try
+		{
+			
+			tx = session.beginTransaction();
+			@SuppressWarnings("unchecked")
+			List<User> userList = session.createQuery("from User s where s.email='"+email+"'").getResultList();
+			for(User tmpuser : userList) 
+			{	
+				user = tmpuser; 
+				user.setPass(pass);
+				session.update(user);
+				break; 
+			}
+			tx.commit();
 		}
 		catch(HibernateException e)
 		{

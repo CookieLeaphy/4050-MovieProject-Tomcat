@@ -2,11 +2,17 @@ package servlets;
 
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import entity.User;
+import orm.ManageUser;
 
 /**
  * Servlet implementation class CreateAccount
@@ -35,14 +41,25 @@ public class CreateAccount extends HttpServlet {
 		String lastname= 	request.getParameter("lastname");
 		String phone = 		request.getParameter("phone");
 		String email = 		request.getParameter("email");
+		
+		//Implement 
 		String newPass0	 = 	request.getParameter("newPass0");
 		String newPass1 = 	request.getParameter("newPass1");
-		String news =	 	request.getParameter("news");	   //True = "on" False = "null"
-		String promotions = request.getParameter("promotions");//True = "on" False = "null"
+		if (!newPass0.equals(newPass1)) {
+		//Throw error/ send user to incorrect form page 
+		}
+		
+		int news = 1;	   //True = "on" False = "null"
+		if(request.getParameter("news")==null)
+			news = 0;
+		int promotions = 1;
+		if(request.getParameter("promotions")==null)//True = "on" False = "null"
+			promotions = 0;
+		
 		String address = 	request.getParameter("address");
 		String city = 		request.getParameter("city");
 		String stateSelect =request.getParameter("stateSelect");
-		String zip = 		request.getParameter("zip");
+		int zip = 			Integer.parseInt(request.getParameter("zip"));
 		String country = 	request.getParameter("country");
 		String ccno = 		request.getParameter("ccno");
 		String ccType = 	request.getParameter("ccType");
@@ -55,12 +72,15 @@ public class CreateAccount extends HttpServlet {
 		
 		ManageUser userMngr = new ManageUser();
 		userMngr.addUser(0, username, firstname, lastname, newPass0, address, city, zip, country, 1, email, phone, news, promotions, 0);
-		User user = userMngr.loginInfo(username, password);
+		SendEmail send = new SendEmail();
+		User user = userMngr.loginInfo(username, newPass0);
 		
-		if(user != null){
+		if( user.getUser_type() != -1){
 			request.getSession().setAttribute("user", user.getUserName());
 			session.setAttribute("connected", "true");
 			dispatcher = getServletContext().getRequestDispatcher("/AccountConfirmation.jsp");
+			send.sendMessage(user, 1); //Send a confirmation email
+			
 		} else{
 			session.setAttribute("connected", "false");
 			request.setAttribute("error", "Error creating account, please try again");
@@ -70,11 +90,12 @@ public class CreateAccount extends HttpServlet {
 		
 		dispatcher.forward(request, response); //forward to correct page
 		
+		//Test cases
 		String all = username + " " + firstname + " " + lastname + " " + email +  " "+ phone+ " " + newPass0 +
 				" " + newPass1 + " " + news + " " + promotions + " " + address + " " + city + " " + stateSelect +
 				" " + zip + " " + country + " " + ccno + " " + ccType + " " + expMonth + " " + expYear;
 		System.out.print(all);
-		response.getWriter().append("Served at: " + all).append(request.getContextPath());
+		//response.getWriter().append("Served at: " + all).append(request.getContextPath());
 	}
 
 	/**
