@@ -48,15 +48,18 @@ public class ManageMovie {
 	
 	public List<Movie> lookUpMovies(String title){
 		Session session = factory.openSession();
-		//List<Movie> movieList;
+		//@SuppressWarnings("unchecked")
+		List<Movie> movieList = null;
 		Transaction tx = null;
 		try
 		{
-			
+			String query = "FROM Movie s where s.title like '%"+title+"%'"
+							+ " or s.producer like '%"+title+"%'"
+							+ " or s.director like '%"+title+"%'"
+							+ " or s.genre like '%"+title+"%'";
 			tx = session.beginTransaction();
-			@SuppressWarnings("unchecked")
-			List<Movie> movieList = session.createQuery("FROM Movie").getResultList();
-			return movieList;
+			movieList = session.createQuery(query).getResultList();
+//			return movieList;
 		}
 		catch(HibernateException e)
 		{
@@ -66,10 +69,10 @@ public class ManageMovie {
 		{
 			session.close();
 		}
-		//return movieList;
+		return movieList;
 	}
 
-	public Movie getStudent(Integer ID)
+	public Movie getMovie(Integer ID)
 	{
 		Session session = factory.openSession();
 		Movie movie = null;
@@ -90,7 +93,7 @@ public class ManageMovie {
 		return movie;
 	}
 	
-	public void deleteStudent(Integer ID)
+	public void deleteMovie(Integer ID)
 	{
 		Session session = factory.openSession();
 		Transaction tx = null;

@@ -34,7 +34,13 @@ public class SearchMovie extends HttpServlet {
 		String title = request.getParameter("title");
 		ManageMovie movies = new ManageMovie();
 		List<Movie> results = movies.lookUpMovies(title);
-		response.getWriter().append("Served at: "+results.toString()).append(request.getContextPath());
+		String strlist = "";
+		for (Movie tmp: results) {
+			System.out.println(tmp.toString());
+			strlist += tmp.toString() + "\n";
+		}
+		System.out.println(results.toString());
+		response.getWriter().append("Served at: "+strlist).append(request.getContextPath());
 	}
 
 }

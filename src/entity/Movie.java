@@ -35,6 +35,13 @@ public class Movie {
 	
 	public Movie() {
 		ID = -1; //invalid movie
+		this.showing = "NA";
+		this.rating = "NA";
+		this.title = "NA";
+		this.producer = "NA";
+		this.director = "NA";
+		this.genre = "NA";
+		this.trailor = "NA";
 	}
 
 	public Movie(String showing, String rating, String title, String producer, String director, String genre,
@@ -110,5 +117,16 @@ public class Movie {
 
 	public void setTrailor(String trailor) {
 		this.trailor = trailor;
+	}
+	
+	public String toString() {
+		String str = this.showing + " "+
+					 this.rating + " "+
+					 this.title + " "+
+					 this.producer + " "+
+					 this.director + " "+
+					 this.genre + " "+
+					 this.trailor;
+		return  "Movie: "+str; 
 	}
 }

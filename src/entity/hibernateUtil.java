@@ -31,6 +31,10 @@ public class hibernateUtil
 	
 	public static SessionFactory getSessionFactory() 
 	{
+		if(factory==null)
+		{
+			factory = cfgSession();
+		}
 		return factory;
 	}
 	
