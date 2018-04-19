@@ -74,9 +74,9 @@ if((session.getAttribute("connected") == null) || !((String) session.getAttribut
     <h1 class="my-4">Search Movies
       <small>: [Black Panther] [PG - 13]</small>
     </h1>
-    <form>
+    <form action="SearchMovie" method="get">
       <div class="form-group">
-        <input type="text" class="form-control" id="user">
+        <input type="text" class="form-control" id="user" name="title">
       </div>
     </form>
     <div class="row">

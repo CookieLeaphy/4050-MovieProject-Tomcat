@@ -1,5 +1,7 @@
 package orm;
 
+import java.util.List;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -7,9 +9,14 @@ import org.hibernate.Transaction;
 
 import entity.hibernateUtil;
 import entity.Movie;
+import entity.User;
 
 public class ManageMovie {
 
+	public ManageMovie(){
+		System.out.print("ManageMovie constructor accessed.");
+	}
+	
 	private static SessionFactory factory = hibernateUtil.getSessionFactory();
 	
 	public Integer addMovie(String showing, String rating, String title, String producer, String director, String genre,
@@ -37,6 +44,29 @@ public class ManageMovie {
 		}
 		
 		return ID;
+	}
+	
+	public List<Movie> lookUpMovies(String title){
+		Session session = factory.openSession();
+		//List<Movie> movieList;
+		Transaction tx = null;
+		try
+		{
+			
+			tx = session.beginTransaction();
+			@SuppressWarnings("unchecked")
+			List<Movie> movieList = session.createQuery("FROM Movie").getResultList();
+			return movieList;
+		}
+		catch(HibernateException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			session.close();
+		}
+		//return movieList;
 	}
 
 	public Movie getStudent(Integer ID)

@@ -32,6 +32,10 @@ public class Movie {
 	
 	@Column(name="trailor")
 	private String trailor;
+	
+	public Movie() {
+		ID = -1; //invalid movie
+	}
 
 	public Movie(String showing, String rating, String title, String producer, String director, String genre,
 			String trailor) {
