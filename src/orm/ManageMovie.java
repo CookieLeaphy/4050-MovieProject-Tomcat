@@ -79,7 +79,8 @@ public class ManageMovie {
 		
 		try
 		{
-			movie = (Movie)session.get(Movie.class, ID);
+			movie = (Movie) session.get(Movie.class, ID); //idk if this is correct. we may need to use a sql query?
+			return movie;
 		}
 		catch(HibernateException e)
 		{

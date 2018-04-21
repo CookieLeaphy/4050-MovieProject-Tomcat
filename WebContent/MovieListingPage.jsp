@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<%@page language="java" contentType="text/html" pageEncoding="UTF-8" %>
+<%@ page import="java.util.List, entity.Movie" %>
 
 <head>
 
@@ -19,7 +20,8 @@
 </head>
 
 <body>
-
+<% Movie m = (Movie) request.getAttribute("movie"); %>
+<%  %>
   <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
@@ -71,7 +73,7 @@ if((session.getAttribute("connected") == null) || !((String) session.getAttribut
   <div class="container">
 
     <!-- Portfolio Item Heading -->
-    <h1 class="my-4">Ticketeer <small>Black Panther: Long Live the King</small>
+    <h1 class="my-4">Ticketeer <small><%= m.getTitle() %></small>
     </h1>
 
     <!-- Portfolio Item Row -->
@@ -85,6 +87,7 @@ if((session.getAttribute("connected") == null) || !((String) session.getAttribut
             <input type="date" type="form-control" name="screeningDate">
           </div>
           <div class="form-group">
+          <!-- TODO - get list of showing and open seats from Movie m -->
             <label for="screeningTime">Screening</label>
             <select id="screeningTime" class="form-control">
               <option disabled selected value></option>
@@ -214,24 +217,26 @@ if((session.getAttribute("connected") == null) || !((String) session.getAttribut
 
       <div class="col-md-8">
         <h3 class="my-3">Summary</h3>
+        <!-- TODO - get summary from Movie m -->
         <p>After the death of his father, T'Challa returns home to the African nation of Wakanda to take his rightful place as king. When a powerful enemy suddenly reappears, T'Challa's mettle as king -- and as Black Panther -- gets tested when he's drawn into a conflict that puts the fate of Wakanda and the entire world at risk. Faced with treachery and danger, the young king must rally his allies and release the full power of Black Panther to defeat his foes and secure the safety of his people.</p>
         <h3 class="my-3">Details</h3>
         <ul>
-          <li><b>Release date: </b>3/9/2017</li>
-          <li><b>Rating: </b>PG-13</li>
-          <li><b>Genre: </b>Action</li>
-          <li><b>Director: </b>Soandso Whatshisface</li>
-          <li><b>Producer: </b>Thatguy Exampleman</li>
-          <li><b>Cast: </b>James Earwig, Frederick Langley, James Mao, Ubuntu Gnarls</li>
+          <li><b>Release date: </b>3/9/2017</li> <!-- TODO - get release date from Movie m -->
+          <li><b>Rating: </b><%= m.getRating() %></li>
+          <li><b>Genre: </b><%= m.getGenre() %></li>
+          <li><b>Director: </b><%= m.getDirector() %></li>
+          <li><b>Producer: </b><%= m.getProducer() %>></li>
+          <li><b>Cast: </b>James Earwig, Frederick Langley, James Mao, Ubuntu Gnarls</li> <!-- TODO - get cast list from Movie m -->
         </ul>
         <h3 class="my-3">Trailer</h3>
         <div class="embed-responsive embed-responsive-16by9">
-          <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/xjDjIWPwcPU?rel=0" allowfullscreen></iframe>
+          <iframe class="embed-responsive-item" src=<%= m.getTrailor() %> allowfullscreen="true"></iframe>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col">
+      <!-- TODO - get reviews from Movie m -->
         <h3 class="md-8">Reviews</h3>
         <table class="table table-responsive table-scrollable">
           <thead>
