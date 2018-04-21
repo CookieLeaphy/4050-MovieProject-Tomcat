@@ -40,7 +40,7 @@ public class Login extends HttpServlet {
 		ManageUser userMngr = new ManageUser();
 		User user =  userMngr.loginInfo(username, password);
 
-		if(user != null){
+		if(user.getUser_type() != -1){
 			request.getSession().setAttribute("user", user.getUserName());
 			session.setAttribute("connected", "true");
 			dispatcher = getServletContext().getRequestDispatcher("/Home.jsp");

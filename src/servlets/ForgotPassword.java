@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entity.User;
 import orm.ManageUser;
 
 /**
@@ -17,7 +18,19 @@ import orm.ManageUser;
 @WebServlet("/ForgotPassword")
 public class ForgotPassword extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+     
+	private String genString(int count)
+	{
+		String ALPHA_NUM = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+		StringBuilder builder = new StringBuilder();
+		while (count -- > 0)
+		{
+			int character = (int)(Math.random()*ALPHA_NUM.length());
+			builder.append(ALPHA_NUM.charAt(character));
+		}
+		return builder.toString();
+	}
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -32,13 +45,16 @@ public class ForgotPassword extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String email = request.getParameter("email");
+		SendEmail send = new SendEmail();
 		RequestDispatcher dispatcher;
-		String password = request.getParameter("newPassword0");
-		if(password.equals(request.getParameter("newPassword1")))
-			System.out.println("Password Failed: This needs to be implemented");
+		//String password = request.getParameter("newPassword0");
+		//if(password.equals(request.getParameter("newPassword1")))
+		//	System.out.println("Password Failed: This needs to be implemented");
 		ManageUser mnguser = new ManageUser();
 		
-		mnguser.setPassword(email, password);
+		String password = genString(10);
+		User user = mnguser.setPassword(email, password);
+		send.sendMessage(user, 2);
 		dispatcher = getServletContext().getRequestDispatcher("/ForgotPassword1.html");
 		dispatcher.forward(request, response);
 		
