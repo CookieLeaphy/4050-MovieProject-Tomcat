@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<%@page language="java" contentType="text/html" pageEncoding="UTF-8" %>
+<%@ page import="java.util.List, entity.Movie" %>
 
 <head>
 
@@ -19,7 +20,6 @@
 </head>
 
 <body>
-
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
@@ -39,7 +39,7 @@ if((session.getAttribute("connected") == null) || !((String) session.getAttribut
 
             <h3 class="nav-link" href="Login-CreateNewAccount.html">Login/Create an account
               <span class="sr-only">(current)</span>
-            <h3/> 
+            </h3> 
 
 <% } else{ %>
 
@@ -67,33 +67,48 @@ if((session.getAttribute("connected") == null) || !((String) session.getAttribut
     </div>
   </nav>
 
+<% List<Movie> results = (List<Movie>) request.getAttribute("movieList"); %>
+<% String s = (String) request.getAttribute("searchTerm"); %>
   <!-- Page Content -->
   <div class="container">
 
     <!-- Page Heading -->
     <h1 class="my-4">Search Movies
-      <small>: [Black Panther] [PG - 13]</small>
+      <small><%= s %></small>
     </h1>
     <form action="SearchMovie" method="get">
       <div class="form-group">
         <input type="text" class="form-control" id="user" name="title">
       </div>
     </form>
+    
+<% if(results.size() == 0){ %>
+<div class="row">
+	<p>Sorry, your search did not yield any results. Please try different search terms or try browsing with the filters on the home page.</p>
+</div>
+<% } else{
+	for(Movie m : results){
+%>
     <div class="row">
       <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
         <div class="card h-100">
           <a href="#"><img class="card-img-top" src="http://t1.gstatic.com/images?q=tbn:ANd9GcQPpcKQ9eWZGxJe6eXyCW91eayLVm4KqruvJz3GP0F2T2w46yKZ" alt=""></a>
           <div class="card-body">
             <h4 class="card-title">
-              <a href="#">Black Panther</a>
+              <a href="#"><%= m.getTitle() %></a>
             </h4>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt? Voluptatibus sit, repellat sequi itaque deserunt, dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
+            <p class="card-text"><b>Rating: </b><%= m.getRating() %><br><b>Genre: </b><%= m.getDirector() %><br><b>Director: </b><%= m.getGenre() %></p>
+            <form action="MoviePage" method="get">
+				<div class="form-group">
+					<input type="submit" class="form-control" id="movie" name="id" value=<%= m.getID() %>>
+				</div>
+    		</form>
           </div>
         </div>
       </div>
     </div>
     <!-- /.row -->
-
+<% }} %>
     <!-- Pagination -->
     <ul class="pagination justify-content-center">
       <li class="page-item">
