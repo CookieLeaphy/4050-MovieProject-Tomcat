@@ -161,7 +161,7 @@ public class ManageUser {
 		return user;
 	}
 	
-	public User setUsername(User user, String oldUsername, String newUsername)
+	public User setUsername(User user, String newUsername)
 	{
 		Session session = factory.openSession();
 		Transaction tx = null;
@@ -170,11 +170,134 @@ public class ManageUser {
 			
 			tx = session.beginTransaction();
 			@SuppressWarnings("unchecked")
-			List<User> userList = session.createQuery("from User s where s.userName='"+oldUsername+"'").getResultList();
+			List<User> userList = session.createQuery("from User s where s.userName='"+user.getUserName()+"'").getResultList();
 			for(User tmpuser : userList) 
 			{	
 				user = tmpuser; 
 				user.setUserName(newUsername);
+				session.update(user);
+				break; 
+			}
+			tx.commit();
+		}
+		catch(HibernateException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			session.close();
+		}
+		return user;
+	}
+	
+	public User setName(User user, String newFirstName, String newLastName)
+	{
+		Session session = factory.openSession();
+		Transaction tx = null;
+		try
+		{
+			
+			tx = session.beginTransaction();
+			@SuppressWarnings("unchecked")
+			List<User> userList = session.createQuery("from User s where s.userName='"+user.getUserName()+"'").getResultList();
+			for(User tmpuser : userList) 
+			{	
+				user = tmpuser; 
+				user.setFirstName(newFirstName);
+				user.setLastName(newLastName);
+				session.update(user);
+				break; 
+			}
+			tx.commit();
+		}
+		catch(HibernateException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			session.close();
+		}
+		return user;
+	}
+	
+	public User setPassword(User user, String newPassword)
+	{
+		Session session = factory.openSession();
+		Transaction tx = null;
+		try
+		{
+			
+			tx = session.beginTransaction();
+			@SuppressWarnings("unchecked")
+			List<User> userList = session.createQuery("from User s where s.userName='"+user.getUserName()+"'").getResultList();
+			for(User tmpuser : userList) 
+			{	
+				user = tmpuser; 
+				user.setPass(newPassword);
+				session.update(user);
+				break; 
+			}
+			tx.commit();
+		}
+		catch(HibernateException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			session.close();
+		}
+		return user;
+	}
+	
+	public User setPromos(User user, int news, int promos)
+	{
+		Session session = factory.openSession();
+		Transaction tx = null;
+		try
+		{
+			
+			tx = session.beginTransaction();
+			@SuppressWarnings("unchecked")
+			List<User> userList = session.createQuery("from User s where s.userName='"+user.getUserName()+"'").getResultList();
+			for(User tmpuser : userList) 
+			{	
+				user = tmpuser; 
+				user.setNewsSub(news);
+				user.setPromoSub(promos);
+				session.update(user);
+				break; 
+			}
+			tx.commit();
+		}
+		catch(HibernateException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			session.close();
+		}
+		return user;
+	}
+	
+	public User setContact(User user, String phone, String email)
+	{
+		Session session = factory.openSession();
+		Transaction tx = null;
+		try
+		{
+			
+			tx = session.beginTransaction();
+			@SuppressWarnings("unchecked")
+			List<User> userList = session.createQuery("from User s where s.userName='"+user.getUserName()+"'").getResultList();
+			for(User tmpuser : userList) 
+			{	
+				user = tmpuser; 
+				user.setPhone(phone);
+				user.setEmail(email);
 				session.update(user);
 				break; 
 			}
