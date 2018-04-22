@@ -43,6 +43,7 @@ public class Login extends HttpServlet {
 		if(user.getUser_type() != -1){
 			request.getSession().setAttribute("user", user.getUserName());
 			session.setAttribute("User", user);
+			request.getSession().setAttribute("userType", user.getUser_type());
 			session.setAttribute("connected", "true");
 			dispatcher = getServletContext().getRequestDispatcher("/Home.jsp");
 		} else{

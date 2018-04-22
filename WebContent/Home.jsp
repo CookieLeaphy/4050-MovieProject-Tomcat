@@ -41,18 +41,31 @@ if((session.getAttribute("connected") == null) || !((String) session.getAttribut
               <span class="sr-only">(current)</span>
             <h3/> 
 
-<% } else{ %>
+<% } else if((int)session.getAttribute("userType")==1){ //Check if the user is an admin %>
+
+            <a class="nav-item" href="AdminSettings.html">Hello, <%= session.getAttribute("user") %>!
+              <span class="sr-only">(current)</span>
+            </a>
+
+<% } else { %>
 
             <a class="nav-item" href="Settings.jsp">Hello, <%= session.getAttribute("user") %>!
               <span class="sr-only">(current)</span>
             </a>
-
+            
 <% } %>
-
           </li>
+<% if((int)session.getAttribute("userType")==0){ //if user is a customer%>
+
           <li class="nav-item active">
             <a class="nav-link" href="Settings.jsp">Settings</a>
           </li>
+          
+<% } else if((int) session.getAttribute("userType")==1) { //Check if admin {%>
+	<li class="nav-item active">
+            <a class="nav-link" href="AdminSettings.jsp">Settings</a>
+          </li>
+<% } %>
           <li class="nav-item">
             <a class="nav-link" href="Cart.jsp">Cart</a>
           </li>
