@@ -117,43 +117,41 @@ if((session.getAttribute("connected") == null) || !((String) session.getAttribut
       </div>
       <div class="col">
         <h2 class="mt-4">Personal Info</h2>
-        <form>
+        <form action = "ChangeUsername" method = "get">
           <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" class="form-control" id="username" value="Example616">
+            <input type="text" class="form-control" id="username" name = "username">
           </div>
           <div class="form-group">
             <button type="submit" class="btn btn-primary" onClick="checkFormUsername()">Change Username</button>
           </div>
         </form>
-        <form>
+        <form action = "ChangeName" method = "get">
           <div class="form-group">
             <label for="firstName">First name</label>
-            <input type="text" class="form-control" id="firstName" value="Nicholas">
+            <input type="text" class="form-control" id="firstName" name = "firstName">
           </div>
           <div class="form-group">
             <label for="lastName">Last name</label>
-            <input type="text" class="form-control" id="lastName" value="Marx">
+            <input type="text" class="form-control" id="lastName" name = "lastName">
           </div>
           <div class="form-group">
             <button type="submit" class="btn btn-primary" onClick="checkFormName()">Change Name</button>
           </div>
         </form>
-        <form>
+        <form action = "ChangeContactInfo" method = "get">
           <div class="form-group">
             <label for="phone">Phone number</label>
-            <input id="phone" class="form-control" value="(202)123-5984">
+            <input id="phone" class="form-control" name ="phone">
           </div>
-        </form>
-        <form>
           <div class="form-group">
             <label for="email">Email address</label>
-            <input type="text" class="form-control" id="email" value="pabstdrinker44@gmail.com">
+            <input type="text" class="form-control" id="email" name = "phone">
           </div>
-        </form>
-        <div class="form-group">
-          <button type="submit" class="btn btn-primary" onClick="checkFormContact()">Change Contact Info</button>
-        </div>
+	      <div class="form-group">
+	        <button type="submit" class="btn btn-primary" onClick="checkFormContact()">Change Contact Info</button>
+	      </div>
+       	</form>
       </div>
     </div>
     <div class="row row-eq-height">

@@ -159,4 +159,34 @@ public class ManageUser {
 		}
 		return user;
 	}
+	
+	public User setUsername(User user, String oldUsername, String newUsername)
+	{
+		Session session = factory.openSession();
+		Transaction tx = null;
+		try
+		{
+			
+			tx = session.beginTransaction();
+			@SuppressWarnings("unchecked")
+			List<User> userList = session.createQuery("from User s where s.userName='"+oldUsername+"'").getResultList();
+			for(User tmpuser : userList) 
+			{	
+				user = tmpuser; 
+				user.setUserName(newUsername);
+				session.update(user);
+				break; 
+			}
+			tx.commit();
+		}
+		catch(HibernateException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			session.close();
+		}
+		return user;
+	}
 }

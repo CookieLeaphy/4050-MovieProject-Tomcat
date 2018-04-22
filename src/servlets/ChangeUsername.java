@@ -1,6 +1,5 @@
 package servlets;
 
-
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -15,45 +14,35 @@ import entity.User;
 import orm.ManageUser;
 
 /**
- * Servlet implementation class Login
+ * Servlet implementation class ChangeUsername
  */
-@WebServlet("/Login")
-public class Login extends HttpServlet {
+@WebServlet("/ChangeUsername")
+public class ChangeUsername extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Login() {
+    public ChangeUsername() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String username = request.getParameter("loginUser");
-		String password = request.getParameter("loginPassword");
 		RequestDispatcher dispatcher;
 		HttpSession session = request.getSession(); //new session
-		
-		//SQL Code
-		ManageUser userMngr = new ManageUser();
-		User user =  userMngr.loginInfo(username, password);
 
-		if(user.getUser_type() != -1){
-			request.getSession().setAttribute("user", user.getUserName());
-			session.setAttribute("User", user);
-			session.setAttribute("connected", "true");
-			dispatcher = getServletContext().getRequestDispatcher("/Home.jsp");
-		} else{
-			session.setAttribute("connected", "false");
-			request.setAttribute("error", "Unknown user, please try again");
-			dispatcher = getServletContext().getRequestDispatcher("/Login-CreateNewAccount.jsp");
-			//request.getRequestDispatcher("/login.jsp").forward(request, response);
-		}
+		ManageUser userMngr = new ManageUser();
+		User user = (User) session.getAttribute("User");
+		user = userMngr.setUsername(user, user.getUserName(), request.getParameter("username"));
+		session.setAttribute("user", user.getUserName());
+		session.setAttribute("User", user);
+		dispatcher = getServletContext().getRequestDispatcher("/Home.jsp");
 		
 		dispatcher.forward(request, response); //forward to correct page
-		//response.getWriter().append("Served at: " + username + " " + password).append(request.getContextPath());
 	}
 
 	/**
