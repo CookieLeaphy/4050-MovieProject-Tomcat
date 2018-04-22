@@ -146,7 +146,7 @@ if((session.getAttribute("connected") == null) || !((String) session.getAttribut
           </div>
           <div class="form-group">
             <label for="email">Email address</label>
-            <input type="text" class="form-control" id="email" name = "phone">
+            <input type="text" class="form-control" id="email" name = "email">
           </div>
 	      <div class="form-group">
 	        <button type="submit" class="btn btn-primary" onClick="checkFormContact()">Change Contact Info</button>
@@ -312,18 +312,14 @@ if((session.getAttribute("connected") == null) || !((String) session.getAttribut
     <div class="row row-eq-height">
       <div class="col">
         <h2 class="mt-4">Password</h2>
-        <form>
-          <div class="form-group">
-            <label for="password">Current password</label>
-            <input type="password" class="form-control" id="password">
-          </div>
+        <form action = "ChangePassword" method = "get">
           <div class="form-group">
             <label for="newPass0">New password</label>
-            <input type="password" class="form-control" id="newPass0">
+            <input type="password" class="form-control" id="newPass0" name = "newPass0">
           </div>
           <div class="form-group">
             <label for="newPass1">Confirm new password</label>
-            <input type="password" class="form-control" id="newPass1">
+            <input type="password" class="form-control" id="newPass1" name = "newPass1">
           </div>
           <div class="form-group">
             <button type="submit" class="btn btn-primary" onClick="checkFormPassword()">Change Password</button>
@@ -332,13 +328,13 @@ if((session.getAttribute("connected") == null) || !((String) session.getAttribut
       </div>
       <div class="col">
         <h2 class="mt-4">Subscriptions</h2>
-        <form>
+        <form action = "ChangeSubscriptions" method = "get">
           <div class="form-check form-check-inline">
-            <input type="checkbox" class="form-check-input" id="news">
+            <input type="checkbox" class="form-check-input" id="news" name = "news">
             <label for="news" class="form-check-label">News</label>
           </div><br>
           <div class="form-check form-check-inline">
-            <input type="checkbox" class="form-check-input" id="promotions">
+            <input type="checkbox" class="form-check-input" id="promotions" name = "promotions">
             <label for="promotions" class="form-check-label">Promotions</label>
           </div>
           <div class="form-group">

@@ -37,7 +37,7 @@ public class ChangeUsername extends HttpServlet {
 
 		ManageUser userMngr = new ManageUser();
 		User user = (User) session.getAttribute("User");
-		user = userMngr.setUsername(user, user.getUserName(), request.getParameter("username"));
+		user = userMngr.setUsername(user, request.getParameter("username"));
 		session.setAttribute("user", user.getUserName());
 		session.setAttribute("User", user);
 		dispatcher = getServletContext().getRequestDispatcher("/Home.jsp");
