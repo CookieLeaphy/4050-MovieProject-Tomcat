@@ -73,7 +73,7 @@ if((session.getAttribute("connected") == null) || !((String) session.getAttribut
             <a class="nav-link" href="Search.jsp">Search</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="LogoutConfirmation.jsp">Logout</a>
+            <a class="nav-link" href="LogOut">Logout</a>
           </li>
         </ul>
       </div>
