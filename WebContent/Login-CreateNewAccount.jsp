@@ -23,27 +23,84 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="Home.html">Movies</a>
+      <a class="navbar-brand" href="Home.jsp">Movies</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link active" href="Login-CreateNewAccount.html">Login/Create an account
+          <li class="nav-item">
+
+<%
+//******LOGIN/CREATE ACCOUNT
+//Check if "Hello 'User'!" is necessary
+if((session.getAttribute("connected") == null) || !((String) session.getAttribute("connected")).equals("true")){
+	//String redirectURL = "/path/ToYour/login.jsp;
+    //response.sendRedirect("Login-CreateNewAccount.jsp");
+%>
+
+            <a class="nav-link" href="Login-CreateNewAccount.jsp">Login/Create an account 
+              <span class="sr-only">(current)</span>
+            </a> 
+
+<% } else if((int)session.getAttribute("userType")==1){ //Check if the user is an admin %>
+
+            <a class="nav-item" href="AdminSettings.html">Hello, <%= session.getAttribute("user") %>!
               <span class="sr-only">(current)</span>
             </a>
+
+<% } else { %>
+
+            <a class="nav-item" href="Settings.jsp">Hello, <%= session.getAttribute("user") %>!
+              <span class="sr-only">(current)</span>
+            </a>
+            
+<% } %>
+          </li>
+<%
+//*****USER SETTING
+//If user settings should be redirected or exist
+if((session.getAttribute("connected") == null) || !((String) session.getAttribute("connected")).equals("true")){
+	//Prevent from posting anything
+%>
+
+<% } else if((int)session.getAttribute("userType")==0){ //if user is a customer%>
+
+          <li class="nav-item active">
+            <a class="nav-link" href="Settings.jsp">Settings</a>
+          </li>
+          
+<% } else if((int) session.getAttribute("userType")==1) { //Check if admin {%>
+	<li class="nav-item active">
+            <a class="nav-link" href="AdminSettings.jsp">Settings</a>
+          </li>
+<% } %>
+          <li class="nav-item">
+            <a class="nav-link" href="Cart.jsp">Cart</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="Cart.html">Cart</a>
+            <a class="nav-link" href="Search.jsp">Search</a>
           </li>
+<%
+//******LOG OUT
+//Display Log out 
+if((session.getAttribute("connected") == null) || !((String) session.getAttribute("connected")).equals("true"))
+	{
+	//Do nothing here
+	}
+else{   //Display Log Out
+%>
           <li class="nav-item">
-            <a class="nav-link" href="Search.html">Search</a>
+            <a class="nav-link" href="LogOut">Logout</a>
           </li>
+<%} %>
         </ul>
       </div>
     </div>
   </nav>
+<!--  End of Navigation -->
+
+
 
   <!-- Page Content -->
   <div class="container">
@@ -66,6 +123,12 @@
                 <label for="password">Password</label>
                 <input type="password" class="form-control" id="password" name = "loginPassword">
               </div>
+              
+              <!-- ****INVALID INPUT***** -->
+              <%if (session.getAttribute("error").equals("WrongInput")) {%>
+              <h6 class = "text-danger">Invalid Username/Password </h6>
+              <% }%>
+              
               <div class="form-group">
                 <button type="submit" class="btn btn-primary">Login</button>
                 <a class="btn" href="ForgotPassword0.html">Forgot password</a>
@@ -79,6 +142,11 @@
           <div class="card-body">
             <p>Don't have an account?</p>
             <h3 class="card-title">Create New Account</h3>
+            
+			 <!-- ****INVALID INPUT***** -->
+              <%if (session.getAttribute("error").equals("WrongForm")) {%>
+              <h6 class = "text-danger">Invalid Fields</h6>
+              <% }%>
             <form action = "CreateAccount" method = "get">
               <h5>Personal Information</h5>
               <div class="form-group">

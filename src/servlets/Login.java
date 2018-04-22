@@ -20,7 +20,7 @@ import orm.ManageUser;
 @WebServlet("/Login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    public static boolean invalidLogin = false; //
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -35,12 +35,14 @@ public class Login extends HttpServlet {
 		String password = request.getParameter("loginPassword");
 		RequestDispatcher dispatcher;
 		HttpSession session = request.getSession(); //new session
-		
+		session.setAttribute("error", "");
 		//SQL Code
 		ManageUser userMngr = new ManageUser();
 		User user =  userMngr.loginInfo(username, password);
-
-		if(user.getUser_type() != -1){
+/*		if(user == null) {
+			
+		}
+		else*/ if(user.getUser_type() != -1){
 			request.getSession().setAttribute("user", user.getUserName());
 			session.setAttribute("User", user);
 			request.getSession().setAttribute("userType", user.getUser_type());
@@ -48,7 +50,7 @@ public class Login extends HttpServlet {
 			dispatcher = getServletContext().getRequestDispatcher("/Home.jsp");
 		} else{
 			session.setAttribute("connected", "false");
-			request.setAttribute("error", "Unknown user, please try again");
+			session.setAttribute("error", "WrongInput");
 			dispatcher = getServletContext().getRequestDispatcher("/Login-CreateNewAccount.jsp");
 			//request.getRequestDispatcher("/login.jsp").forward(request, response);
 		}

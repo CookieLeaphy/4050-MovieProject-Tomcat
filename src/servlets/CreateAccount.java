@@ -37,6 +37,24 @@ public class CreateAccount extends HttpServlet {
 		RequestDispatcher dispatcher;
 		HttpSession session = request.getSession(); //new session
 		
+		if(request.getParameter("address").equals("")||
+				request.getParameter("city").equals("")||
+				request.getParameter("stateSelect").equals("")||
+				request.getParameter("zip").equals("")||
+				request.getParameter("country").equals("")||
+				request.getParameter("ccno").equals("")||
+				request.getParameter("ccType").equals("")||
+				request.getParameter("expMonth").equals("")||
+				request.getParameter("expYear").equals(""))
+				{	
+					dispatcher = getServletContext().getRequestDispatcher("/Login-CreateNewAccount.jsp");
+					session.setAttribute("error", "WrongForm");
+					dispatcher.forward(request, response);
+					return; 
+				}
+		
+		
+		
 		// TODO Auto-generated method stub
 		String username = 	request.getParameter("username"); 
 		String firstname =	request.getParameter("firstname");
@@ -57,6 +75,8 @@ public class CreateAccount extends HttpServlet {
 		int promotions = 1;
 		if(request.getParameter("promotions")==null)//True = "on" False = "null"
 			promotions = 0;
+		
+		
 		
 		String address = 	request.getParameter("address");
 		String city = 		request.getParameter("city");
@@ -85,8 +105,8 @@ public class CreateAccount extends HttpServlet {
 				dispatcher = getServletContext().getRequestDispatcher("/AccountConfirmation.jsp");
 		} else{
 			session.setAttribute("connected", "false");
-			request.setAttribute("error", "Error creating account, please try again");
-			dispatcher = getServletContext().getRequestDispatcher("/Login-CreateNewAccount.html"); //.jsp");
+			session.setAttribute("error", "WrongForm");
+			dispatcher = getServletContext().getRequestDispatcher("/Login-CreateNewAccount.jsp"); //.jsp");
 			//request.getRequestDispatcher("/login.jsp").forward(request, response);
 		}
 		

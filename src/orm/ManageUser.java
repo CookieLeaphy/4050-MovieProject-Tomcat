@@ -121,6 +121,7 @@ public class ManageUser {
 		catch(HibernateException e)
 		{
 			e.printStackTrace();
+			return null;
 		}
 		finally
 		{
