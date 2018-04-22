@@ -26,11 +26,23 @@ public class ManageUser {
 		
 		try
 		{
+			boolean emailExists = false;
 			tx = session.beginTransaction();
 			User user = new User(user_type, userName, firstName, lastName, pass, address,
 					city, zip, country, subStatus, email, phone, newsSub, promoSub, orders);
-			ID = (Integer)session.save(user);
-			tx.commit();	
+			List<User> userList = session.createQuery("from User s where s.email='"+user.getEmail()+"'").getResultList();
+			for(User tmpuser : userList) 
+			{
+				if(tmpuser.getEmail().equals(user.getEmail())) 
+				{
+					emailExists = true;
+				}
+			}
+			if(!emailExists)
+			{
+				ID = (Integer)session.save(user);
+				tx.commit();
+			}
 		}
 		catch(HibernateException e)
 		{

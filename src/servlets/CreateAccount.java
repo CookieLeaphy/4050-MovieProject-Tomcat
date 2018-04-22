@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.sun.mail.smtp.SMTPAddressFailedException;
+
 import entity.User;
 import orm.ManageUser;
 
@@ -76,16 +78,15 @@ public class CreateAccount extends HttpServlet {
 		User user = userMngr.loginInfo(username, newPass0);
 		
 		if( user.getUser_type() != -1){
-			request.getSession().setAttribute("user", user.getUserName());
-			session.setAttribute("User", user);
-			session.setAttribute("connected", "true");
-			dispatcher = getServletContext().getRequestDispatcher("/AccountConfirmation.jsp");
-			send.sendMessage(user, 1); //Send a confirmation email
-			
+				request.getSession().setAttribute("user", user.getUserName());
+				send.sendMessage(user, 1); //Send a confirmation email
+				session.setAttribute("User", user);
+				session.setAttribute("connected", "true");
+				dispatcher = getServletContext().getRequestDispatcher("/AccountConfirmation.jsp");
 		} else{
 			session.setAttribute("connected", "false");
 			request.setAttribute("error", "Error creating account, please try again");
-			dispatcher = getServletContext().getRequestDispatcher("/Login-CreateNewAccount.jsp");
+			dispatcher = getServletContext().getRequestDispatcher("/Login-CreateNewAccount.html"); //.jsp");
 			//request.getRequestDispatcher("/login.jsp").forward(request, response);
 		}
 		
