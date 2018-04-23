@@ -162,6 +162,16 @@ else{   //Display Log Out
     </div>
 
     <div class="row">
+   
+    <% List<Movie> results = (List<Movie>) request.getAttribute("movieList"); %>
+	<% String s = (String) request.getAttribute("searchTerm"); %>    
+	<% if(results.size() == 0){ %>
+	<div class="row">
+		<p>Sorry, your search did not yield any results. Please try different search terms or try browsing with the filters on the home page.</p>
+	</div>
+	<% } else{
+	//	for(Movie m : results){
+	%>
       <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
         <div class="card h-100">
           <a href="MovieListingPage.html"><img class="card-img-top" src="http://t1.gstatic.com/images?q=tbn:ANd9GcQPpcKQ9eWZGxJe6eXyCW91eayLVm4KqruvJz3GP0F2T2w46yKZ" alt="" ></a>
@@ -173,6 +183,7 @@ else{   //Display Log Out
           </div>
         </div>
       </div>
+    <% }} %>
       <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
         <div class="card h-100">
           <a href="#"><img class="card-img-top" src="http://t3.gstatic.com/images?q=tbn:ANd9GcSgBWvp6He2MU-9rDInUNGBnjzDdgcg4W3e-Lx2rtJyAFSkxdVw" alt=""></a>

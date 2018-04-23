@@ -67,21 +67,20 @@ if((session.getAttribute("connected") == null) || !((String) session.getAttribut
     </div>
   </nav>
 
-<% List<Movie> results = (List<Movie>) request.getAttribute("movieList"); %>
-<% String s = (String) request.getAttribute("searchTerm"); %>
   <!-- Page Content -->
   <div class="container">
 
     <!-- Page Heading -->
     <h1 class="my-4">Search Movies
-      <small><%= s %></small>
     </h1>
     <form action="SearchMovie" method="get">
       <div class="form-group">
         <input type="text" class="form-control" id="user" name="title">
       </div>
     </form>
-    
+
+<% List<Movie> results = (List<Movie>) request.getAttribute("movieList"); %>
+<% String s = (String) request.getAttribute("searchTerm"); %>    
 <% if(results.size() == 0){ %>
 <div class="row">
 	<p>Sorry, your search did not yield any results. Please try different search terms or try browsing with the filters on the home page.</p>

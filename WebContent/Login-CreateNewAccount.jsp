@@ -125,7 +125,7 @@ else{   //Display Log Out
               </div>
               
               <!-- ****INVALID INPUT***** -->
-              <%if (session.getAttribute("error").equals("WrongInput")) {%>
+              <%if (session.getAttribute("error")!=null && session.getAttribute("error").equals("WrongInput")) {%>
               <h6 class = "text-danger">Invalid Username/Password </h6>
               <% }%>
               
@@ -144,7 +144,7 @@ else{   //Display Log Out
             <h3 class="card-title">Create New Account</h3>
             
 			 <!-- ****INVALID INPUT***** -->
-              <%if (session.getAttribute("error").equals("WrongForm")) {%>
+              <%if (session.getAttribute("error")!=null && session.getAttribute("error").equals("WrongForm")) {%>
               <h6 class = "text-danger">Invalid Fields</h6>
               <% }%>
             <form action = "CreateAccount" method = "get">
