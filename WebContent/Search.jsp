@@ -33,36 +33,68 @@
           <li class="nav-item">
 
 <%
+//******LOGIN/CREATE ACCOUNT
+//Check if "Hello 'User'!" is necessary
 if((session.getAttribute("connected") == null) || !((String) session.getAttribute("connected")).equals("true")){
-//String redirectURL = "/path/ToYour/login.jsp;
-//response.sendRedirect("Login-CreateNewAccount.jsp");
+	//String redirectURL = "/path/ToYour/login.jsp;
+    //response.sendRedirect("Login-CreateNewAccount.jsp");
 %>
 
-            <h3 class="nav-link" href="Login-CreateNewAccount.html">Login/Create an account
+            <a class="nav-link" href="Login-CreateNewAccount.jsp">Login/Create an account 
               <span class="sr-only">(current)</span>
-            </h3> 
+            </a> 
 
-<% } else{ %>
+<% } else if((int)session.getAttribute("userType")==1){ //Check if the user is an admin %>
+
+            <a class="nav-item" href="AdminSettings.jsp">Hello, <%= session.getAttribute("user") %>!
+              <span class="sr-only">(current)</span>
+            </a>
+
+<% } else { %>
 
             <a class="nav-item" href="Settings.jsp">Hello, <%= session.getAttribute("user") %>!
               <span class="sr-only">(current)</span>
             </a>
-
+            
 <% } %>
+          </li>
+<%
+//*****USER SETTING
+//If user settings should be redirected or exist
+if((session.getAttribute("connected") == null) || !((String) session.getAttribute("connected")).equals("true")){
+	//Prevent from posting anything
+%>
 
-          </li>
+<% } else if((int)session.getAttribute("userType")==0){ //if user is a customer%>
+
           <li class="nav-item active">
-            <a class="nav-link" href="Settings.jsp">Notes</a>
+            <a class="nav-link" href="Settings.jsp">Settings</a>
+          </li>
+          
+<% } else if((int) session.getAttribute("userType")==1) { //Check if admin {%>
+	<li class="nav-item active">
+            <a class="nav-link" href="AdminSettings.jsp">Settings</a>
+          </li>
+<% } %>
+          <li class="nav-item">
+            <a class="nav-link" href="Cart.jsp">Cart</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="Cart.jsp">Change</a>
+            <a class="nav-link" href="Search.jsp">Search</a>
           </li>
+<%
+//******LOG OUT
+//Display Log out 
+if((session.getAttribute("connected") == null) || !((String) session.getAttribute("connected")).equals("true"))
+	{
+	//Do nothing here
+	}
+else{   //Display Log Out
+%>
           <li class="nav-item">
-            <a class="nav-link" href="Search.jsp">Me</a>
+            <a class="nav-link" href="LogOut">Logout</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="LogoutConfirmation.jsp">Later</a>
-          </li>
+<%} %>
         </ul>
       </div>
     </div>
@@ -82,17 +114,16 @@ if((session.getAttribute("connected") == null) || !((String) session.getAttribut
         <input type="text" class="form-control" id="user" name="title">
       </div>
     </form>
-    
+
+ <div class="row">    
 <%
 if(results != null){
 if(results.size() == 0){ %>
 <div class="row">
 	<p>Sorry, your search did not yield any results. Please try different search terms or try browsing with the filters on the home page.</p>
 </div>
-<% } else{
-	for(Movie m : results){
-%>
-    <div class="row">
+<% } else{ %>
+	<% for(Movie m : results){%>
       <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
         <div class="card h-100">
           <a href="#"><img class="card-img-top" src="http://t1.gstatic.com/images?q=tbn:ANd9GcQPpcKQ9eWZGxJe6eXyCW91eayLVm4KqruvJz3GP0F2T2w46yKZ" alt=""></a>
@@ -114,9 +145,9 @@ if(results.size() == 0){ %>
           </div>
         </div>
       </div>
-    </div>
     <!-- /.row -->
 <% }}} %>
+</div>
     <!-- Pagination -->
     <ul class="pagination justify-content-center">
       <li class="page-item">

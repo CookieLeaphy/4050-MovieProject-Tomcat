@@ -72,6 +72,29 @@ public class ManageMovie {
 		return movieList;
 	}
 
+	public List<Movie> getAllMovies(){
+		Session session = factory.openSession();
+		//@SuppressWarnings("unchecked")
+		List<Movie> movieList = null;
+		Transaction tx = null;
+		try
+		{
+			String query = "FROM Movie";
+			tx = session.beginTransaction();
+			movieList = session.createQuery(query).getResultList();
+//			return movieList;
+		}
+		catch(HibernateException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			session.close();
+		}
+		return movieList;
+	}
+	
 	public Movie getMovie(Integer ID)
 	{
 		Session session = factory.openSession();

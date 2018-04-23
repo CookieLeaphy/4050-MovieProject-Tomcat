@@ -55,7 +55,7 @@ public class ForgotPassword extends HttpServlet {
 		String password = genString(10);
 		User user = mnguser.setPassword(email, password);
 		send.sendMessage(user, 2);
-		dispatcher = getServletContext().getRequestDispatcher("/ForgotPassword1.html");
+		dispatcher = getServletContext().getRequestDispatcher("/ForgotPassword1.jsp");
 		dispatcher.forward(request, response);
 		
 		//response.getWriter().append("Served at: ").append(request.getContextPath());

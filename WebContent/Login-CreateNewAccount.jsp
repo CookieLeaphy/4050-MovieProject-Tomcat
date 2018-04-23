@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<%@page language="java" contentType="text/html" pageEncoding="UTF-8" %>
+<%@ page import="java.util.List" %>
 <head>
 
   <meta charset="utf-8">
@@ -45,7 +45,7 @@ if((session.getAttribute("connected") == null) || !((String) session.getAttribut
 
 <% } else if((int)session.getAttribute("userType")==1){ //Check if the user is an admin %>
 
-            <a class="nav-item" href="AdminSettings.html">Hello, <%= session.getAttribute("user") %>!
+            <a class="nav-item" href="AdminSettings.jsp">Hello, <%= session.getAttribute("user") %>!
               <span class="sr-only">(current)</span>
             </a>
 
@@ -84,7 +84,6 @@ if((session.getAttribute("connected") == null) || !((String) session.getAttribut
 <%
 //******LOG OUT
 //Display Log out 
-if(session !=null){
 if((session.getAttribute("connected") == null) || !((String) session.getAttribute("connected")).equals("true"))
 	{
 	//Do nothing here
@@ -94,7 +93,7 @@ else{   //Display Log Out
           <li class="nav-item">
             <a class="nav-link" href="LogOut">Logout</a>
           </li>
-<%}} %>
+<%} %>
         </ul>
       </div>
     </div>
@@ -136,7 +135,7 @@ else{   //Display Log Out
               
               <div class="form-group">
                 <button type="submit" class="btn btn-primary">Login</button>
-                <a class="btn" href="ForgotPassword0.html">Forgot password</a>
+                <a class="btn" href="ForgotPassword0.jsp">Forgot password</a>
               </div>
             </form>
           </div>

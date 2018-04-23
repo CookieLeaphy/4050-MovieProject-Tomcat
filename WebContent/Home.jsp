@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<%@page language="java" contentType="text/html" pageEncoding="UTF-8" %>
+<%@ page import="java.util.List, entity.Movie, orm.ManageMovie" %>
 
 <head>
 
@@ -45,7 +46,7 @@ if((session.getAttribute("connected") == null) || !((String) session.getAttribut
 
 <% } else if((int)session.getAttribute("userType")==1){ //Check if the user is an admin %>
 
-            <a class="nav-item" href="AdminSettings.html">Hello, <%= session.getAttribute("user") %>!
+            <a class="nav-item" href="AdminSettings.jsp">Hello, <%= session.getAttribute("user") %>!
               <span class="sr-only">(current)</span>
             </a>
 
@@ -162,132 +163,30 @@ else{   //Display Log Out
     </div>
 
     <div class="row">
-   
-    <% List<Movie> results = (List<Movie>) request.getAttribute("movieList"); %>
-	<% String s = (String) request.getAttribute("searchTerm"); %>    
+    <% ManageMovie mngMov = new ManageMovie(); %>
+    <% List<Movie> results = mngMov.getAllMovies(); %>
+	<% request.setAttribute("movieList", results); %>    
+	<% if(results != null){ %>
 	<% if(results.size() == 0){ %>
 	<div class="row">
 		<p>Sorry, your search did not yield any results. Please try different search terms or try browsing with the filters on the home page.</p>
 	</div>
 	<% } else{
-	//	for(Movie m : results){
+		for(Movie m : results){
 	%>
       <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
         <div class="card h-100">
-          <a href="MovieListingPage.html"><img class="card-img-top" src="http://t1.gstatic.com/images?q=tbn:ANd9GcQPpcKQ9eWZGxJe6eXyCW91eayLVm4KqruvJz3GP0F2T2w46yKZ" alt="" ></a>
+          <a href="MovieListingPage.jsp"><img class="card-img-top" src="http://t1.gstatic.com/images?q=tbn:ANd9GcQPpcKQ9eWZGxJe6eXyCW91eayLVm4KqruvJz3GP0F2T2w46yKZ" alt="" ></a>
           <div class="card-body">
             <h4 class="card-title">
-              <a href="MovieListingPage.html">Black Panther</a>
+              <a href="MovieListingPage.jsp"><%= m.getTitle() %></a>
             </h4>
             <p class="card-text">After the death of his father, T'Challa returns home to the African nation of Wakanda to take his rightful place as king. When a powerful enemy suddenly reappears, T'Challa's mettle...</p>
           </div>
         </div>
       </div>
-    <% }} %>
-      <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-        <div class="card h-100">
-          <a href="#"><img class="card-img-top" src="http://t3.gstatic.com/images?q=tbn:ANd9GcSgBWvp6He2MU-9rDInUNGBnjzDdgcg4W3e-Lx2rtJyAFSkxdVw" alt=""></a>
-          <div class="card-body">
-            <h4 class="card-title">
-              <a href="#">A Wrinkle in Time </a>
-            </h4>
-            <p class="card-text">Meg Murry and her little brother, Charles Wallace, have been without their scientist father, Mr. Murry, for five years, ever since he discovered a new planet and used the concept...</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-        <div class="card h-100">
-          <a href="#"><img class="card-img-top" src="http://t1.gstatic.com/images?q=tbn:ANd9GcRf61mker2o4KH3CbVE7Zw5B1-VogMH8LfZHEaq3UdCMLxARZAB" alt=""></a>
-          <div class="card-body">
-            <h4 class="card-title">
-              <a href="#">Interstellar</a>
-            </h4>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos quisquam, error quod sed cumque, odio distinctio velit nostrum temporibus necessitatibus et facere atque iure perspiciatis mollitia recusandae vero vel quam!</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-        <div class="card h-100">
-          <a href="#"><img class="card-img-top" src="http://t1.gstatic.com/images?q=tbn:ANd9GcTp0qlAoWcOOswIkL_qpjYzJqCCDmWXiBzCXiqbE43Obo8c0Z-s" alt=""></a>
-          <div class="card-body">
-            <h4 class="card-title">
-              <a href="#">The Avengers</a>
-            </h4>
-            <p class="card-text">When Thor's evil brother, Loki (Tom Hiddleston), gains access to the unlimited power of the energy cube called the Tesseract, Nick Fury (Samuel L. Jackson), director of S.H.I.E.L.D., initiates a superhero recruitment effort to defeat the unprecedented threat to Earth. Joining Fury's "dream team" are...</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-        <div class="card h-100">
-          <a href="#"><img class="card-img-top" src="https://static2.tribute.ca/poster/540x800/the-dark-knight-rises-the-imax-experience-3271.jpg" alt=""></a>
-          <div class="card-body">
-            <h4 class="card-title">
-              <a href="#">The Dark Knight</a>
-            </h4>
-            <p class="card-text">With the help of allies Lt. Jim Gordon (Gary Oldman) and DA Harvey Dent (Aaron Eckhart), Batman (Christian Bale) has been able to keep a tight lid on crime in Gotham City. But when a vile young criminal calling himself the Joker (Heath Ledger) suddenly throws the town into chaos, the caped Crusader...</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-        <div class="card h-100">
-          <a href="#"><img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTKaJgQTJ_bOFOKUAU51ejR0GFzR5U795Rq9Yi_WJoq_v-erWIoP6zeA" alt=""></a>
-          <div class="card-body">
-            <h4 class="card-title">
-              <a href="#">Dumb and Dumber</a>
-            </h4>
-            <p class="card-text">Imbecilic best friends Lloyd Christmas (Jim Carrey) and Harry Dunne (Jeff Daniels) stumble across a suitcase full of money left behind in Harry's car by Mary Swanson (Lauren Holly), who was on her way to the airport. ...</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-        <div class="card h-100">
-          <a href="#"><img class="card-img-top" src="https://images-na.ssl-images-amazon.com/images/M/MV5BODRmZDVmNzUtZDA4ZC00NjhkLWI2M2UtN2M0ZDIzNDcxYThjL2ltYWdlXkEyXkFqcGdeQXVyNTk0MzMzODA@._V1_UX182_CR0,0,182,268_AL_.jpg" alt=""></a>
-          <div class="card-body">
-            <h4 class="card-title">
-              <a href="#">Your Name</a>
-            </h4>
-            <p class="card-text">Two strangers find themselves linked in a bizarre way. When a connection forms, will distance be the only thing to keep them apart?</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-        <div class="card h-100">
-          <a href="#"><img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz_jejTNINwPXzXaJ5WW7L_RiAstTWnqsjn7XPq_njL9ZGNCGaTsNBMg" alt=""></a>
-          <div class="card-body">
-            <h4 class="card-title">
-              <a href="#">Sausage Party</a>
-            </h4>
-            <p class="card-text">Life is good for all the food items that occupy the shelves at the local supermarket. Frank (Seth Rogen) the sausage, Brenda (Kristen Wiig) the hot dog bun, T...</p>
-          </div>
-        </div>
-      </div>
-    </div>
+    <% }}} %>
     <!-- /.row -->
-
-    <!-- Pagination -->
-    <ul class="pagination justify-content-center">
-      <li class="page-item">
-        <a class="page-link" href="#" aria-label="Previous">
-          <span aria-hidden="true">&laquo;</span>
-          <span class="sr-only">Previous</span>
-        </a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" href="#">1</a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" href="#">2</a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" href="#">3</a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" href="#" aria-label="Next">
-          <span aria-hidden="true">&raquo;</span>
-          <span class="sr-only">Next</span>
-        </a>
-      </li>
-    </ul>
 
   </div>
   <!-- /.container -->

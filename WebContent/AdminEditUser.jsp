@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<%@page language="java" contentType="text/html" pageEncoding="UTF-8" %>
+<%@ page import="java.util.List" %>
 <head>
 
   <meta charset="utf-8">
@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Account Page</title>
+  <title>Edit User Account</title>
 
   <!-- Bootstrap core CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -23,32 +23,83 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="Home.html">Movies</a>
+      <a class="navbar-brand" href="Home.jsp">Movies</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="Login-CreateNewAccount.html">Login/Create an account
+
+<%
+//******LOGIN/CREATE ACCOUNT
+//Check if "Hello 'User'!" is necessary
+if((session.getAttribute("connected") == null) || !((String) session.getAttribute("connected")).equals("true")){
+	//String redirectURL = "/path/ToYour/login.jsp;
+    //response.sendRedirect("Login-CreateNewAccount.jsp");
+%>
+
+            <a class="nav-link" href="Login-CreateNewAccount.jsp">Login/Create an account 
+              <span class="sr-only">(current)</span>
+            </a> 
+
+<% } else if((int)session.getAttribute("userType")==1){ //Check if the user is an admin %>
+
+            <a class="nav-item" href="AdminSettings.jsp">Hello, <%= session.getAttribute("user") %>!
               <span class="sr-only">(current)</span>
             </a>
+
+<% } else { %>
+
+            <a class="nav-item" href="Settings.jsp">Hello, <%= session.getAttribute("user") %>!
+              <span class="sr-only">(current)</span>
+            </a>
+            
+<% } %>
           </li>
+<%
+//*****USER SETTING
+//If user settings should be redirected or exist
+if((session.getAttribute("connected") == null) || !((String) session.getAttribute("connected")).equals("true")){
+	//Prevent from posting anything
+%>
+
+<% } else if((int)session.getAttribute("userType")==0){ //if user is a customer%>
+
           <li class="nav-item active">
-            <a class="nav-link" href="Settings.html">Settings</a>
+            <a class="nav-link" href="Settings.jsp">Settings</a>
+          </li>
+          
+<% } else if((int) session.getAttribute("userType")==1) { //Check if admin {%>
+	<li class="nav-item active">
+            <a class="nav-link" href="AdminSettings.jsp">Settings</a>
+          </li>
+<% } %>
+          <li class="nav-item">
+            <a class="nav-link" href="Cart.jsp">Cart</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="Cart.html">Cart</a>
+            <a class="nav-link" href="Search.jsp">Search</a>
           </li>
+<%
+//******LOG OUT
+//Display Log out 
+if((session.getAttribute("connected") == null) || !((String) session.getAttribute("connected")).equals("true"))
+	{
+	//Do nothing here
+	}
+else{   //Display Log Out
+%>
           <li class="nav-item">
-            <a class="nav-link" href="Search.html">Search</a>
+            <a class="nav-link" href="LogOut">Logout</a>
           </li>
+<%} %>
         </ul>
       </div>
     </div>
   </nav>
+  
   <!-- Page Content -->
-
   <div class="container-fluid">
     <div class="row">
       <h1 class="my-4">Ticketeer
@@ -90,7 +141,7 @@
                 <a class="btn" href="#">View Details</a>
               </td>
               <td>
-                <button type="button" class="btn btn-warning" onClick="requestRefund()">Request Refund</button>
+                <button type="button" class="btn btn-danger" onClick="refundOrder()">Refund</button>
               </td>
             </tr>
           </tbody>
@@ -152,7 +203,7 @@
           <div class="form-group">
             <label for="stateSelect">State</label>
             <select id="stateSelect" class="form-control">
-              <option disabled selected value>--</option>
+              <option disabled selected value></option>
               <option>AL</option>
               <option>AK</option>
               <option>AZ</option>
@@ -234,7 +285,7 @@
           <div class="form-group">
             <label for="expMonth">Exp. month</label>
             <select id="expMonth" class="form-control">
-              <option disabled selected value>--</option>
+              <option disabled selected value></option>
               <option>01</option>
               <option>02</option>
               <option>03</option>
@@ -250,7 +301,7 @@
             </select>
             <label for="expYear">Exp. year</label>
             <select id="expYear" class="form-control">
-              <option disabled selected value>----</option>
+              <option disabled selected value></option>
               <option>2018</option>
               <option>2019</option>
               <option>2020</option>
@@ -290,6 +341,7 @@
             <button type="submit" class="btn btn-primary" onClick="checkFormCC()">Change Credit Card Info</button>
           </div>
         </form>
+        <button type="submit" class="btn btn-danger" onClick="deleteUser()">Delete User</button>
       </div>
     </div>
     <div class="row row-eq-height">
@@ -326,6 +378,21 @@
           </div>
           <div class="form-group">
             <button type="submit" class="btn btn-primary" onClick="checkFormSubscriptions()">Change Subscriptions</button>
+          </div>
+        </form>
+        <h2 class="mt-4">Account Type</h2>
+        <form>
+          <div class="form-group">
+            <label for="accountType">Account type</label>
+            <select id="accountType" class="form-control">
+              <option disabled selected value></option>
+              <option>Admin</option>
+              <option>Employee</option>
+              <option>User</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary" onClick="checkFormAccountType()">Change AccountType</button>
           </div>
         </form>
       </div>

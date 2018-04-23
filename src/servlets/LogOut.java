@@ -40,7 +40,7 @@ public class LogOut extends HttpServlet {
 		session.invalidate();
 		
 		//Send user to Log Out Confirmation
-        dispatcher = getServletContext().getRequestDispatcher("/LogoutConfirmation.html");
+        dispatcher = getServletContext().getRequestDispatcher("/LogoutConfirmation.jsp");
         dispatcher.forward(request, response);
         
         out.print("You are successfully logged out!");  

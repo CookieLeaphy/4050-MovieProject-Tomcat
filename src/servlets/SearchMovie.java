@@ -35,13 +35,6 @@ public class SearchMovie extends HttpServlet {
 		String title = request.getParameter("title");
 		ManageMovie movies = new ManageMovie();
 		List<Movie> results = movies.lookUpMovies(title);
-		/*String strlist = "";
-		for (Movie tmp: results) {
-			System.out.println(tmp.toString());
-			strlist += tmp.toString() + "\n";
-		}*/
-		//System.out.println(results.toString());
-		//response.getWriter().append("Served at: "+strlist).append(request.getContextPath());
 		request.setAttribute("movieList", results);
 		request.setAttribute("searchTerm", title);
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Search.jsp");
