@@ -84,6 +84,7 @@ if((session.getAttribute("connected") == null) || !((String) session.getAttribut
 <%
 //******LOG OUT
 //Display Log out 
+if(session !=null){
 if((session.getAttribute("connected") == null) || !((String) session.getAttribute("connected")).equals("true"))
 	{
 	//Do nothing here
@@ -93,7 +94,7 @@ else{   //Display Log Out
           <li class="nav-item">
             <a class="nav-link" href="LogOut">Logout</a>
           </li>
-<%} %>
+<%}} %>
         </ul>
       </div>
     </div>
@@ -125,9 +126,14 @@ else{   //Display Log Out
               </div>
               
               <!-- ****INVALID INPUT***** -->
-              <%if (session.getAttribute("error").equals("WrongInput")) {%>
-              <h6 class = "text-danger">Invalid Username/Password </h6>
-              <% }%>
+              
+              <%
+              if(session.getAttribute("connected") != null)
+              {
+              	if (session.getAttribute("error").equals("WrongInput")) {%>
+              	<h6 class = "text-danger">Invalid Username/Password </h6>
+              	<% }
+              }%>
               
               <div class="form-group">
                 <button type="submit" class="btn btn-primary">Login</button>
@@ -144,9 +150,14 @@ else{   //Display Log Out
             <h3 class="card-title">Create New Account</h3>
             
 			 <!-- ****INVALID INPUT***** -->
-              <%if (session.getAttribute("error").equals("WrongForm")) {%>
+			 
+              <%
+              if(session.getAttribute("connected") != null){
+              if (session.getAttribute("error").equals("WrongForm")) {%>
               <h6 class = "text-danger">Invalid Fields</h6>
-              <% }%>
+              <% }}%>
+              
+              
             <form action = "CreateAccount" method = "get">
               <h5>Personal Information</h5>
               <div class="form-group">

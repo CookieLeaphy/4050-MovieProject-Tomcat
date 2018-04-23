@@ -209,5 +209,21 @@ public class User {
 		this.orders = orders;
 	}
 	
-	
+	public String toString() {
+		return this.user_type 
+				+" "+this.userName 
+				+" "+this.firstName 
+				+" "+this.lastName 
+				+" "+this.pass 
+				+" "+this.address 
+				+" "+this.city 
+				+" "+this.zip 
+				+" "+this.country 
+				+" "+this.subStatus 
+				+" "+this.email +" "
+				+this.phone +" "+
+				this.newsSub +" "+
+				this.promoSub +" "+
+				this.orders;
+	}
 }
