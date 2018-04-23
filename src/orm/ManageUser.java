@@ -30,18 +30,28 @@ public class ManageUser {
 			tx = session.beginTransaction();
 			User user = new User(user_type, userName, firstName, lastName, pass, address,
 					city, zip, country, subStatus, email, phone, newsSub, promoSub, orders);
-			List<User> userList = session.createQuery("from User s where s.email='"+user.getEmail()+"'").getResultList();
-			for(User tmpuser : userList) 
+			List<User> userList = session.createQuery("from User s where s.email='"+user.getEmail()+"'"
+													+ " or s.userName='" + user.getUserName() + "'").getResultList();
+			/*for(User tmpuser : userList) 
 			{
-				if(tmpuser.getEmail().equals(user.getEmail())) 
-				{
+				//System.out.println("This is being looped");
+				//Check for duplicate email and duplicate usernames 
+				if(tmpuser.getEmail().equals(user.getEmail()) || tmpuser.getEmail().equals(user.getEmail())) 
+				{	
+					//System.out.println(tmpuser.toString());
 					emailExists = true;
+					user = null;
 				}
-			}
-			if(!emailExists)
+			}*/
+			if(userList.size() == 0)
 			{
 				ID = (Integer)session.save(user);
 				tx.commit();
+			}else
+			{
+				//Invalid Account Parameters
+				ID = -1;
+				tx.rollback();
 			}
 		}
 		catch(HibernateException e)
@@ -313,4 +323,6 @@ public class ManageUser {
 		}
 		return user;
 	}
+	
+
 }

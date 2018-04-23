@@ -20,6 +20,7 @@
 </head>
 
 <body>
+
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
@@ -34,7 +35,7 @@
 <%
 if((session.getAttribute("connected") == null) || !((String) session.getAttribute("connected")).equals("true")){
 //String redirectURL = "/path/ToYour/login.jsp;
-    response.sendRedirect("Login-CreateNewAccount.jsp");
+//response.sendRedirect("Login-CreateNewAccount.jsp");
 %>
 
             <h3 class="nav-link" href="Login-CreateNewAccount.html">Login/Create an account
@@ -51,22 +52,25 @@ if((session.getAttribute("connected") == null) || !((String) session.getAttribut
 
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="Settings.jsp">Settings</a>
+            <a class="nav-link" href="Settings.jsp">Notes</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="Cart.jsp">Cart</a>
+            <a class="nav-link" href="Cart.jsp">Change</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="Search.jsp">Search</a>
+            <a class="nav-link" href="Search.jsp">Me</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="LogoutConfirmation.jsp">Logout</a>
+            <a class="nav-link" href="LogoutConfirmation.jsp">Later</a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
+<!-- end of nav (This one needs to be changed (add -->
 
+<% List<Movie> results = (List<Movie>) request.getAttribute("movieList"); %>
+<% String s = (String) request.getAttribute("searchTerm"); %>    
   <!-- Page Content -->
   <div class="container">
 
@@ -78,10 +82,10 @@ if((session.getAttribute("connected") == null) || !((String) session.getAttribut
         <input type="text" class="form-control" id="user" name="title">
       </div>
     </form>
-
-<% List<Movie> results = (List<Movie>) request.getAttribute("movieList"); %>
-<% String s = (String) request.getAttribute("searchTerm"); %>    
-<% if(results.size() == 0){ %>
+    
+<%
+if(results != null){
+if(results.size() == 0){ %>
 <div class="row">
 	<p>Sorry, your search did not yield any results. Please try different search terms or try browsing with the filters on the home page.</p>
 </div>
@@ -96,7 +100,12 @@ if((session.getAttribute("connected") == null) || !((String) session.getAttribut
             <h4 class="card-title">
               <a href="#"><%= m.getTitle() %></a>
             </h4>
-            <p class="card-text"><b>Rating: </b><%= m.getRating() %><br><b>Genre: </b><%= m.getDirector() %><br><b>Director: </b><%= m.getGenre() %></p>
+            <p class="card-text">
+            <b>Rating: </b><%= m.getRating() %>
+            <br>
+            <b>Genre: </b><%= m.getDirector() %>
+            <br>
+            <b>Director: </b><%= m.getGenre() %></p>
             <form action="MoviePage" method="get">
 				<div class="form-group">
 					<input type="submit" class="form-control" id="movie" name="id" value=<%= m.getID() %>>
@@ -107,7 +116,7 @@ if((session.getAttribute("connected") == null) || !((String) session.getAttribut
       </div>
     </div>
     <!-- /.row -->
-<% }} %>
+<% }}} %>
     <!-- Pagination -->
     <ul class="pagination justify-content-center">
       <li class="page-item">

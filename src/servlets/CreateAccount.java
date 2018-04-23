@@ -93,7 +93,16 @@ public class CreateAccount extends HttpServlet {
 		//int orders
 		
 		ManageUser userMngr = new ManageUser();
-		userMngr.addUser(0, username, firstname, lastname, newPass0, address, city, zip, country, 1, email, phone, news, promotions, 0);
+		if(userMngr.addUser(0, username, firstname, lastname, newPass0, address, city, zip, country, 1, email, phone, news, promotions, 0)==-1) {
+			//If account credentials are wrong
+			session.setAttribute("connected", "false");
+			session.setAttribute("error", "WrongForm");
+			
+			dispatcher = getServletContext().getRequestDispatcher("/Login-CreateNewAccount.jsp");
+			dispatcher.forward(request, response);
+			return; //Stop the method here
+		}
+		
 		SendEmail send = new SendEmail();
 		User user = userMngr.loginInfo(username, newPass0);
 		
