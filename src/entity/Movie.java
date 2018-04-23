@@ -33,6 +33,9 @@ public class Movie {
 	@Column(name="trailor")
 	private String trailor;
 	
+	@Column(name="link")
+	private String link;
+	
 	public Movie() {
 		ID = -1; //invalid movie
 		this.showing = "NA";
@@ -42,10 +45,11 @@ public class Movie {
 		this.director = "NA";
 		this.genre = "NA";
 		this.trailor = "NA";
+		this.link = "NA";
 	}
 
 	public Movie(String showing, String rating, String title, String producer, String director, String genre,
-			String trailor) {
+			String trailor, String link) {
 		this.showing = showing;
 		this.rating = rating;
 		this.title = title;
@@ -53,6 +57,7 @@ public class Movie {
 		this.director = director;
 		this.genre = genre;
 		this.trailor = trailor;
+		this.link = link;
 	}
 
 	public int getID() {
@@ -119,6 +124,14 @@ public class Movie {
 		this.trailor = trailor;
 	}
 	
+	public String getLink() {
+		return link;
+	}
+	
+	private void setLink(String link) {
+		this.link = link;
+	}
+	
 	public String toString() {
 		String str = this.showing + " "+
 					 this.rating + " "+
@@ -126,7 +139,8 @@ public class Movie {
 					 this.producer + " "+
 					 this.director + " "+
 					 this.genre + " "+
-					 this.trailor;
+					 this.trailor + " " +
+					 this.link ;
 		return  "Movie: "+str; 
 	}
 }

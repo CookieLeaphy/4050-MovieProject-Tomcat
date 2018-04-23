@@ -84,6 +84,7 @@ if((session.getAttribute("connected") == null) || !((String) session.getAttribut
 <%
 //******LOG OUT
 //Display Log out 
+if(session !=null){
 if((session.getAttribute("connected") == null) || !((String) session.getAttribute("connected")).equals("true"))
 	{
 	//Do nothing here
@@ -93,7 +94,7 @@ else{   //Display Log Out
           <li class="nav-item">
             <a class="nav-link" href="LogOut">Logout</a>
           </li>
-<%} %>
+<%}} %>
         </ul>
       </div>
     </div>
@@ -125,6 +126,7 @@ else{   //Display Log Out
               </div>
               
               <!-- ****INVALID INPUT***** -->
+
               <%
               if(session.getAttribute("connected") != null)
               {

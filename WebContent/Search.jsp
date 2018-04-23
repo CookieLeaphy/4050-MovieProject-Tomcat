@@ -36,8 +36,7 @@
 //******LOGIN/CREATE ACCOUNT
 //Check if "Hello 'User'!" is necessary
 if((session.getAttribute("connected") == null) || !((String) session.getAttribute("connected")).equals("true")){
-	//String redirectURL = "/path/ToYour/login.jsp;
-    //response.sendRedirect("Login-CreateNewAccount.jsp");
+
 %>
 
             <a class="nav-link" href="Login-CreateNewAccount.jsp">Login/Create an account 
@@ -68,7 +67,7 @@ if((session.getAttribute("connected") == null) || !((String) session.getAttribut
 <% } else if((int)session.getAttribute("userType")==0){ //if user is a customer%>
 
           <li class="nav-item active">
-            <a class="nav-link" href="Settings.jsp">Settings</a>
+            <a class="nav-link" href="Settings.jsp">Notes</a>
           </li>
           
 <% } else if((int) session.getAttribute("userType")==1) { //Check if admin {%>
@@ -77,10 +76,10 @@ if((session.getAttribute("connected") == null) || !((String) session.getAttribut
           </li>
 <% } %>
           <li class="nav-item">
-            <a class="nav-link" href="Cart.jsp">Cart</a>
+            <a class="nav-link" href="Cart.jsp">Change</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="Search.jsp">Search</a>
+            <a class="nav-link" href="Search.jsp">Me</a>
           </li>
 <%
 //******LOG OUT
@@ -92,7 +91,11 @@ if((session.getAttribute("connected") == null) || !((String) session.getAttribut
 else{   //Display Log Out
 %>
           <li class="nav-item">
+<<<<<<< HEAD
             <a class="nav-link" href="LogOut">Logout</a>
+=======
+            <a class="nav-link" href="LogoutConfirmation.jsp">Later</a>
+>>>>>>> refs/remotes/origin/master
           </li>
 <%} %>
         </ul>
@@ -100,6 +103,10 @@ else{   //Display Log Out
     </div>
   </nav>
 <!-- end of nav (This one needs to be changed (add -->
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/remotes/origin/master
 
 <% List<Movie> results = (List<Movie>) request.getAttribute("movieList"); %>
 <% String s = (String) request.getAttribute("searchTerm"); %>    
@@ -114,8 +121,12 @@ else{   //Display Log Out
         <input type="text" class="form-control" id="user" name="title">
       </div>
     </form>
+<<<<<<< HEAD
 
  <div class="row">    
+=======
+    
+>>>>>>> refs/remotes/origin/master
 <%
 if(results != null){
 if(results.size() == 0){ %>
@@ -146,8 +157,14 @@ if(results.size() == 0){ %>
         </div>
       </div>
     <!-- /.row -->
+<<<<<<< HEAD
 <% }}} %>
 </div>
+=======
+<% } //For
+	} //If
+} //Results != null%>
+>>>>>>> refs/remotes/origin/master
     <!-- Pagination -->
     <ul class="pagination justify-content-center">
       <li class="page-item">
