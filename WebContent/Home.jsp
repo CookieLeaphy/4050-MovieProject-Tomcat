@@ -179,13 +179,15 @@ else{   //Display Log Out
           <a href="MovieListingPage.jsp"><img class="card-img-top" src="http://t1.gstatic.com/images?q=tbn:ANd9GcQPpcKQ9eWZGxJe6eXyCW91eayLVm4KqruvJz3GP0F2T2w46yKZ" alt="" ></a>
           <div class="card-body">
             <h4 class="card-title">
-              <a href="MovieListingPage.jsp"><%= m.getTitle() %></a>
+              <a href="MovieListingPage?param=<%=m.getID()%>"><%= m.getTitle() %></a>
             </h4>
             <p class="card-text">After the death of his father, T'Challa returns home to the African nation of Wakanda to take his rightful place as king. When a powerful enemy suddenly reappears, T'Challa's mettle...</p>
           </div>
         </div>
       </div>
-    <% }}} %>
+    <% }
+	}
+	} %>
     <!-- /.row -->
 
   </div>
