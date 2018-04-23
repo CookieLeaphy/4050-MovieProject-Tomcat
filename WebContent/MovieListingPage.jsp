@@ -113,7 +113,7 @@ else{   //Display Log Out
       <div class="col-md-3">
         <img class="img-fluid" src="http://t1.gstatic.com/images?q=tbn:ANd9GcQPpcKQ9eWZGxJe6eXyCW91eayLVm4KqruvJz3GP0F2T2w46yKZ" alt="">
         <h3 class="my-3">Buy Tickets</h3>
-        <form>
+        <form action = "PurchaseTicket" method ="get">
           <div class="form-group">
             <label for="screeningDate">Please select a date.</label>
             <input type="date" type="form-control" name="screeningDate">
@@ -121,19 +121,19 @@ else{   //Display Log Out
           <div class="form-group">
           <!-- TODO - get list of showing and open seats from Movie m -->
             <label for="screeningTime">Screening</label>
-            <select id="screeningTime" class="form-control">
+            <select id="screeningTime" class="form-control" name = "screeningTime">
               <option disabled selected value></option>
-              <option>5:30</option>
-              <option>6:00</option>
-              <option>6:30</option>
-              <option>7:00</option>
-              <option>7:30</option>
-              <option>8:00</option>
-              <option>8:30</option>
-              <option>9:00</option>
-              <option>9:30</option>
-              <option>10:00</option>
-              <option>10:30</option>
+<!--              <option>5:30</option>-->
+<!--              <option>6:00</option>-->
+<!--              <option>6:30</option>-->
+<!--              <option>7:00</option>-->
+<!--              <option>7:30</option>-->
+<!--              <option>8:00</option>-->
+<!--              <option>8:30</option>-->
+              <option value = "9:00">9:00</option>
+              <option value = "9:30">9:30</option>
+              <option value = "10:00">10:00</option>
+              <option value = "10:30">10:30</option>
             </select>
           </div>
           <div class="form-group">
@@ -154,95 +154,95 @@ else{   //Display Log Out
               </tr>
               <tr>
                 <th>F</th>
-                <td><input type="radio" name="seatSelect" value="F0"></td>
-                <td><input type="radio" name="seatSelect" value="F1"></td>
-                <td><input type="radio" name="seatSelect" value="F2"></td>
-                <td><input type="radio" name="seatSelect" value="F3"></td>
-                <td><input type="radio" name="seatSelect" value="F4"></td>
-                <td><input type="radio" name="seatSelect" value="F5"></td>
-                <td><input type="radio" name="seatSelect" value="F6"></td>
-                <td><input type="radio" name="seatSelect" value="F7"></td>
-                <td><input type="radio" name="seatSelect" value="F8"></td>
-                <td><input type="radio" name="seatSelect" value="F9"></td>
+                <td><input type="checkbox" name="seatSelect" value="F0"></td>
+                <td><input type="checkbox" name="seatSelect" value="F1"></td>
+                <td><input type="checkbox" name="seatSelect" value="F2"></td>
+                <td><input type="checkbox" name="seatSelect" value="F3"></td>
+                <td><input type="checkbox" name="seatSelect" value="F4"></td>
+                <td><input type="checkbox" name="seatSelect" value="F5"></td>
+                <td><input type="checkbox" name="seatSelect" value="F6"></td>
+                <td><input type="checkbox" name="seatSelect" value="F7"></td>
+                <td><input type="checkbox" name="seatSelect" value="F8"></td>
+                <td><input type="checkbox" name="seatSelect" value="F9"></td>
               </tr>
               <tr>
                 <th>E</th>
-                <td><input type="radio" name="seatSelect" value="E0"></td>
-                <td><input type="radio" name="seatSelect" value="E1"></td>
-                <td><input type="radio" name="seatSelect" value="E2"></td>
-                <td><input type="radio" name="seatSelect" value="E3"></td>
-                <td><input type="radio" name="seatSelect" value="E4"></td>
-                <td><input type="radio" name="seatSelect" value="E5"></td>
-                <td><input type="radio" name="seatSelect" value="E6"></td>
-                <td><input type="radio" name="seatSelect" value="E7"></td>
-                <td><input type="radio" name="seatSelect" value="E8"></td>
-                <td><input type="radio" name="seatSelect" value="E9"></td>
+                <td><input type="checkbox" name="seatSelect" value="E0"></td>
+                <td><input type="checkbox" name="seatSelect" value="E1"></td>
+                <td><input type="checkbox" name="seatSelect" value="E2"></td>
+                <td><input type="checkbox" name="seatSelect" value="E3"></td>
+                <td><input type="checkbox" name="seatSelect" value="E4"></td>
+                <td><input type="checkbox" name="seatSelect" value="E5"></td>
+                <td><input type="checkbox" name="seatSelect" value="E6"></td>
+                <td><input type="checkbox" name="seatSelect" value="E7"></td>
+                <td><input type="checkbox" name="seatSelect" value="E8"></td>
+                <td><input type="checkbox" name="seatSelect" value="E9"></td>
               </tr>
               <tr>
                 <th>D</th>
-                <td><input type="radio" name="seatSelect" value="D0"></td>
-                <td><input type="radio" name="seatSelect" value="D1"></td>
-                <td><input type="radio" name="seatSelect" value="D2"></td>
-                <td><input type="radio" name="seatSelect" value="D3"></td>
-                <td><input type="radio" name="seatSelect" value="D4"></td>
-                <td><input type="radio" name="seatSelect" value="D5"></td>
-                <td><input type="radio" name="seatSelect" value="D6"></td>
-                <td><input type="radio" name="seatSelect" value="D7"></td>
-                <td><input type="radio" name="seatSelect" value="D8"></td>
-                <td><input type="radio" name="seatSelect" value="D9"></td>
+                <td><input type="checkbox" name="seatSelect" value="D0"></td>
+                <td><input type="checkbox" name="seatSelect" value="D1"></td>
+                <td><input type="checkbox" name="seatSelect" value="D2"></td>
+                <td><input type="checkbox" name="seatSelect" value="D3"></td>
+                <td><input type="checkbox" name="seatSelect" value="D4"></td>
+                <td><input type="checkbox" name="seatSelect" value="D5"></td>
+                <td><input type="checkbox" name="seatSelect" value="D6"></td>
+                <td><input type="checkbox" name="seatSelect" value="D7"></td>
+                <td><input type="checkbox" name="seatSelect" value="D8"></td>
+                <td><input type="checkbox" name="seatSelect" value="D9"></td>
               </tr>
               <tr>
                 <th>C</th>
-                <td><input type="radio" name="seatSelect" value="C0"></td>
-                <td><input type="radio" name="seatSelect" value="C1"></td>
-                <td><input type="radio" name="seatSelect" value="C2"></td>
-                <td><input type="radio" name="seatSelect" value="C3"></td>
-                <td><input type="radio" name="seatSelect" value="C4"></td>
-                <td><input type="radio" name="seatSelect" value="C5"></td>
-                <td><input type="radio" name="seatSelect" value="C6"></td>
-                <td><input type="radio" name="seatSelect" value="C7"></td>
-                <td><input type="radio" name="seatSelect" value="C8"></td>
-                <td><input type="radio" name="seatSelect" value="C9"></td>
+                <td><input type="checkbox" name="seatSelect" value="C0"></td>
+                <td><input type="checkbox" name="seatSelect" value="C1"></td>
+                <td><input type="checkbox" name="seatSelect" value="C2"></td>
+                <td><input type="checkbox" name="seatSelect" value="C3"></td>
+                <td><input type="checkbox" name="seatSelect" value="C4"></td>
+                <td><input type="checkbox" name="seatSelect" value="C5"></td>
+                <td><input type="checkbox" name="seatSelect" value="C6"></td>
+                <td><input type="checkbox" name="seatSelect" value="C7"></td>
+                <td><input type="checkbox" name="seatSelect" value="C8"></td>
+                <td><input type="checkbox" name="seatSelect" value="C9"></td>
               </tr>
               <tr>
                 <th>B</th>
-                <td><input type="radio" name="seatSelect" value="B0"></td>
-                <td><input type="radio" name="seatSelect" value="B1"></td>
-                <td><input type="radio" name="seatSelect" value="B2"></td>
-                <td><input type="radio" name="seatSelect" value="B3"></td>
-                <td><input type="radio" name="seatSelect" value="B4"></td>
-                <td><input type="radio" name="seatSelect" value="B5"></td>
-                <td><input type="radio" name="seatSelect" value="B6"></td>
-                <td><input type="radio" name="seatSelect" value="B7"></td>
-                <td><input type="radio" name="seatSelect" value="B8"></td>
-                <td><input type="radio" name="seatSelect" value="B9"></td>
+                <td><input type="checkbox" name="seatSelect" value="B0"></td>
+                <td><input type="checkbox" name="seatSelect" value="B1"></td>
+                <td><input type="checkbox" name="seatSelect" value="B2"></td>
+                <td><input type="checkbox" name="seatSelect" value="B3"></td>
+                <td><input type="checkbox" name="seatSelect" value="B4"></td>
+                <td><input type="checkbox" name="seatSelect" value="B5"></td>
+                <td><input type="checkbox" name="seatSelect" value="B6"></td>
+                <td><input type="checkbox" name="seatSelect" value="B7"></td>
+                <td><input type="checkbox" name="seatSelect" value="B8"></td>
+                <td><input type="checkbox" name="seatSelect" value="B9"></td>
               </tr>
               <tr>
                 <th>A</th>
-                <td><input type="radio" name="seatSelect" value="A0"></td>
-                <td><input type="radio" name="seatSelect" value="A1"></td>
-                <td><input type="radio" name="seatSelect" value="A2"></td>
-                <td><input type="radio" name="seatSelect" value="A3"></td>
-                <td><input type="radio" name="seatSelect" value="A4"></td>
-                <td><input type="radio" name="seatSelect" value="A5"></td>
-                <td><input type="radio" name="seatSelect" value="A6"></td>
-                <td><input type="radio" name="seatSelect" value="A7"></td>
-                <td><input type="radio" name="seatSelect" value="A8"></td>
-                <td><input type="radio" name="seatSelect" value="A9"></td>
+                <td><input type="checkbox" name="seatSelect" value="A0"></td>
+                <td><input type="checkbox" name="seatSelect" value="A1"></td>
+                <td><input type="checkbox" name="seatSelect" value="A2"></td>
+                <td><input type="checkbox" name="seatSelect" value="A3"></td>
+                <td><input type="checkbox" name="seatSelect" value="A4"></td>
+                <td><input type="checkbox" name="seatSelect" value="A5"></td>
+                <td><input type="checkbox" name="seatSelect" value="A6"></td>
+                <td><input type="checkbox" name="seatSelect" value="A7"></td>
+                <td><input type="checkbox" name="seatSelect" value="A8"></td>
+                <td><input type="checkbox" name="seatSelect" value="A9"></td>
               </tr>
             </table>
           </div>
           <div class="form-group">
             <label for="ticketType">Ticket type</label>
-            <select id="ticketType" class="form-control">
+            <select id="ticketType" class="form-control" name = "ticketType">
               <option disabled selected value></option>
-              <option>Child - $6</option>
-              <option>Adult - $9</option>
-              <option>Senior - $7</option>
+              <option value = "c">Child - $6</option>
+              <option value = "a">Adult - $9</option>
+              <option value = "s">Senior - $7</option>
             </select>
           </div>
           <div class="form-group">
-            <button type="submit" class="btn btn-primary" onClick=addTicketToCart()>Add to Cart</button>
+            <button type="submit" class="btn btn-primary"  onClick=addTicketToCart()>Add to Cart</button>
           </div>
         </form>
       </div>
@@ -257,8 +257,9 @@ else{   //Display Log Out
           <li><b>Rating: </b><%= m.getRating() %></li>
           <li><b>Genre: </b><%= m.getGenre() %></li>
           <li><b>Director: </b><%= m.getDirector() %></li>
-          <li><b>Producer: </b><%= m.getProducer() %>></li>
-          <li><b>Cast: </b>James Earwig, Frederick Langley, James Mao, Ubuntu Gnarls</li> <!-- TODO - get cast list from Movie m -->
+          <li><b>Producer: </b><%= m.getProducer() %></li>
+          <!--<li><b>Cast: </b>James Earwig, Frederick Langley, James Mao, Ubuntu Gnarls</li>-->
+           <!-- TODO - get cast list from Movie m -->
         </ul>
         <h3 class="my-3">Trailer</h3>
         <div class="embed-responsive embed-responsive-16by9">
@@ -267,9 +268,9 @@ else{   //Display Log Out
       </div>
     </div>
     <div class="row">
-      <div class="col">
+      <!--<div class="col">
       <!-- TODO - get reviews from Movie m -->
-        <h3 class="md-8">Reviews</h3>
+        <!--<h3 class="md-8">Reviews</h3>
         <table class="table table-responsive table-scrollable">
           <thead>
             <tr>
@@ -324,7 +325,7 @@ else{   //Display Log Out
             <button type="submit" class="btn btn-primary" onClick="submitMovieReview">Submit Review</button>
           </div>
         </form>
-      </div>
+      </div>    -->
     </div>
 
     <!-- /.row -->

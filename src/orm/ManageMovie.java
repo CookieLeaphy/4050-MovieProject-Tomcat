@@ -95,14 +95,17 @@ public class ManageMovie {
 		return movieList;
 	}
 	
-	public Movie getMovie(Integer ID)
+	public Movie getMovie(int ID)
 	{
 		Session session = factory.openSession();
 		Movie movie = null;
-		
+		Transaction tx;
 		try
-		{
-			movie = (Movie) session.get(Movie.class, ID); //idk if this is correct. we may need to use a sql query?
+		{	
+			//String query = "FROM Movie s where s.ID '"+ID+"'";
+			//tx = session.beginTransaction();
+			movie = (Movie) session.get(Movie.class, ID);//session.createQuery(query).getResultList();
+			//movie = (Movie) session.get(Movie.class, ID); //idk if this is correct. we may need to use a sql query?
 			return movie;
 		}
 		catch(HibernateException e)
