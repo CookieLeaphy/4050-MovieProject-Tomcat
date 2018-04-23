@@ -105,7 +105,7 @@ else{   //Display Log Out
   <div class="container">
 
     <!-- Portfolio Item Heading -->
-    <h1 class="my-4">Ticketeer <small><%= m.getTitle() %></small>
+    <h1 class="my-4">Ticketeer <small>Black Panther</small>
     </h1>
 
     <!-- Portfolio Item Row -->

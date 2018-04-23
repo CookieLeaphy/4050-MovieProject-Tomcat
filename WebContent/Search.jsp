@@ -91,11 +91,7 @@ if((session.getAttribute("connected") == null) || !((String) session.getAttribut
 else{   //Display Log Out
 %>
           <li class="nav-item">
-<<<<<<< HEAD
             <a class="nav-link" href="LogOut">Logout</a>
-=======
-            <a class="nav-link" href="LogoutConfirmation.jsp">Later</a>
->>>>>>> refs/remotes/origin/master
           </li>
 <%} %>
         </ul>
@@ -103,10 +99,6 @@ else{   //Display Log Out
     </div>
   </nav>
 <!-- end of nav (This one needs to be changed (add -->
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/remotes/origin/master
 
 <% List<Movie> results = (List<Movie>) request.getAttribute("movieList"); %>
 <% String s = (String) request.getAttribute("searchTerm"); %>    
@@ -121,12 +113,8 @@ else{   //Display Log Out
         <input type="text" class="form-control" id="user" name="title">
       </div>
     </form>
-<<<<<<< HEAD
 
  <div class="row">    
-=======
-    
->>>>>>> refs/remotes/origin/master
 <%
 if(results != null){
 if(results.size() == 0){ %>
@@ -157,14 +145,10 @@ if(results.size() == 0){ %>
         </div>
       </div>
     <!-- /.row -->
-<<<<<<< HEAD
+
 <% }}} %>
 </div>
-=======
-<% } //For
-	} //If
-} //Results != null%>
->>>>>>> refs/remotes/origin/master
+
     <!-- Pagination -->
     <ul class="pagination justify-content-center">
       <li class="page-item">
