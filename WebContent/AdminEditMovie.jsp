@@ -143,8 +143,8 @@ else{   //Display Log Out
           </div>
           <div class="form-group">
             <label for="genre">Genre</label>
-            <select class="form-control" id="genre" value="Horror">
-              <option disabled selected value></option>
+            <select class="form-control" name="genre">
+              <option disabled selected value=""></option>
               <option value="Horror"<%if(m.getGenre().equals("Horror")){%> selected<%}%>>Horror</option>
               <option value="Comedy"<%if(m.getGenre().equals("Comedy")){%> selected<%}%>>Comedy</option>
               <option value="Drama"<%if(m.getGenre().equals("Drama")){%> selected<%}%>>Drama</option>
@@ -165,14 +165,10 @@ else{   //Display Log Out
             <input type="text" class="form-control" id="producer" value=<%= m.getProducer() %>>
           </div>
           <div class="form-group">
-            <label for="cast">Cast</label>
-            <input type="text" class="form-control text" id="cast" value=<%= m.getCast() %>>
-          </div>
-          <div class="form-group">
             <button type="submit" class="btn btn-primary">Submit Changes</button>
           </div>
         </form>
-        <a class="btn btn-secondary" href="#">View Movie Page</a>
+        <a class="btn btn-secondary" href="MovieListingPage?param=<%=m.getID()%>">View Movie Page</a>
       </div>
       <div class="col">
         <h3 class="mt-5">Manage Showings</h3>

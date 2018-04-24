@@ -2,7 +2,8 @@ package servlets;
 
 import java.io.IOException;
 import java.util.Date;
-
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,7 +37,12 @@ public class CreateMovie extends HttpServlet {
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/AdminEditMovie.jsp");
 		HttpSession session = request.getSession(); //new session
 		String title = request.getParameter("title");
-		Date releaseDate = request.getParameter("release");
+		Date releaseDate = null;
+		try {
+			releaseDate = new SimpleDateFormat("yyyy/MM/dd").parse(request.getParameter("release"));
+		} catch(ParseException e) {
+		
+		}
 		String link = request.getParameter("link");
 		String trailor = request.getParameter("trailor");
 		String description = request.getParameter("description");
@@ -44,7 +50,6 @@ public class CreateMovie extends HttpServlet {
 		String genre = request.getParameter("genre");
 		String director = request.getParameter("director");
 		String producer = request.getParameter("producer");
-		String cast = request.getParameter("cast");
 		ManageMovie mngr = new ManageMovie();
 		Integer id = mngr.addMovie(rating, title, producer, director, genre, trailor, link, description, releaseDate);
 		if(id == -1) {

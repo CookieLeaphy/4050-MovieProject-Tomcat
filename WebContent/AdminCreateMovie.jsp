@@ -129,27 +129,27 @@ else{   //Display Log Out
         <div class="form-group">
           <label for="rating">Rating</label>
           <select class="form-control" id="rating">
-            <option disabled selected value></option>
-            <option>G</option>
-            <option>PG</option>
-            <option>PG-13</option>
-            <option>R</option>
-            <option>NC-17</option>
+            <option disabled selected value=""></option>
+            <option value="G">G</option>
+            <option value="PG">PG</option>
+            <option value="PG">PG-13</option>
+            <option value="R">R</option>
+            <option value="NC-17">NC-17</option>
           </select>
         </div>
         <div class="form-group">
           <label for="genre">Genre</label>
           <select class="form-control" name="genre">
-            <option disabled selected value></option>
-            <option>Horror</option>
-            <option>Comedy</option>
-            <option>Drama</option>
-            <option>Action</option>
-            <option>Romance</option>
-            <option>Sci-Fi</option>
-            <option>Art</option>
-            <option>Documentary</option>
-            <option>Performance Recording</option>
+            <option disabled selected value=""></option>
+            <option value="Horror">Horror</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Drama">Drama</option>
+            <option value="Action">Action</option>
+            <option value="Romance">Romance</option>
+            <option value="Sci-Fi">Sci-Fi</option>
+            <option value="Art">Art</option>
+            <option value="Documentary">Documentary</option>
+            <option value="Performance Recording">Performance Recording</option>
           </select>
         </div>
         <div class="form-group">
@@ -161,10 +161,6 @@ else{   //Display Log Out
           <input type="text" class="form-control" name="producer">
         </div>
         <div class="form-group">
-          <label for="cast">Cast</label>
-          <input type="text" class="form-control text" name="cast">
-        </div>
-        <div class="form-group">
           <button type="submit" class="btn btn-primary">Create Movie</button>
         </div>
       </form>
@@ -173,6 +169,7 @@ else{   //Display Log Out
 
       <!-- /.row -->
 
+    </div>
     </div>
     <!-- /.container -->
 
