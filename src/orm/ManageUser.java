@@ -324,5 +324,63 @@ public class ManageUser {
 		return user;
 	}
 	
-
+	public User randomConfirmation(User user)
+	{
+		Session session = factory.openSession();
+		Transaction tx = null;
+		try
+		{
+			
+			tx = session.beginTransaction();
+			@SuppressWarnings("unchecked")
+			List<User> userList = session.createQuery("from User s where s.userName='"+user.getUserName()+"'").getResultList();
+			for(User tmpuser : userList) 
+			{	
+				user = tmpuser; 
+				user.setConfirmation((int) Math.ceil(Math.random()*89999 + 10000));
+				session.update(user);
+				break; 
+			}
+			tx.commit();
+		}
+		catch(HibernateException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			session.close();
+		}
+		return user;
+	}
+	
+	public User setConfirmation(User user, int n)
+	{
+		Session session = factory.openSession();
+		Transaction tx = null;
+		try
+		{
+			
+			tx = session.beginTransaction();
+			@SuppressWarnings("unchecked")
+			List<User> userList = session.createQuery("from User s where s.userName='"+user.getUserName()+"'").getResultList();
+			for(User tmpuser : userList) 
+			{	
+				user = tmpuser; 
+				user.setConfirmation(n);
+				session.update(user);
+				break; 
+			}
+			tx.commit();
+		}
+		catch(HibernateException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			session.close();
+		}
+		return user;
+	}
 }

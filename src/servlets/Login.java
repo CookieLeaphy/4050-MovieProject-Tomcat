@@ -43,11 +43,24 @@ public class Login extends HttpServlet {
 			
 		}
 		else*/ if(user.getUser_type() != -1){
-			request.getSession().setAttribute("user", user.getUserName());
 			session.setAttribute("User", user);
-			request.getSession().setAttribute("userType", user.getUser_type());
-			session.setAttribute("connected", "true");
-			dispatcher = getServletContext().getRequestDispatcher("/Home.jsp");
+			if(user.getConfirmation() != 1)
+			{
+		  	 	if(user.getConfirmation() == 0)
+		  	 	{
+		  	 		user = userMngr.randomConfirmation(user);
+		  			SendEmail send = new SendEmail();
+		  	 		send.sendMessage(user, 1); //Send a confirmation email
+		  	 	}
+				dispatcher = getServletContext().getRequestDispatcher("/AccountConfirmation.jsp");
+			}
+			else
+			{
+				request.getSession().setAttribute("user", user.getUserName());
+				request.getSession().setAttribute("userType", user.getUser_type());
+				session.setAttribute("connected", "true");
+				dispatcher = getServletContext().getRequestDispatcher("/Home.jsp");
+			}
 		} else{
 			session.setAttribute("connected", "false");
 			session.setAttribute("error", "WrongInput");

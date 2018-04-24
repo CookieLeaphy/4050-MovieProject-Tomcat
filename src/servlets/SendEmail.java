@@ -46,8 +46,8 @@ public class SendEmail {
 				InternetAddress.parse(user.getEmail())); //Change 
 			
 			if(emailType == 1) {	 	//New Account Email
-				message.setSubject("Congratulations " + user.getFirstName() + "!");
-				message.setText("Your account has been created !");
+				message.setSubject("Code Validation for " + user.getFirstName());
+				message.setText("Your validation code is: " + user.getConfirmation());
 			}
 			else if(emailType == 2) { 	//Forgot Password Email
 				message.setSubject(user.getFirstName() + ", your account has received a new password.");

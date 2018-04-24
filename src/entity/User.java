@@ -57,6 +57,7 @@ public class User {
 
 	public User() {
 		this.user_type = -1;
+		this.confirmation = -1;
 	}
 	public User(int user_type, String userName, String firstName, String lastName, String pass, String address,
 			String city, int zip, String country, String email, String phone, int newsSub, int promoSub,
