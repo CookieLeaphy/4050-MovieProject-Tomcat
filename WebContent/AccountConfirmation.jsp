@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <%@page language="java" contentType="text/html" pageEncoding="UTF-8" %>
-<%@ page import="java.util.List" %>
+<%@ page import="java.util.List, entity.User" %>
 
 <head>
 
@@ -76,9 +76,6 @@ if((session.getAttribute("connected") == null) || !((String) session.getAttribut
           </li>
 <% } %>
           <li class="nav-item">
-            <a class="nav-link" href="Cart.jsp">Cart</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="Search.jsp">Search</a>
           </li>
 <%
@@ -100,11 +97,12 @@ else{   //Display Log Out
   </nav>
   
   <!-- Page Content -->
+  <% User u = (User)session.getAttribute("User"); %>
   <div class="container">
     <h1 class="my-4">Ticketeer
       <small>Account Confirmation</small>
     </h1>
-    <p>The account <%= session.getAttribute("user") %> has been successfully created. You're all set to start ordering tickets!</p>
+    <p><%= u.getUserName() %>, an E-Mail has been sent to <%= u.getEmail() %>. Copy the verification to the box below.</p>
     <div class="row">
       <div class="form-group">
         <a class="btn" href="Home.jsp">Browse Movies</a>

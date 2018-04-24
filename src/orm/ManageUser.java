@@ -17,8 +17,8 @@ public class ManageUser {
 	private static SessionFactory factory = hibernateUtil.getSessionFactory();
 	
 	public Integer addUser(int user_type, String userName, String firstName, String lastName, String pass, String address,
-			String city, int zip, String country, int subStatus, String email, String phone, int newsSub, int promoSub,
-			int orders)
+			String city, int zip, String country, String email, String phone, int newsSub, int promoSub,
+			int confirmation)
 	{
 		Session session = factory.openSession();
 		Transaction tx = null;
@@ -29,7 +29,7 @@ public class ManageUser {
 			boolean emailExists = false;
 			tx = session.beginTransaction();
 			User user = new User(user_type, userName, firstName, lastName, pass, address,
-					city, zip, country, subStatus, email, phone, newsSub, promoSub, orders);
+					city, zip, country, email, phone, newsSub, promoSub, confirmation);
 			List<User> userList = session.createQuery("from User s where s.email='"+user.getEmail()+"'"
 													+ " or s.userName='" + user.getUserName() + "'").getResultList();
 			/*for(User tmpuser : userList) 

@@ -40,9 +40,6 @@ public class User {
 	@Column(name="country")
 	private String country;
 	
-	@Column(name="subStatus")
-	private int subStatus;
-	
 	@Column(name="email")
 	private String email;
 	
@@ -55,15 +52,15 @@ public class User {
 	@Column(name="promoSub")
 	private int promoSub;
 	
-	@Column(name="orders")
-	private int orders;
+	@Column(name="confirmation")
+	private int confirmation;
 
 	public User() {
 		this.user_type = -1;
 	}
 	public User(int user_type, String userName, String firstName, String lastName, String pass, String address,
-			String city, int zip, String country, int subStatus, String email, String phone, int newsSub, int promoSub,
-			int orders) {
+			String city, int zip, String country, String email, String phone, int newsSub, int promoSub,
+			int confirmation) {
 		this.user_type = user_type;
 		this.userName = userName;
 		this.firstName = firstName;
@@ -73,12 +70,11 @@ public class User {
 		this.city = city;
 		this.zip = zip;
 		this.country = country;
-		this.subStatus = subStatus;
 		this.email = email;
 		this.phone = phone;
 		this.newsSub = newsSub;
 		this.promoSub = promoSub;
-		this.orders = orders;
+		this.confirmation = confirmation;
 	}
 
 	public int getId() {
@@ -161,14 +157,6 @@ public class User {
 		this.country = country;
 	}
 
-	public int getSubStatus() {
-		return subStatus;
-	}
-
-	public void setSubStatus(int subStatus) {
-		this.subStatus = subStatus;
-	}
-
 	public String getEmail() {
 		return email;
 	}
@@ -201,12 +189,12 @@ public class User {
 		this.promoSub = promoSub;
 	}
 
-	public int getOrders() {
-		return orders;
+	public int getConfirmation() {
+		return confirmation;
 	}
 
-	public void setOrders(int orders) {
-		this.orders = orders;
+	public void setConfirmation(int confirmation) {
+		this.confirmation = confirmation;
 	}
 	
 	public String toString() {
@@ -219,11 +207,10 @@ public class User {
 				+" "+this.city 
 				+" "+this.zip 
 				+" "+this.country 
-				+" "+this.subStatus 
 				+" "+this.email +" "
 				+this.phone +" "+
 				this.newsSub +" "+
 				this.promoSub +" "+
-				this.orders;
+				this.confirmation;
 	}
 }

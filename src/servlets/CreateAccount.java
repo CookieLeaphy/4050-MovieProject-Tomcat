@@ -93,7 +93,7 @@ public class CreateAccount extends HttpServlet {
 		//int orders
 		
 		ManageUser userMngr = new ManageUser();
-		if(userMngr.addUser(0, username, firstname, lastname, newPass0, address, city, zip, country, 1, email, phone, news, promotions, 0)==-1) {
+		if(userMngr.addUser(0, username, firstname, lastname, newPass0, address, city, zip, country, email, phone, news, promotions, 0)==-1) {
 			//If account credentials are wrong
 			session.setAttribute("connected", "false");
 			session.setAttribute("error", "WrongForm");

@@ -76,9 +76,6 @@ if((session.getAttribute("connected") == null) || !((String) session.getAttribut
           </li>
 <% } %>
           <li class="nav-item">
-            <a class="nav-link" href="Cart.jsp">Cart</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="Search.jsp">Search</a>
           </li>
 <%
