@@ -105,12 +105,12 @@ else{   //Display Log Out
       <h6>Find your favorite selections here!</h6>
     </h1>
     <form action="SearchMovie" method="get">
-		<div class ="row">
+		<!--  <div class ="row "></div>-->
 	      <div class="form-group">
 	        <input type="text" class="form-control" id="user" name="title">
-	      </div>
+	      
 		</div>
-	    <div class="row">
+	    <!-- <div class="row"> -->
 	        <div class="form-row">
 	          <div class="form-group">
 	            <select class="form-control" id="genre" name="genre">
@@ -158,7 +158,7 @@ else{   //Display Log Out
 	            <button type="submit" class="btn btn-primary" onClick="filterMovies()" id="submitFilter">Filter Movies</button>
 	          </div>
 	        </div>
-	    </div>
+	   <!-- </div> -->
     </form>
 
     <div class="row">
