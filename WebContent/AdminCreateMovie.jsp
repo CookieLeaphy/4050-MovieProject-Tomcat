@@ -119,12 +119,12 @@ else{   //Display Log Out
           <input type="text" class="form-control" name="link">
         </div>
         <div class="form-group">
-          <label for="trailer">Trailer</label>
+          <label for="trailor">Trailor</label>
           <input type="text" class="form-control" name="trailor">
         </div>
         <div class="form-group">
           <label for="summary">Summary</label>
-          <input type="text" class="form-control text" name="summary">
+          <input type="text" class="form-control text" name="description">
         </div>
         <div class="form-group">
           <label for="rating">Rating</label>

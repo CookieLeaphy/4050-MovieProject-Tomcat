@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -31,21 +32,29 @@ public class CreateMovie extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher;
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/AdminEditMovie.jsp");
 		HttpSession session = request.getSession(); //new session
 		String title = request.getParameter("title");
-		Date release = request.getParameter("release");
+		Date releaseDate = request.getParameter("release");
 		String link = request.getParameter("link");
 		String trailor = request.getParameter("trailor");
-		String summary = request.getParameter("summary");
+		String description = request.getParameter("description");
 		String rating = request.getParameter("rating");
 		String genre = request.getParameter("genre");
 		String director = request.getParameter("director");
 		String producer = request.getParameter("producer");
 		String cast = request.getParameter("cast");
 		ManageMovie mngr = new ManageMovie();
-		if(mngr.addMovie)
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		Integer id = mngr.addMovie(rating, title, producer, director, genre, trailor, link, description, releaseDate);
+		if(id == -1) {
+			request.setAttribute("created", "false");
+			request.setAttribute("error", "FailedMovieCreation");
+			dispatcher = getServletContext().getRequestDispatcher("/AdminCreateMovie.jsp");
+		} else {
+			request.setAttribute("created", "true");
+			request.setAttribute("ID", id);
+		}
+		dispatcher.forward(request, response);
 	}
 
 	/**
