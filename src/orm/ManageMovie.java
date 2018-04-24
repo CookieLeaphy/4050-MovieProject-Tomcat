@@ -1,5 +1,6 @@
 package orm;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -46,19 +47,40 @@ public class ManageMovie {
 		return ID;
 	}
 	
-	public List<Movie> lookUpMovies(String title){
+	@SuppressWarnings("deprecation")
+	public List<Movie> lookUpMovies(String title, String genre, String rating, String releaseStatus){
 		Session session = factory.openSession();
 		//@SuppressWarnings("unchecked")
 		List<Movie> movieList = null;
 		Transaction tx = null;
 		try
 		{
-			String query = "FROM Movie s where s.title like '%"+title+"%'"
+			Date date = new Date();
+			StringBuilder query = new StringBuilder(
+					"FROM Movie s where (s.title like '%"+title+"%'"
 							+ " or s.producer like '%"+title+"%'"
-							+ " or s.director like '%"+title+"%'"
-							+ " or s.genre like '%"+title+"%'";
-			tx = session.beginTransaction();
-			movieList = session.createQuery(query).getResultList();
+							+ " or s.director like '%"+title+"%')"
+							+ " and s.genre like '%"+genre+"%'"
+							+ " and s.rating like '%"+rating+"'");
+			
+			if(releaseStatus.equals("Showing"))
+			{
+				query.append(" and s.releaseDate <= :date");
+			}
+			else if(releaseStatus.equals("Coming Soon"))
+			{
+				query.append(" and s.releaseDate > :date");
+			}
+			if(releaseStatus.equals("Showing") || releaseStatus.equals("Coming Soon"))
+			{
+				tx = session.beginTransaction();
+				movieList = session.createQuery(query.toString()).setDate("date", date).getResultList();
+			}
+			else
+			{
+				tx = session.beginTransaction();
+				movieList = session.createQuery(query.toString()).getResultList();
+			}
 //			return movieList;
 		}
 		catch(HibernateException e)

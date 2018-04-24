@@ -75,9 +75,7 @@ if((session.getAttribute("connected") == null) || !((String) session.getAttribut
             <a class="nav-link" href="AdminSettings.jsp">Settings</a>
           </li>
 <% } %>
-          <li class="nav-item">
-            <a class="nav-link" href="Search.jsp">Search</a>
-          </li>
+
 <%
 //******LOG OUT
 //Display Log out 
