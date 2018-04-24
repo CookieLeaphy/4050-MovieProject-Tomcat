@@ -107,26 +107,26 @@ else{   //Display Log Out
 
     <!-- Portfolio Item Row -->
     <div class="row">
-      <form>
+      <form action="CreateMovie" method="get">
         <div class="form-group">
           <label for="title">Title</label>
-          <input type="text" class="form-control" id="title">
+          <input type="text" class="form-control" name="title">
         </div>
         <div class="form-group">
           <label for="release">Release date</label>
-          <input type="date" class="form-control" id="release">
+          <input type="date" class="form-control" name="release">
         </div>
         <div class="form-group">
           <label for="poster">Poster</label>
-          <input type="text" class="form-control" id="poster">
+          <input type="text" class="form-control" name="link">
         </div>
         <div class="form-group">
           <label for="trailer">Trailer</label>
-          <input type="text" class="form-control" id="trailer">
+          <input type="text" class="form-control" name="trailor">
         </div>
         <div class="form-group">
           <label for="summary">Summary</label>
-          <input type="text" class="form-control text" id="summary">
+          <input type="text" class="form-control text" name="summary">
         </div>
         <div class="form-group">
           <label for="rating">Rating</label>
@@ -141,7 +141,7 @@ else{   //Display Log Out
         </div>
         <div class="form-group">
           <label for="genre">Genre</label>
-          <select class="form-control" id="genre">
+          <select class="form-control" name="genre">
             <option disabled selected value></option>
             <option>Horror</option>
             <option>Comedy</option>
@@ -156,18 +156,18 @@ else{   //Display Log Out
         </div>
         <div class="form-group">
           <label for="director">Director</label>
-          <input type="text" class="form-control" id="director">
+          <input type="text" class="form-control" name="director">
         </div>
         <div class="form-group">
           <label for="producer">Producer</label>
-          <input type="text" class="form-control" id="producer">
+          <input type="text" class="form-control" name="producer">
         </div>
         <div class="form-group">
           <label for="cast">Cast</label>
-          <input type="text" class="form-control text" id="cast">
+          <input type="text" class="form-control text" name="cast">
         </div>
         <div class="form-group">
-          <button type="submit" class="btn btn-primary" onClick=createMovie()>Create Movie</button>
+          <button type="submit" class="btn btn-primary">Create Movie</button>
         </div>
       </form>
       <!-- Related Projects Row -->
