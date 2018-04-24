@@ -9,17 +9,17 @@ import javax.persistence.Table;
 @Table(name="ticket")
 public class Ticket {
 	@Id
-	@Column(name="ID")
+/*	@Column(name="ID")
 	private int ID;
-	
+*/	
 	@Column(name="showing_ID")
 	private int showing_ID;
 	
 	@Column(name="price")
-	private double price;
+	private int price;
 	
 	@Column(name="purchaser")
-	private int purchaser;
+	private String purchaser;
 	
 	@Column(name="ticketType")
 	private String ticketType;
@@ -28,9 +28,10 @@ public class Ticket {
 	private int auditorium;
 	
 	@Column(name="seat_ID")
-	private int seat_ID;
+	private String seat_ID;
 
-	public Ticket(int showing_ID, double price, int purchaser, String ticketType, int auditorium, int seat_ID) {
+	public Ticket(int showing_ID, int price, String purchaser, String ticketType, int auditorium, String seat_ID) {
+		//this.ID = 1;
 		this.showing_ID = showing_ID;
 		this.price = price;
 		this.purchaser = purchaser;
@@ -39,14 +40,14 @@ public class Ticket {
 		this.seat_ID = seat_ID;
 	}
 
-	public int getID() {
+/*	public int getID() {
 		return ID;
 	}
 
 	public void setID(int iD) {
 		ID = iD;
 	}
-
+*/
 	public int getShowing_ID() {
 		return showing_ID;
 	}
@@ -55,19 +56,19 @@ public class Ticket {
 		this.showing_ID = showing_ID;
 	}
 
-	public double getPrice() {
+	public int getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 
-	public int getPurchaser() {
+	public String getPurchaser() {
 		return purchaser;
 	}
 
-	public void setPurchaser(int purchaser) {
+	public void setPurchaser(String purchaser) {
 		this.purchaser = purchaser;
 	}
 
@@ -87,11 +88,11 @@ public class Ticket {
 		this.auditorium = auditorium;
 	}
 
-	public int getSeat_ID() {
+	public String getSeat_ID() {
 		return seat_ID;
 	}
 
-	public void setSeat_ID(int seat_ID) {
+	public void setSeat_ID(String seat_ID) {
 		this.seat_ID = seat_ID;
 	}
 }

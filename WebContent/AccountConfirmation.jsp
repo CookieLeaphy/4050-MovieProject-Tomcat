@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <%@page language="java" contentType="text/html" pageEncoding="UTF-8" %>
 <%@ page import="java.util.List, entity.User" %>
+  <% User u = (User)session.getAttribute("User"); %>
 
 <head>
 
@@ -97,7 +98,7 @@ else{   //Display Log Out
   </nav>
   
   <!-- Page Content -->
-  <% User u = (User)session.getAttribute("User"); %>
+
   <div class="container">
     <h1 class="my-4">Ticketeer
       <small>Account Confirmation</small>

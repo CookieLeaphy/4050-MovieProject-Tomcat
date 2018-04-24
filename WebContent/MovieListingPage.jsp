@@ -236,13 +236,59 @@ else{   //Display Log Out
             <label for="ticketType">Ticket type</label>
             <select id="ticketType" class="form-control" name = "ticketType">
               <option disabled selected value></option>
-              <option value = "c">Child - $6</option>
-              <option value = "a">Adult - $9</option>
-              <option value = "s">Senior - $7</option>
+              <option value = "6">Child - $6</option>
+              <option value = "9">Adult - $9</option>
+              <option value = "7">Senior - $7</option>
             </select>
           </div>
+
+<%
+
+//If user settings should be redirected or exist
+if((session.getAttribute("connected") == null) || !((String) session.getAttribute("connected")).equals("true")){
+  //Prevent from posting anything
+%>
+
+          <!-- session is NOT connected -->
           <div class="form-group">
-            <button type="submit" class="btn btn-primary"  onClick=addTicketToCart()>Add to Cart</button>
+                <label for="email">Email address</label>
+                <input type="text" class="form-control" id="forms" name = "email">
+              </div>
+          <div class="form-group">
+                <label for="ccno">Credit card number </label>
+                <input type="text" class="form-control" id="forms" name = "ccno">
+              </div>
+              <div class="form-group">
+                <label for="ccType">Credit card type </label>
+                <select id="ccType" class="form-control" id ="forms" name = "ccType">
+                  <option>American Express</option>
+                  <option>Visa</option>
+                  <option>Mastercard</option>
+                  <option>Discover Card</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="expMonth">Exp. month</label>
+                <select id="expMonth" class="form-control" id = "forms" name = "expMonth">
+                  <option disabled selected value></option>
+                  <%for (int i = 1; i < 13; i++){%>
+                  <option><%=i%></option>
+                  <%}%> 
+                </select>
+                <label for="expYear">Exp. year</label>
+                <select id="expYear" class="form-control" id = "forms" name = "expYear">
+                  <option disabled selected value></option>
+                  <%for (int i = 2018; i < 2035; i++){%>
+                  <option><%=i%></option>
+                  <%}%> 
+                  
+                </select>
+              </div>
+            <!-- Display these fields-->
+<% }%>
+
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary">Purchase Tickets</button>
           </div>
         </form>
       </div>

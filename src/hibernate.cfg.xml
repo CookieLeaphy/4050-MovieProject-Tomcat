@@ -17,6 +17,8 @@
 		<mapping class="entity.Cart"/>
 		<mapping class="entity.Movie"/>
 		<mapping class="orm.ManageMovie"/>
+		<mapping class="entity.Ticket"/>
+		<mapping class="orm.ManageTicket"/>
 	</session-factory>
 	
 </hibernate-configuration>
