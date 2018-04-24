@@ -190,10 +190,6 @@ public class User {
 		this.promoSub = promoSub;
 	}
 
-	public int getConfirmation() {
-		return confirmation;
-	}
-
 	public void setConfirmation(int confirmation) {
 		this.confirmation = confirmation;
 	}
@@ -213,5 +209,8 @@ public class User {
 				this.newsSub +" "+
 				this.promoSub +" "+
 				this.confirmation;
+	}
+	public int getConfirmation() {
+		return confirmation;
 	}
 }
