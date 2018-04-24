@@ -44,7 +44,7 @@ public class CreateMovie extends HttpServlet {
 		String producer = request.getParameter("producer");
 		String cast = request.getParameter("cast");
 		ManageMovie mngr = new ManageMovie();
-		if(mngr.addMovie())
+		if(mngr.addMovie)
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
