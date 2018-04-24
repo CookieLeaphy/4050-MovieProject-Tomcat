@@ -53,6 +53,9 @@ public class SendEmail {
 				message.setSubject(user.getFirstName() + ", your account has received a new password.");
 				message.setText("New Password: " + user.getPass());
 			}
+			else if(emailType ==3) {
+				
+			}
 			Transport.send(message);
 
 			System.out.println("Done");
@@ -60,6 +63,46 @@ public class SendEmail {
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);
 		}
+		
+		
+	
+	}
+	
+	public void sendMessage(String email, String Emessage, int emailType) { //int 1 = Account Confirmation int 2 = Ticket Conf. 
+
+		Properties props = new Properties();
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.host", "smtp.gmail.com");
+		props.put("mail.smtp.port", "587");
+
+		Session session = Session.getInstance(props,
+		  new javax.mail.Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(username, password);
+			}
+		  });
+
+		try {
+
+			Message message = new MimeMessage(session);
+			//message.setFrom(new InternetAddress("coke@gmail.com"));
+			message.setRecipients(Message.RecipientType.TO,
+				InternetAddress.parse(email)); //Change 
+			
+			if(emailType ==3) {
+				message.setSubject("Ticket Confirmation for: " + email);
+				message.setText(Emessage);
+			}
+			Transport.send(message);
+
+			System.out.println("Done");
+
+		} catch (MessagingException e) {
+			throw new RuntimeException(e);
+		}
+		
+		
 	
 	}
 }
