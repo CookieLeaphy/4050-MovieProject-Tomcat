@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <%@page language="java" contentType="text/html" pageEncoding="UTF-8" %>
 <%@ page import="java.util.List, entity.Movie" %>
-
+<% Movie m = (Movie) request.getAttribute("movie"); %>
 <head>
 
   <meta charset="utf-8">
@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Black Panther</title>
+  <title><%=m.getTitle()%></title>
 
   <!-- Bootstrap core CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -20,7 +20,7 @@
 </head>
 
 <body>
-<% Movie m = (Movie) request.getAttribute("movie"); %>
+
 <%  %>
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -100,7 +100,7 @@ else{   //Display Log Out
   <div class="container">
 
     <!-- Portfolio Item Heading -->
-    <h1 class="my-4">Ticketeer <small>Black Panther</small>
+    <h1 class="my-4">Ticketeer <small><%=m.getTitle() %></small>
     </h1>
 
     <!-- Portfolio Item Row -->
