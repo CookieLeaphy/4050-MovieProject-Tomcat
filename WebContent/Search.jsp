@@ -67,7 +67,7 @@ if((session.getAttribute("connected") == null) || !((String) session.getAttribut
 <% } else if((int)session.getAttribute("userType")==0){ //if user is a customer%>
 
           <li class="nav-item active">
-            <a class="nav-link" href="Settings.jsp">Notes</a>
+            <a class="nav-link" href="Settings.jsp">Settings</a>
           </li>
           
 <% } else if((int) session.getAttribute("userType")==1) { //Check if admin {%>
@@ -76,10 +76,10 @@ if((session.getAttribute("connected") == null) || !((String) session.getAttribut
           </li>
 <% } %>
           <li class="nav-item">
-            <a class="nav-link" href="Cart.jsp">Change</a>
+            <a class="nav-link" href="Cart.jsp">Cart</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="Search.jsp">Me</a>
+            <a class="nav-link" href="Search.jsp">Search</a>
           </li>
 <%
 //******LOG OUT
@@ -125,7 +125,7 @@ if(results.size() == 0){ %>
 	<% for(Movie m : results){%>
       <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
         <div class="card h-100">
-          <a href="#"><img class="card-img-top" src="http://t1.gstatic.com/images?q=tbn:ANd9GcQPpcKQ9eWZGxJe6eXyCW91eayLVm4KqruvJz3GP0F2T2w46yKZ" alt=""></a>
+          <a href="#"><img class="card-img-top" src=<%= m.getLink() %> alt=""></a>
           <div class="card-body">
             <h4 class="card-title">
               <a href="#"><%= m.getTitle() %></a>

@@ -111,7 +111,7 @@ else{   //Display Log Out
     <!-- Portfolio Item Row -->
     <div class="row">
       <div class="col-md-3">
-        <img class="img-fluid" src="http://t1.gstatic.com/images?q=tbn:ANd9GcQPpcKQ9eWZGxJe6eXyCW91eayLVm4KqruvJz3GP0F2T2w46yKZ" alt="">
+        <img class="img-fluid" src=<%= m.getLink() %> alt="">
         <h3 class="my-3">Buy Tickets</h3>
         <form action = "PurchaseTicket" method ="get">
           <div class="form-group">
@@ -263,7 +263,7 @@ else{   //Display Log Out
         </ul>
         <h3 class="my-3">Trailer</h3>
         <div class="embed-responsive embed-responsive-16by9">
-          <iframe class="embed-responsive-item" src=<%= m.getTrailor() %> allowfullscreen="true"></iframe>
+          <iframe class="embed-responsive-item" src=<%= m.getTrailor() %> allowfullscreen></iframe>
         </div>
       </div>
     </div>

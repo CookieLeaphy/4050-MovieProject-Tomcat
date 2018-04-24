@@ -176,12 +176,12 @@ else{   //Display Log Out
 	%>
       <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
         <div class="card h-100">
-          <a href="MovieListingPage.jsp"><img class="card-img-top" src="http://t1.gstatic.com/images?q=tbn:ANd9GcQPpcKQ9eWZGxJe6eXyCW91eayLVm4KqruvJz3GP0F2T2w46yKZ" alt="" ></a>
+          <a href="MovieListingPage.jsp"><img class="card-img-top" src= <%= m.getLink() %> alt="" ></a>
           <div class="card-body">
             <h4 class="card-title">
               <a href="MovieListingPage?param=<%=m.getID()%>"><%= m.getTitle() %></a>
             </h4>
-            <p class="card-text">After the death of his father, T'Challa returns home to the African nation of Wakanda to take his rightful place as king. When a powerful enemy suddenly reappears, T'Challa's mettle...</p>
+            <p class="card-text"><%= m.getDescriptionStart() %></p>
           </div>
         </div>
       </div>

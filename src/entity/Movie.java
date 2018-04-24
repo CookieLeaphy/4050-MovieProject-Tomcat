@@ -12,9 +12,6 @@ public class Movie {
 	@Column(name="ID")
 	private int ID;
 	
-	@Column(name="showing")
-	private String showing;
-	
 	@Column(name="rating")
 	private String rating;
 	
@@ -36,9 +33,11 @@ public class Movie {
 	@Column(name="link")
 	private String link;
 	
+	@Column(name="description")
+	private String description;
+	
 	public Movie() {
 		ID = -1; //invalid movie
-		this.showing = "NA";
 		this.rating = "NA";
 		this.title = "NA";
 		this.producer = "NA";
@@ -46,11 +45,11 @@ public class Movie {
 		this.genre = "NA";
 		this.trailor = "NA";
 		this.link = "NA";
+		this.description = "NA";
 	}
 
-	public Movie(String showing, String rating, String title, String producer, String director, String genre,
-			String trailor, String link) {
-		this.showing = showing;
+	public Movie(String rating, String title, String producer, String director, String genre,
+			String trailor, String link, String description) {
 		this.rating = rating;
 		this.title = title;
 		this.producer = producer;
@@ -58,6 +57,7 @@ public class Movie {
 		this.genre = genre;
 		this.trailor = trailor;
 		this.link = link;
+		this.description = description;
 	}
 
 	public int getID() {
@@ -66,14 +66,6 @@ public class Movie {
 
 	public void setID(int iD) {
 		ID = iD;
-	}
-
-	public String getShowing() {
-		return showing;
-	}
-
-	public void setShowing(String showing) {
-		this.showing = showing;
 	}
 
 	public String getRating() {
@@ -128,13 +120,31 @@ public class Movie {
 		return link;
 	}
 	
-	private void setLink(String link) {
+	public void setLink(String link) {
 		this.link = link;
 	}
 	
+	public String getDescription() {
+		return description;
+	}
+	
+	public String getDescriptionStart() {
+		//Return first n=200 characters or entire description if description.length() < 200
+		int n = 100;
+		String descriptionStart = "";
+		if(description.length() < n)
+			descriptionStart = description;
+		else
+			descriptionStart = description.substring(0, n) + "...";
+		return descriptionStart;
+	}
+	
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
 	public String toString() {
-		String str = this.showing + " "+
-					 this.rating + " "+
+		String str = this.rating + " "+
 					 this.title + " "+
 					 this.producer + " "+
 					 this.director + " "+
