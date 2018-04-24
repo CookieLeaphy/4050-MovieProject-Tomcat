@@ -109,6 +109,7 @@ public class CreateAccount extends HttpServlet {
 		if( user.getUser_type() != -1){
 				request.getSession().setAttribute("user", user.getUserName());
 				send.sendMessage(user, 1); //Send a confirmation email
+				session.setAttribute("userType", user.getUser_type());
 				session.setAttribute("User", user);
 				session.setAttribute("connected", "true");
 				dispatcher = getServletContext().getRequestDispatcher("/AccountConfirmation.jsp");
