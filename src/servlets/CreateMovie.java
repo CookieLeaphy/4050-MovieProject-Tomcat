@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import orm.ManageMovie;
+import entity.Movie;
 
 /**
  * Servlet implementation class CreateMovie
@@ -52,7 +53,8 @@ public class CreateMovie extends HttpServlet {
 			dispatcher = getServletContext().getRequestDispatcher("/AdminCreateMovie.jsp");
 		} else {
 			request.setAttribute("created", "true");
-			request.setAttribute("ID", id);
+			Movie m = mngr.getMovie(id);
+			request.setAttribute("movie", m);
 		}
 		dispatcher.forward(request, response);
 	}
