@@ -337,7 +337,7 @@ else{   //Display Log Out
             <button type="submit" class="btn btn-primary" onClick="searchMovie()">Search</button>
           </div>
         </form>
-        <a class="btn btn-success" href="#">Create New Movie</a>
+        	<a class="btn btn-success" href="AdminCreateMovie.jsp">Create New Movie</a>
       </div>
 
       <div class="col">

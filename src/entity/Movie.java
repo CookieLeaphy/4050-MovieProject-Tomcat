@@ -54,7 +54,7 @@ public class Movie {
 	}
 
 	public Movie(String rating, String title, String producer, String director, String genre,
-			String trailor, String link, String description) {
+			String trailor, String link, String description, Date releaseDate) {
 		this.rating = rating;
 		this.title = title;
 		this.producer = producer;
@@ -63,6 +63,7 @@ public class Movie {
 		this.trailor = trailor;
 		this.link = link;
 		this.description = description;
+		this.releaseDate = releaseDate;
 	}
 
 	public int getID() {

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <%@page language="java" contentType="text/html" pageEncoding="UTF-8" %>
-<%@ page import="java.util.List" %>
+<%@ page import="java.util.List, entity.Movie" %>
 <head>
 
   <meta charset="utf-8">
@@ -102,71 +102,74 @@ else{   //Display Log Out
       <small>Edit Movie Listing</small>
     </h1>
 
+<% if(request.getAttribute("created").equals("true")){
+	Movie m = (Movie) request.getAttribute("movie");
+%>
+
     <!-- Portfolio Item Row -->
     <div class="row">
       <div class="col">
         <h3 class="mt-5">Manage Movie</h3>
-        <form>
+        <form action="ChangeMovie" method="get">
           <div class="form-group">
             <label for="title">Title</label>
-            <input type="text" class="form-control" id="title" value="Killer Bees">
+            <input type="text" class="form-control" name="title" value=<%= m.getTitle() %>>
           </div>
           <div class="form-group">
             <label for="release">Release date</label>
-            <input type="date" class="form-control" id="release">
+            <input type="date" class="form-control" name="release" value=<%= m.getReleaseDate() %>>
           </div>
           <div class="form-group">
             <label for="poster">Poster</label>
-            <input type="text" class="form-control" id="poster" value="https://cdn.modernfarmer.com/wp-content/uploads/2016/06/africanizedbee.jpg">
+            <input type="text" class="form-control" name="poster" value=<%= m.getLink() %>>
           </div>
           <div class="form-group">
-            <label for="trailer">Trailer</label>
-            <input type="text" class="form-control" id="trailer" value="sdlkfjsldkfs">
+            <label for="trailor">Trailor</label>
+            <input type="text" class="form-control" name="trailor" value=<%= m.getTrailor() %>>
           </div>
           <div class="form-group">
-            <label for="summary">Summary</label>
-            <input type="text" class="form-control text" id="summary" value="This is a summary.">
+            <label for="description">Description</label>
+            <input type="text" class="form-control text" name="description" value=<%= m.getDescription() %>>
           </div>
           <div class="form-group">
             <label for="rating">Rating</label>
-            <select class="form-control" id="rating" value="NC-17">
-              <option disabled selected value></option>
-              <option>G</option>
-              <option>PG</option>
-              <option>PG-13</option>
-              <option>R</option>
-              <option>NC-17</option>
+            <select class="form-control" name="rating">
+              <option value="G"<%if(m.getRating().equals("G")){%> selected<%}%>>G</option>
+              <option value="PG"<%if(m.getRating().equals("PG")){%> selected<%}%>>PG</option>
+              <option value="PG-13"<%if(m.getRating().equals("PG-13")){%> selected<%}%>>PG-13</option>
+              <option value="R"<%if(m.getRating().equals("R")){%> selected<%}%>>R</option>
+              <option value="NC-17"<%if(m.getRating().equals("NC-17")){%> selected<%}%>>NC-17</option>
             </select>
           </div>
           <div class="form-group">
             <label for="genre">Genre</label>
             <select class="form-control" id="genre" value="Horror">
               <option disabled selected value></option>
-              <option>Horror</option>
-              <option>Comedy</option>
-              <option>Drama</option>
-              <option>Action</option>
-              <option>Romance</option>
-              <option>Sci-Fi</option>
-              <option>Art</option>
-              <option>Documentary</option>
-              <option>Performance Recording</option>
+              <option value="Horror"<%if(m.getGenre().equals("Horror")){%> selected<%}%>>Horror</option>
+              <option value="Comedy"<%if(m.getGenre().equals("Comedy")){%> selected<%}%>>Comedy</option>
+              <option value="Drama"<%if(m.getGenre().equals("Drama")){%> selected<%}%>>Drama</option>
+              <option value="Action"<%if(m.getGenre().equals("Action")){%> selected<%}%>>Action</option>
+              <option value="Romance"<%if(m.getGenre().equals("Romance")){%> selected<%}%>>Romance</option>
+              <option value="Sci-Fi"<%if(m.getGenre().equals("Sci-Fi")){%> selected<%}%>>Sci-Fi</option>
+              <option value="Art"<%if(m.getGenre().equals("Art")){%> selected<%}%>>Art</option>
+              <option value="Documentary"<%if(m.getGenre().equals("Documentary")){%> selected<%}%>>Documentary</option>
+              <option value="Performance Recording"<%if(m.getGenre().equals("Performance Recording")){%> selected<%}%>>Performance Recording</option>
             </select>
           </div>
           <div class="form-group">
             <label for="director">Director</label>
-            <input type="text" class="form-control" id="director" value="James McBoy">
+            <input type="text" class="form-control" id="director" value=<%= m.getDirector() %>>
           </div>
           <div class="form-group">
             <label for="producer">Producer</label>
-            <input type="text" class="form-control" id="producer" value="Sally Whatzittoya">
+            <input type="text" class="form-control" id="producer" value=<%= m.getProducer() %>>
           </div>
           <div class="form-group">
             <label for="cast">Cast</label>
-            <input type="text" class="form-control text" id="cast" value="Xin Tian, Robert Algongo, Lilo Chamberonian">
+            <input type="text" class="form-control text" id="cast" value=<%= m.getCast() %>>
           </div>
           <div class="form-group">
-            <button type="submit" class="btn btn-primary" onClick=createMovie()>Submit Changes</button>
+            <button type="submit" class="btn btn-primary">Submit Changes</button>
           </div>
         </form>
         <a class="btn btn-secondary" href="#">View Movie Page</a>
@@ -270,6 +273,7 @@ else{   //Display Log Out
     <!-- /.row -->
   </div>
 
+<% } %>
   <!-- /.container -->
 
   <!-- Footer -->
