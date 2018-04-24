@@ -1,5 +1,7 @@
 package entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -35,6 +37,9 @@ public class Movie {
 	
 	@Column(name="description")
 	private String description;
+	
+	@Column(name="releaseDate")
+	private Date releaseDate;
 	
 	public Movie() {
 		ID = -1; //invalid movie
@@ -141,6 +146,14 @@ public class Movie {
 	
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	public Date getReleaseDate() {
+		return releaseDate;
+	}
+	
+	public void setReleaseDate(Date releaseDate) {
+		this.releaseDate = releaseDate;
 	}
 	
 	public String toString() {
