@@ -9,10 +9,13 @@ import entity.hibernateUtil;
 import entity.Ticket;
 
 public class ManageTicket {
-
+	
+	public ManageTicket() {
+		
+	}
 	private static SessionFactory factory = hibernateUtil.getSessionFactory();
 	
-	public Integer addTicket(int showing_ID, double price, int purchaser, String ticketType, int auditorium, int seat_ID)
+	public Integer addTicket(int showing_ID, int price, String purchaser, String ticketType, int auditorium, String seat_ID)
 	{
 		Session session = factory.openSession();
 		Transaction tx = null;
@@ -22,11 +25,12 @@ public class ManageTicket {
 		{
 			tx = session.beginTransaction();
 			Ticket ticket = new Ticket(showing_ID, price, purchaser, ticketType, auditorium, seat_ID);
-			ID = (Integer)session.save(ticket);
+			session.save(ticket);
 			tx.commit();
 		}
 		catch(HibernateException e)
-		{
+		{	
+			System.out.println("Ticket commit failed");
 			if(tx != null) tx.rollback();
 			e.printStackTrace();
 		}
@@ -38,7 +42,7 @@ public class ManageTicket {
 		return ID;
 	}
 
-	public Ticket getStudent(Integer ID)
+	public Ticket getTicket(Integer ID)
 	{
 		Session session = factory.openSession();
 		Ticket ticket = null;
@@ -59,7 +63,7 @@ public class ManageTicket {
 		return ticket;
 	}
 	
-	public void deleteStudent(Integer ID)
+	public void deleteTicket(Integer ID)
 	{
 		Session session = factory.openSession();
 		Transaction tx = null;

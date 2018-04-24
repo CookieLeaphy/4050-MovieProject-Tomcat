@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <%@page language="java" contentType="text/html" pageEncoding="UTF-8" %>
-<%@ page import="java.util.List, entity.User, orm.ManageUser" %>
+<%@ page import="java.util.List, entity.User" %>
+  <% User u = (User)session.getAttribute("User"); %>
 
 <head>
 
@@ -97,30 +98,16 @@ else{   //Display Log Out
   </nav>
   
   <!-- Page Content -->
-  <% User u = (User)session.getAttribute("User"); %>
+
   <div class="container">
     <h1 class="my-4">Ticketeer
       <small>Account Confirmation</small>
     </h1>
-    <p><%= u.getUserName() %>, an E-Mail has been sent to <%= u.getEmail() %>. Copy the verification code to the box below.</p>
+    <p><%= u.getUserName() %>, an E-Mail has been sent to <%= u.getEmail() %>. Copy the verification to the box below.</p>
     <div class="row">
-      <form action = "CheckValidate" method = "get">
-        <div class="form-group">
-          <label for="validation">Validation</label>
-          <input type="text" class="form-control" id="validation" name = "validation">
-        </div>
-         <%
-         	if(session.getAttribute("connected") != null)
-         	{
-         		if (session.getAttribute("error").equals("WrongInput")) 
-         		{%>
-         		<h6 class = "text-danger">Invalid Code</h6>
-         		<%}
-         	}%>
-        <div class="form-group">
-          <button type="submit" class="btn btn-primary" onClick="checkValidation()">Validate</button>
-        </div>
-      </form>
+      <div class="form-group">
+        <a class="btn" href="Home.jsp">Browse Movies</a>
+      </div>
     </div>
   </div>
   <!-- /.container -->
