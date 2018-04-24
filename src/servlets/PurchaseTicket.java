@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import entity.Movie;
 import entity.User;
 import orm.ManageTicket;
 
@@ -31,13 +32,18 @@ public class PurchaseTicket extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(); 
+		
+		//String movieID = request.getParameter("param");
+		//System.out.println("MovieID:"+movieID);
+		
 		String [] seats = request.getParameterValues("seatSelect");
 		String ticketType = request.getParameter("ticketType");
+		
 		int ticketPrice = Integer.parseInt(ticketType);
 		String screenTime = request.getParameter("screeningTime");
 		ManageTicket mngTicket = new ManageTicket();
 		User user = (User) session.getAttribute("User");
-		
+		//Movie movie = (Movie)session.getAttribute("");
 		//For users who didn't create an account
 		if(user == null)
 		{	
@@ -45,6 +51,7 @@ public class PurchaseTicket extends HttpServlet {
 			
 			for (String i: seats)
 				mngTicket.addTicket(1, ticketPrice, email, ticketType, 1, i);
+			//NOTE movieID IS CONTAINED IN THE showing_ID of the db
 				//				System.out.println("Seat: "+i);
 		}else {
 			//Extract information from user
