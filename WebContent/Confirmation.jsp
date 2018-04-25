@@ -99,94 +99,10 @@ else{   //Display Log Out
     <h1 class="my-4">Ticketeer
       <small>Order Confirmation</small>
     </h1>
-    <p>Thank you, James! Your order has been confirmed.</p>
-    <h3 class="mt-5">Order # <small>39483</small></h3>
-    <div class="row">
-      <table class="table">
-        <tbody>
-          <tr>
-            <td><b>Name</b></td>
-            <td>James Alexander</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td><b>Contact</b></td>
-            <td>303-444-4039<br>asdf@sdf.com</td>
-          </tr>
-          <tr>
-            <td><b>Billing Address</b></td>
-            <td>2839 Peachtree St<br>Atlanta, GA 30043-4859<br>United States</td>
-          </tr>
-          <tr>
-            <td><b>Credit Card</b></td>
-            <td>XXXX-XXXX-XXXX-3943</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="row">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <p><b>Movie Title </b>show time, auditorium, seat number, age group</p>
-            </td>
-            <td>$6</td>
-          </tr>
-          <tr>
-            <td>
-              <p><b>Movie Title </b>show time, auditorium, seat number, age group</p>
-            </td>
-            <td>$6</td>
-          </tr>
-          <tr>
-            <td>
-              <p><b>Movie Title </b>show time, auditorium, seat number, age group</p>
-            </td>
-            <td>$6</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="row">
-      <table class="table">
-        <tbody>
-          <tr>
-            <td>Ticket Total</td>
-            <td></td>
-            <td>$18.00</td>
-          </tr>
-          <tr>
-            <td>Tax</td>
-            <td></td>
-            <td>+$1.00</td>
-          </tr>
-          <tr>
-            <td>Promo Code:EXAMPLECODE</td>
-            <td>(-10%)</td>
-            <td>-$1.90</td>
-          </tr>
-          <tr>
-            <td><b>Order Total</b></td>
-            <td></td>
-            <td><b>$17.10</b></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="row">
-      <div class="form-group">
-        <a class="btn" href="#">Back to Browse</a>
-      </div>
-    </div>
+    <p>Thank you! Your order has been confirmed.</p>
+    <!-- <h3 class="mt-5">Order # <small>39483</small></h3> -->
   </div>
-  <!-- /.container -->
+    <!-- /.container -->
 
   <!-- Bootstrap core JavaScript -->
   <script src="js/jquery.min.js"></script>

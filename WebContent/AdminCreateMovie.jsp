@@ -105,67 +105,63 @@ else{   //Display Log Out
 
     <!-- Portfolio Item Row -->
     <div class="row">
-      <form>
+      <form action="CreateMovie" method="get">
         <div class="form-group">
           <label for="title">Title</label>
-          <input type="text" class="form-control" id="title">
+          <input type="text" class="form-control" name="title">
         </div>
         <div class="form-group">
           <label for="release">Release date</label>
-          <input type="date" class="form-control" id="release">
+          <input type="date" class="form-control" name="release">
         </div>
         <div class="form-group">
           <label for="poster">Poster</label>
-          <input type="text" class="form-control" id="poster">
+          <input type="text" class="form-control" name="link">
         </div>
         <div class="form-group">
-          <label for="trailer">Trailer</label>
-          <input type="text" class="form-control" id="trailer">
+          <label for="trailor">Trailor</label>
+          <input type="text" class="form-control" name="trailor">
         </div>
         <div class="form-group">
           <label for="summary">Summary</label>
-          <input type="text" class="form-control text" id="summary">
+          <input type="text" class="form-control text" name="description">
         </div>
         <div class="form-group">
           <label for="rating">Rating</label>
           <select class="form-control" id="rating">
-            <option disabled selected value></option>
-            <option>G</option>
-            <option>PG</option>
-            <option>PG-13</option>
-            <option>R</option>
-            <option>NC-17</option>
+            <option disabled selected value=""></option>
+            <option value="G">G</option>
+            <option value="PG">PG</option>
+            <option value="PG">PG-13</option>
+            <option value="R">R</option>
+            <option value="NC-17">NC-17</option>
           </select>
         </div>
         <div class="form-group">
           <label for="genre">Genre</label>
-          <select class="form-control" id="genre">
-            <option disabled selected value></option>
-            <option>Horror</option>
-            <option>Comedy</option>
-            <option>Drama</option>
-            <option>Action</option>
-            <option>Romance</option>
-            <option>Sci-Fi</option>
-            <option>Art</option>
-            <option>Documentary</option>
-            <option>Performance Recording</option>
+          <select class="form-control" name="genre">
+            <option disabled selected value=""></option>
+            <option value="Horror">Horror</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Drama">Drama</option>
+            <option value="Action">Action</option>
+            <option value="Romance">Romance</option>
+            <option value="Sci-Fi">Sci-Fi</option>
+            <option value="Art">Art</option>
+            <option value="Documentary">Documentary</option>
+            <option value="Performance Recording">Performance Recording</option>
           </select>
         </div>
         <div class="form-group">
           <label for="director">Director</label>
-          <input type="text" class="form-control" id="director">
+          <input type="text" class="form-control" name="director">
         </div>
         <div class="form-group">
           <label for="producer">Producer</label>
-          <input type="text" class="form-control" id="producer">
+          <input type="text" class="form-control" name="producer">
         </div>
         <div class="form-group">
-          <label for="cast">Cast</label>
-          <input type="text" class="form-control text" id="cast">
-        </div>
-        <div class="form-group">
-          <button type="submit" class="btn btn-primary" onClick=createMovie()>Create Movie</button>
+          <button type="submit" class="btn btn-primary">Create Movie</button>
         </div>
       </form>
       <!-- Related Projects Row -->
@@ -173,6 +169,7 @@ else{   //Display Log Out
 
       <!-- /.row -->
 
+    </div>
     </div>
     <!-- /.container -->
 

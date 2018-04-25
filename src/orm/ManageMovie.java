@@ -20,8 +20,8 @@ public class ManageMovie {
 	
 	private static SessionFactory factory = hibernateUtil.getSessionFactory();
 	
-	public Integer addMovie(String showing, String rating, String title, String producer, String director, String genre,
-			String trailor, String link)
+	public Integer addMovie(String rating, String title, String producer, String director, String genre,
+			String trailor, String link, String description, Date releaseDate)
 	{
 		Session session = factory.openSession();
 		Transaction tx = null;
@@ -30,7 +30,7 @@ public class ManageMovie {
 		try
 		{
 			tx = session.beginTransaction();
-			Movie movie = new Movie(showing, rating, title, producer, director, genre, trailor, link);
+			Movie movie = new Movie(rating, title, producer, director, genre, trailor, link, description, releaseDate);
 			ID = (Integer)session.save(movie);
 			tx.commit();
 		}
@@ -45,6 +45,40 @@ public class ManageMovie {
 		}
 		
 		return ID;
+	}
+	
+	public Integer editMovie(Movie m, Integer id, String rating, String title, String producer, String director, String genre,
+			String trailor, String link, String description, Date releaseDate) {
+		Session session = factory.openSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			@SuppressWarnings("unchecked")
+			List<Movie> movieList = session.createQuery("from Movie s where s.ID='"+id+"'").getResultList();
+			for(Movie temp : movieList) 
+			{	
+				m = temp; 
+				m.setRating(rating);
+				m.setTitle(title);
+				m.setProducer(producer);
+				m.setDirector(director);
+				m.setGenre(genre);
+				m.setTrailor(trailor);
+				m.setLink(link);
+				m.setDescription(description);
+				m.setReleaseDate(releaseDate);
+				session.update(m);
+				break; 
+			}
+			tx.commit();
+		} catch(HibernateException e) {
+			if(tx != null) tx.rollback();
+			e.printStackTrace();
+			id = -1;
+		} finally {
+			session.close();
+		}
+		return id;
 	}
 	
 	@SuppressWarnings("deprecation")

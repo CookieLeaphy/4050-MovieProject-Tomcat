@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <%@page language="java" contentType="text/html" pageEncoding="UTF-8" %>
 <%@ page import="java.util.List, entity.Movie" %>
-
+<% Movie m = (Movie) request.getAttribute("movie"); %>
 <head>
 
   <meta charset="utf-8">
@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Black Panther</title>
+  <title><%=m.getTitle()%></title>
 
   <!-- Bootstrap core CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -20,7 +20,7 @@
 </head>
 
 <body>
-<% Movie m = (Movie) request.getAttribute("movie"); %>
+
 <%  %>
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -100,7 +100,7 @@ else{   //Display Log Out
   <div class="container">
 
     <!-- Portfolio Item Heading -->
-    <h1 class="my-4">Ticketeer <small>Black Panther</small>
+    <h1 class="my-4">Ticketeer <small><%=m.getTitle() %></small>
     </h1>
 
     <!-- Portfolio Item Row -->
@@ -291,7 +291,8 @@ if((session.getAttribute("connected") == null) || !((String) session.getAttribut
       <div class="col-md-8">
         <h3 class="my-3">Summary</h3>
         <!-- TODO - get summary from Movie m -->
-        <p>After the death of his father, T'Challa returns home to the African nation of Wakanda to take his rightful place as king. When a powerful enemy suddenly reappears, T'Challa's mettle as king -- and as Black Panther -- gets tested when he's drawn into a conflict that puts the fate of Wakanda and the entire world at risk. Faced with treachery and danger, the young king must rally his allies and release the full power of Black Panther to defeat his foes and secure the safety of his people.</p>
+        <p><%=m.getDescription()%></p>
+        <!--<p>After the death of his father, T'Challa returns home to the African nation of Wakanda to take his rightful place as king. When a powerful enemy suddenly reappears, T'Challa's mettle as king -- and as Black Panther -- gets tested when he's drawn into a conflict that puts the fate of Wakanda and the entire world at risk. Faced with treachery and danger, the young king must rally his allies and release the full power of Black Panther to defeat his foes and secure the safety of his people.</p> -->
         <h3 class="my-3">Details</h3>
         <ul>
           <li><b>Release date: </b>3/9/2017</li> <!-- TODO - get release date from Movie m -->

@@ -1,9 +1,10 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.Date;
-import java.text.SimpleDateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,20 +13,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import orm.ManageMovie;
 import entity.Movie;
+import orm.ManageMovie;
 
 /**
- * Servlet implementation class CreateMovie
+ * Servlet implementation class ChangeMovie
  */
-@WebServlet("/CreateMovie")
-public class CreateMovie extends HttpServlet {
+@WebServlet("/ChangeMovie")
+public class ChangeMovie extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CreateMovie() {
+    public ChangeMovie() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,8 +35,9 @@ public class CreateMovie extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/AdminEditMovie.jsp");
-		HttpSession session = request.getSession(); //new session
+		// TODO Auto-generated method stub
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/MovieListingPage.jsp");
+		//HttpSession session = request.getSession(); //new session
 		String title = request.getParameter("title");
 		Date releaseDate = null;
 		try {
@@ -50,18 +52,18 @@ public class CreateMovie extends HttpServlet {
 		String genre = request.getParameter("genre");
 		String director = request.getParameter("director");
 		String producer = request.getParameter("producer");
+		Movie m = (Movie) request.getAttribute("movie");
 		ManageMovie mngr = new ManageMovie();
-		Integer id = mngr.addMovie(rating, title, producer, director, genre, trailor, link, description, releaseDate);
-		if(id == -1) {
-			request.setAttribute("created", "false");
-			request.setAttribute("error", "FailedMovieCreation");
-			dispatcher = getServletContext().getRequestDispatcher("/AdminCreateMovie.jsp");
+		Integer i = mngr.editMovie(m, m.getID(), rating, title, producer, director, genre, trailor, link, description, releaseDate);
+		if(i == -1) {
+			request.setAttribute("edited", "false");
+			request.setAttribute("error", "FailedMovieChange");
+			dispatcher = getServletContext().getRequestDispatcher("/AdminEditMovie.jsp");
 		} else {
-			request.setAttribute("created", "true");
-			Movie m = mngr.getMovie(id);
-			request.setAttribute("movie", m);
+			request.setAttribute("edited", "true");
 		}
 		dispatcher.forward(request, response);
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
