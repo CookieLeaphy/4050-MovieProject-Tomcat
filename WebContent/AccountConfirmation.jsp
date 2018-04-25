@@ -103,9 +103,13 @@ else{   //Display Log Out
     </h1>
     <p><%= u.getUserName() %>, an E-Mail has been sent to <%= u.getEmail() %>. Copy the verification to the box below.</p>
     <div class="row">
-      <div class="form-group">
-        <a class="btn" href="Home.jsp">Browse Movies</a>
-      </div>
+      <form action = "CheckValidate" method = "get">
+        <div class="form-group">
+          <label for="validation">Validate</label>
+          <input type="text" class="form-control" id="validation" name ="validation">
+          <button type="submit" class="btn btn-primary" onClick="checkValidation()">Validate</button>
+        </div>
+      </form>
     </div>
   </div>
   <!-- /.container -->
