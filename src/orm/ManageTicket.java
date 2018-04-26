@@ -92,6 +92,29 @@ public class ManageTicket {
 		return ticketList;
 	}
 	
+	public List<Ticket> getAllTickets(){
+		Session session = factory.openSession();
+		//@SuppressWarnings("unchecked")
+		List<Ticket> ticketList = null;
+		Transaction tx = null;
+		try
+		{
+			String query = "FROM Ticket";
+			tx = session.beginTransaction();
+			ticketList = session.createQuery(query).getResultList();
+//			return movieList;
+		}
+		catch(HibernateException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			session.close();
+		}
+		return ticketList;
+	}
+	
 	public void deleteTicket(Integer ID)
 	{
 		Session session = factory.openSession();

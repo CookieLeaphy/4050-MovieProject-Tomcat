@@ -97,6 +97,14 @@ else{   //Display Log Out
     </div>
   </nav>
 
+<%
+ManageUser mngUser = new ManageUser();
+ManageTicket mngTicket = new ManageTicket();
+ManageMovie mngMovie = new ManageMovie(); 
+List<User> userResults = mngUser.getAllUsers();
+List<Movie> movieResults = mngMovie.getAllMovies();
+List<Ticket> ticketResults = mngTicket.getAllTickets(); 
+%>
   <!-- Page Content -->
   <div class="container-fluid">
     <div class="row">
@@ -172,88 +180,24 @@ else{   //Display Log Out
               <th>#</th>
               <th>Username</th>
               <th>Email</th>
-              <th>Name</th>
               <th></th>
               <th></th>
             </tr>
           </thead>
           <tbody class="table table-searchable">
+          <% for(User u : userResults) {%>
             <tr>
-              <td>0</td>
-              <td>Sample12</td>
-              <td>freddy1293@gmail.com</td>
-              <td>
-                <a class="btn" href="#">Edit</a>
-              </td>
+              <td><%= u.getId() %></td>
+              <td><%= u.getUserName() %></td>
+              <td><%= u.getEmail() %></td>
               <td>
                 <button type="button" class="btn btn-danger" onClick="deleteUser()">Delete</button>
               </td>
             </tr>
-            <tr>
-              <td>1</td>
-              <td>aaalpha</td>
-              <td>qwert69@gmail.com</td>
-              <td>
-                <a class="btn" href="#">Edit</a>
-              </td>
-              <td>
-                <button type="button" class="btn btn-danger" onClick="deleteUser()">Delete</button>
-              </td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>davidc</td>
-              <td>11auster@yahoo.com</td>
-              <td>
-                <a class="btn" href="#">Edit</a>
-              </td>
-              <td>
-                <button type="button" class="btn btn-danger" onClick="deleteUser()">Delete</button>
-              </td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>simmerdown</td>
-              <td>sd454@gmail.com</td>
-              <td>
-                <a class="btn" href="#">Edit</a>
-              </td>
-              <td>
-                <button type="button" class="btn btn-danger" onClick="deleteUser()">Delete</button>
-              </td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td>Samp8</td>
-              <td>jr495@gmail.com</td>
-              <td>
-                <a class="btn" href="#">Edit</a>
-              </td>
-              <td>
-                <button type="button" class="btn btn-danger" onClick="deleteUser()">Delete</button>
-              </td>
-            </tr>
-            <tr>
-              <td>5</td>
-              <td>hello</td>
-              <td>davidsanders@gmail.com</td>
-              <td>
-                <a class="btn" href="#">Edit</a>
-              </td>
-              <td>
-                <button type="button" class="btn btn-danger" onClick="deleteUser()">Delete</button>
-              </td>
-            </tr>
+            <% } %>
           </tbody>
         </table>
-        <h5>Search User</h5>
-        <form>
-          <div class="form-group">
-            <input type="input" class="form-control" id="user">
-            <button type="submit" class="btn btn-primary" onClick="searchUser()">Search</button>
-          </div>
-        </form>
-        <a class="btn btn-success" href="#">Create New User</a>
+        <a class="btn btn-success" href="AdminCreateAccount.jsp">Create New User</a>
       </div>
     </div>
     <div class="row row-eq-height">
@@ -264,83 +208,23 @@ else{   //Display Log Out
             <tr>
               <th>Movie</th>
               <th></th>
-              <th></th>
             </tr>
           </thead>
           <tbody class="table table-searchable">
+          <% for(Movie m : movieResults) { %>
             <tr>
-              <td>Black Panther</td>
-              <td>
+              <td><%= m.getTitle() %></td>
+<!--             <td>
                 <a class="btn" href="#">Edit</a>
               </td>
-              <td>
+-->           <td>
                 <button type="button" class="btn btn-danger" onClick="deleteMovie()">Delete</button>
               </td>
             </tr>
-            <tr>
-              <td>Ladybird</td>
-              <td>
-                <a class="btn" href="#">Edit</a>
-              </td>
-              <td>
-                <button type="button" class="btn btn-danger" onClick="deleteMovie()">Delete</button>
-              </td>
-            </tr>
-            <tr>
-              <td>Saw XVI</td>
-              <td>
-                <a class="btn" href="#">Edit</a>
-              </td>
-              <td>
-                <button type="button" class="btn btn-danger" onClick="deleteMovie()">Delete</button>
-              </td>
-            </tr>
-            <tr>
-              <td>Mars Attacks</td>
-              <td>
-                <a class="btn" href="#">Edit</a>
-              </td>
-              <td>
-                <button type="button" class="btn btn-danger" onClick="deleteMovie()">Delete</button>
-              </td>
-            </tr>
-            <tr>
-              <td>Spider-Man vs. X-Men</td>
-              <td>
-                <a class="btn" href="#">Edit</a>
-              </td>
-              <td>
-                <button type="button" class="btn btn-danger" onClick="deleteMovie()">Delete</button>
-              </td>
-            </tr>
-            <tr>
-              <td>Mulan</td>
-              <td>
-                <a class="btn" href="#">Edit</a>
-              </td>
-              <td>
-                <button type="button" class="btn btn-danger" onClick="deleteMovie()">Delete</button>
-              </td>
-            </tr>
-            <tr>
-              <td>Fast and the Furious 17</td>
-              <td>
-                <a class="btn" href="#">Edit</a>
-              </td>
-              <td>
-                <button type="button" class="btn btn-danger" onClick="deleteMovie()">Delete</button>
-              </td>
-            </tr>
+            <% } %>
           </tbody>
         </table>
-        <h5>Search Movie</h5>
-        <form>
-          <div class="form-group">
-            <input type="input" class="form-control" id="movie">
-            <button type="submit" class="btn btn-primary" onClick="searchMovie()">Search</button>
-          </div>
-        </form>
-        	<a class="btn btn-success" href="AdminCreateMovie.jsp">Create New Movie</a>
+        <a class="btn btn-success" href="AdminCreateMovie.jsp">Create New Movie</a>
       </div>
 
       <div class="col">
@@ -353,67 +237,22 @@ else{   //Display Log Out
               <th>User</th>
               <th>Total</th>
               <th></th>
-              <th></th>
             </tr>
           </thead>
           <tbody class="table table-searchable">
+          <% for(Ticket t : ticketResults) { %>
             <tr>
-              <td><b>039432</b></td>
+              <td><b><%= t.getID() %></b></td>
               <td>1/1/2000</td>
-              <td>userEx283</td>
-              <td>$19.00</td>
-              <td>
-                <a class="btn" href="#">View Details</a>
-              </td>
+              <td>t.getPurchaserName()</td>
+              <td>$<%=t.getPrice() %></td>
               <td>
                 <button type="button" class="btn btn-danger" onClick="refundOrder()">Refund</button>
               </td>
             </tr>
-            <tr>
-              <td><b>039433</b></td>
-              <td>1/1/2000</td>
-              <td>bigSpender69</td>
-              <td>$382.00</td>
-              <td>
-                <a class="btn" href="#">View Details</a>
-              </td>
-              <td>
-                <button type="button" class="btn btn-danger" onClick="refundOrder()">Refund</button>
-              </td>
-            </tr>
-            <tr>
-              <td><b>039434</b></td>
-              <td>1/1/2000</td>
-              <td>hellokitttttty</td>
-              <td>$50.51</td>
-              <td>
-                <a class="btn" href="#">View Details</a>
-              </td>
-              <td>
-                <button type="button" class="btn btn-danger" onClick="refundOrder()">Refund</button>
-              </td>
-            </tr>
-            <tr>
-              <td><b>039435</b></td>
-              <td>1/1/2000</td>
-              <td>sammyboy2</td>
-              <td>$23.19</td>
-              <td>
-                <a class="btn" href="#">View Details</a>
-              </td>
-              <td>
-                <button type="button" class="btn btn-danger" onClick="refundOrder()">Refund</button>
-              </td>
-            </tr>
+		<% } %>
           </tbody>
         </table>
-        <h5>Search Order</h5>
-        <form>
-          <div class="form-group">
-            <input type="input" class="form-control" id="order">
-            <button type="submit" class="btn btn-primary" onClick="searchOrder()">Search</button>
-          </div>
-        </form>
       </div>
     </div>
     <div class="row row-eq-height">

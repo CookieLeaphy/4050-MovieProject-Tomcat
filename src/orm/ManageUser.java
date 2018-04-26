@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import entity.hibernateUtil;
+import entity.Movie;
 import entity.User;
 
 public class ManageUser {
@@ -30,7 +31,7 @@ public class ManageUser {
 			tx = session.beginTransaction();
 			User user = new User(user_type, userName, firstName, lastName, pass, address,
 					city, zip, country, email, phone, newsSub, promoSub, confirmation);
-			List<User> userList = session.createQuery("from User s where s.email='"+user.getEmail()+"'"
+			List<User> userList = (List<User>) session.createQuery("from User s where s.email='"+user.getEmail()+"'"
 													+ " or s.userName='" + user.getUserName() + "'").getResultList();
 			/*for(User tmpuser : userList) 
 			{
@@ -75,6 +76,81 @@ public class ManageUser {
 		try
 		{
 			user = (User)session.get(User.class, ID);
+		}
+		catch(HibernateException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			session.close();
+		}
+		
+		return user;
+	}
+	
+	public List<User> getAllUsers(){
+		Session session = factory.openSession();
+		//@SuppressWarnings("unchecked")
+		List<User> userList = null;
+		Transaction tx = null;
+		try
+		{
+			String query = "FROM User";
+			tx = session.beginTransaction();
+			userList = session.createQuery(query).getResultList();
+//			return movieList;
+		}
+		catch(HibernateException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			session.close();
+		}
+		return userList;
+	}
+	
+	public User getUserByUsername(String username)
+	{
+		Session session = factory.openSession();
+		User user = null;
+		
+		try
+		{
+			@SuppressWarnings("unchecked")
+			List<User> userList = session.createQuery("from User s where s.userName='"+username+"'").getResultList();
+			for(User tmpuser : userList) 
+			{
+				user = tmpuser;
+			}
+		}
+		catch(HibernateException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			session.close();
+		}
+		
+		return user;
+	}
+	
+	public User getUserByEmail(String email)
+	{
+		Session session = factory.openSession();
+		User user = null;
+		
+		try
+		{
+			@SuppressWarnings("unchecked")
+			List<User> userList = session.createQuery("from User s where s.email='"+email+"'").getResultList();
+			for(User tmpuser : userList) 
+			{
+				user = tmpuser;
+			}
 		}
 		catch(HibernateException e)
 		{

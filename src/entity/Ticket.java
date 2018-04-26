@@ -5,6 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import entity.User;
+import orm.ManageUser;
+
 @Entity
 @Table(name="ticket")
 public class Ticket {
@@ -90,6 +93,12 @@ public class Ticket {
 
 	public String getPurchaser() {
 		return purchaser;
+	}
+	
+	public String getPurchaserName() {
+		ManageUser mngUser = new ManageUser();
+		User user = mngUser.getUserByEmail(purchaser);
+		return user.getUserName();
 	}
 
 	public void setPurchaser(String purchaser) {
