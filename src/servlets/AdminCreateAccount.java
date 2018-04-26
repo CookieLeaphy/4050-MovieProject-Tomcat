@@ -1,6 +1,5 @@
 package servlets;
 
-
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -11,22 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.sun.mail.smtp.SMTPAddressFailedException;
-
 import entity.User;
 import orm.ManageUser;
 
 /**
- * Servlet implementation class CreateAccount
+ * Servlet implementation class AdminCreateAccount
  */
-@WebServlet("/CreateAccount")
-public class CreateAccount extends HttpServlet {
+@WebServlet("/AdminCreateAccount")
+public class AdminCreateAccount extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
     /**
-     * Default constructor. 
+     * @see HttpServlet#HttpServlet()
      */
-    public CreateAccount() {
+    public AdminCreateAccount() {
+        super();
         // TODO Auto-generated constructor stub
     }
 
@@ -56,6 +54,7 @@ public class CreateAccount extends HttpServlet {
 		
 		
 		// TODO Auto-generated method stub
+		int accountType = Integer.parseInt(request.getParameter("accountType"));
 		String username = 	request.getParameter("username"); 
 		String firstname =	request.getParameter("firstname");
 		String lastname= 	request.getParameter("lastname");
@@ -93,12 +92,11 @@ public class CreateAccount extends HttpServlet {
 		//int orders
 		
 		ManageUser userMngr = new ManageUser();
-		if(userMngr.addUser(0, username, firstname, lastname, newPass0, address, city, zip, country, email, phone, news, promotions, 0)==-1) {
+		if(userMngr.addUser(accountType, username, firstname, lastname, newPass0, address, city, zip, country, email, phone, news, promotions, 0)==-1) {
 			//If account credentials are wrong
-			session.setAttribute("connected", "false");
 			session.setAttribute("error", "WrongForm");
 			
-			dispatcher = getServletContext().getRequestDispatcher("/Login-CreateNewAccount.jsp");
+			dispatcher = getServletContext().getRequestDispatcher("/AdminCreateAccount.jsp");
 			dispatcher.forward(request, response);
 			return; //Stop the method here
 		}
@@ -110,16 +108,9 @@ public class CreateAccount extends HttpServlet {
 		  	 	if(user.getConfirmation() == 0)
 		  	 		user = userMngr.randomConfirmation(user);
 				send.sendMessage(user, 1); //Send a confirmation email
-				session.setAttribute("User", user);
-				session.setAttribute("error", "");
-				dispatcher = getServletContext().getRequestDispatcher("/AccountConfirmation.jsp");
-		} else{
-			session.setAttribute("connected", "false");
-			session.setAttribute("error", "WrongForm");
-			dispatcher = getServletContext().getRequestDispatcher("/Login-CreateNewAccount.jsp"); //.jsp");
-			//request.getRequestDispatcher("/login.jsp").forward(request, response);
-		}
+		} 
 		
+		dispatcher = getServletContext().getRequestDispatcher("/AdminSettings.jsp");
 		dispatcher.forward(request, response); //forward to correct page
 		
 		//Test cases
@@ -127,16 +118,14 @@ public class CreateAccount extends HttpServlet {
 				" " + newPass1 + " " + news + " " + promotions + " " + address + " " + city + " " + stateSelect +
 				" " + zip + " " + country + " " + ccno + " " + ccType + " " + expMonth + " " + expYear;
 		System.out.print(all);
-		//response.getWriter().append("Served at: " + all).append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 *
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-	*/
 
 }

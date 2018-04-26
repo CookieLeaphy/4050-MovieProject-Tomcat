@@ -22,7 +22,7 @@ public class Ticket {
 	private int movie_ID;
 	
 	@Column(name="price")
-	private int price;
+	private double price;
 	
 	@Column(name="purchaser")
 	private String purchaser;
@@ -47,7 +47,7 @@ public class Ticket {
 		this.seat_ID = "NA";
 	}
 	
-	public Ticket(int showing_ID, int movie_ID, int price, String purchaser, String ticketType, int auditorium, String seat_ID) {
+	public Ticket(int showing_ID, int movie_ID, double price, String purchaser, String ticketType, int auditorium, String seat_ID) {
 		//this.ID = 1;
 		this.showing_ID = showing_ID;
 		this.movie_ID = movie_ID;
@@ -84,10 +84,10 @@ public class Ticket {
 	}
 	
 	public int getPrice() {
-		return price;
+		return (int) price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 

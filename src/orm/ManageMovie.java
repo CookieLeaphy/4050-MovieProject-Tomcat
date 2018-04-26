@@ -10,6 +10,7 @@ import org.hibernate.Transaction;
 
 import entity.hibernateUtil;
 import entity.Movie;
+import entity.Ticket;
 import entity.User;
 
 public class ManageMovie {
@@ -158,10 +159,7 @@ public class ManageMovie {
 		Transaction tx;
 		try
 		{	
-			//String query = "FROM Movie s where s.ID '"+ID+"'";
-			//tx = session.beginTransaction();
-			movie = (Movie) session.get(Movie.class, ID);//session.createQuery(query).getResultList();
-			//movie = (Movie) session.get(Movie.class, ID); //idk if this is correct. we may need to use a sql query?
+			movie = (Movie) session.get(Movie.class, ID);
 			return movie;
 		}
 		catch(HibernateException e)
@@ -203,12 +201,20 @@ public class ManageMovie {
 	public void deleteMovie(Integer ID)
 	{
 		Session session = factory.openSession();
+		List<Ticket> ticketList = null;
 		Transaction tx = null;
 		
 		try
 		{
 			tx = session.beginTransaction();
 			Movie movie = (Movie)session.get(Movie.class, ID);
+			String query = "FROM Ticket s where s.movie_ID='"+movie.getID()+"'";
+			ticketList = session.createQuery(query).getResultList();
+			for(Ticket t : ticketList)
+			{
+				Ticket ticket = (Ticket)session.get(Ticket.class, t.getID());
+				session.delete(ticket);
+			}
 			session.delete(movie);
 			tx.commit();
 		}

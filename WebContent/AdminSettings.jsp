@@ -4,6 +4,7 @@
 <%@ page import="entity.Ticket, orm.ManageTicket" %>
 <%@ page import="entity.Movie, orm.ManageMovie" %>
 <%@ page import="entity.User, orm.ManageUser" %>
+<%@ page import="entity.Promo, orm.ManagePromo" %>
 <head>
 
   <meta charset="utf-8">
@@ -101,9 +102,11 @@ else{   //Display Log Out
 ManageUser mngUser = new ManageUser();
 ManageTicket mngTicket = new ManageTicket();
 ManageMovie mngMovie = new ManageMovie(); 
+ManagePromo mngPromo = new ManagePromo();
 List<User> userResults = mngUser.getAllUsers();
 List<Movie> movieResults = mngMovie.getAllMovies();
-List<Ticket> ticketResults = mngTicket.getAllTickets(); 
+List<Ticket> ticketResults = mngTicket.getAllTickets();
+List<Promo> promoResults = mngPromo.getAllPromos(); 
 %>
   <!-- Page Content -->
   <div class="container-fluid">
@@ -116,7 +119,7 @@ List<Ticket> ticketResults = mngTicket.getAllTickets();
       <div class="col">
         <h2 class="mt-4">Promotions</h2>
         <table class="table table-responsive table-scrollable" height="250">
-          <thead style="display:block;">
+          <thead> <!-- style="display:block;"-->
             <tr>
               <th>Promo Code</th>
               <th>Type</th>
@@ -125,49 +128,30 @@ List<Ticket> ticketResults = mngTicket.getAllTickets();
             </tr>
           </thead>
           <tbody class="table table-searchable">
+          <% for(Promo p : promoResults) { %>
             <tr>
-              <td>MERRYXMAS22</td>
-              <td>%</td>
-              <td>22</td>
+              <td><b><%= p.getCode() %></b></td>
+              <td><%= p.getType() %></td>
+              <td><%= p.getAmount() %></td>
               <td>
-                <button type="button" class="btn btn-danger" onClick="deletePromo()">Delete</button>
+         	    <a class="btn" href="DeletePromo?param=<%=p.getId()%>">Delete</a>
               </td>
             </tr>
-            <tr>
-              <td>hellocode</td>
-              <td>$</td>
-              <td>9</td>
-              <td>
-                <button type="button" class="btn btn-danger" onClick="deletePromo()">Delete</button>
-              </td>
-            </tr>
-            <tr>
-              <td>example_promo29381</td>
-              <td>$</td>
-              <td>20</td>
-              <td>
-                <button type="button" class="btn btn-danger" onClick="deletePromo()">Delete</button>
-              </td>
-            </tr>
-            <tr>
-              <td>specialDISCOUNT</td>
-              <td>%</td>
-              <td>11</td>
-              <td>
-                <button type="button" class="btn btn-danger" onClick="deletePromo()">Delete</button>
-              </td>
-            </tr>
+            <% } %>
           </tbody>
         </table>
         <h5>Create New Promotion</h5>
-        <form>
+        <form action="AddPromoCode" method = "get">
           <div class="form-group">
-            <label for="newPromoCode">Promo Code</label>
-            <input type="input" class="form-control" id="newPromoCode">
-            <label for="newPromoType">Type</label>
-            <input type="input" class="form-control" id="newPromoType">
-            <label for="newPromoAmount">Amount</label>
-            <input type="input" class="form-control" id="newPromoAmount">
+            <label for="promoCode">Promo Code</label>
+            <input type="input" class="form-control" id="promoCode" name = "promoCode">
+            <label for="promoType">Type</label>
+            <select class="form-control" id="promoType" name = "promoType">
+              <option value = "$">$</option>
+              <option value = "%">%</option>
+            </select>
+            <label for="promoAmount">Amount</label>
+            <input type="input" class="form-control" id="promoAmount" name = "promoAmount">
             <button type="submit" class="btn btn-primary" onClick="addPromo()">Create</button>
           </div>
         </form>
@@ -185,16 +169,17 @@ List<Ticket> ticketResults = mngTicket.getAllTickets();
             </tr>
           </thead>
           <tbody class="table table-searchable">
-          <% for(User u : userResults) {%>
+          <% for(User u : userResults) {
+          		if(u.getUser_type()!=1) {%>
             <tr>
-              <td><%= u.getId() %></td>
+              <td><b><%= u.getId() %></b></td>
               <td><%= u.getUserName() %></td>
               <td><%= u.getEmail() %></td>
               <td>
-                <button type="button" class="btn btn-danger" onClick="deleteUser()">Delete</button>
+          	    <a class="btn" href="DeleteUser?param=<%=u.getId()%>">Delete</a>
               </td>
             </tr>
-            <% } %>
+            <% }} %>
           </tbody>
         </table>
         <a class="btn btn-success" href="AdminCreateAccount.jsp">Create New User</a>
@@ -213,12 +198,12 @@ List<Ticket> ticketResults = mngTicket.getAllTickets();
           <tbody class="table table-searchable">
           <% for(Movie m : movieResults) { %>
             <tr>
-              <td><%= m.getTitle() %></td>
-<!--             <td>
-                <a class="btn" href="#">Edit</a>
+              <td><b><%= m.getTitle() %></b></td>
+             <td>
+                <a class="btn" href="AdminEditMovie.jsp?param=<%=m.getID()%>">Edit</a>
               </td>
--->           <td>
-                <button type="button" class="btn btn-danger" onClick="deleteMovie()">Delete</button>
+              <td>
+          	    <a class="btn" href="DeleteMovie?param=<%=m.getID()%>">Delete</a>
               </td>
             </tr>
             <% } %>
@@ -244,10 +229,10 @@ List<Ticket> ticketResults = mngTicket.getAllTickets();
             <tr>
               <td><b><%= t.getID() %></b></td>
               <td>1/1/2000</td>
-              <td>t.getPurchaserName()</td>
+              <td><%= t.getPurchaserName() %></td>
               <td>$<%=t.getPrice() %></td>
               <td>
-                <button type="button" class="btn btn-danger" onClick="refundOrder()">Refund</button>
+          	    <a class="btn" href="DeleteTicket?param=<%=t.getID()%>">Delete</a>
               </td>
             </tr>
 		<% } %>
@@ -258,61 +243,25 @@ List<Ticket> ticketResults = mngTicket.getAllTickets();
     <div class="row row-eq-height">
       <div class="col">
         <h2 class="mt-4">Emails</h2>
-        <form>
+        <form action = "SendNewsPromos" method ="get">
           <div class="form-group">
-            <label for="title">Subject</label>
-            <input type="text" class="form-control" id="subject">
+            <label for="subject">Subject</label>
+            <input type="text" class="form-control" id="subject" name = "subject">
           </div>
           <div class="form-group">
-            <label for="heading1">Heading 1</label>
-            <input type="text" class="form-control" id="heading1">
+            <label for="text">Text</label>
+            <textarea class="form-control" rows="5" id="text" name = "text"></textarea>
           </div>
           <div class="form-group">
-            <label for="media1">Media 1</label>
-            <input type="text" class="form-control" id="media1">
-          </div>
-          <div class="form-group">
-            <label for="text1">Text 1</label>
-            <textarea class="form-control" rows="5" id="text1"></textarea>
-          </div>
-          <div class="form-group">
-            <label for="heading2">Heading 2</label>
-            <input type="text" class="form-control" id="heading2">
-          </div>
-          <div class="form-group">
-            <label for="media2">Media 2</label>
-            <input type="text" class="form-control" id="media2">
-          </div>
-          <div class="form-group">
-            <label for="text2">Text 2</label>
-            <textarea class="form-control" rows="5" id="text2"></textarea>
-          </div>
-          <div class="form-group">
-            <label for="heading3">Heading 3</label>
-            <input type="text" class="form-control" id="heading3">
-          </div>
-          <div class="form-group">
-            <label for="media3">Media 3</label>
-            <input type="text" class="form-control" id="media3">
-          </div>
-          <div class="form-group">
-            <label for="text3">Text 3</label>
-            <textarea class="form-control" rows="5" id="text3"></textarea>
-          </div>
-          <div class="form-group">
-            <label for="rating">Type</label>
-            <select class="form-control" id="rating">
-              <option disabled selected value></option>
-              <option>News</option>
-              <option>Promotion</option>
+            <label for="type">Type</label>
+            <select class="form-control" id="type" name = "type">
+              <option value = "N&P">News & Promotion</option>
+              <option value = "N">News</option>
+              <option value = "P">Promotion</option>
             </select>
           </div>
           <div class="form-group">
-            <label for="sendDate">Send Date</label>
-            <input type="date" class="form-control" id="sendDate">
-          </div>
-          <div class="form-group">
-            <button type="submit" class="btn btn-primary" onClick=createPreview()>View Email Preview</button>
+            <button type="submit" class="btn btn-primary" onClick=createPreview()>Send</button>
           </div>
         </form>
       </div>

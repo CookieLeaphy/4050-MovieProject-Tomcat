@@ -41,7 +41,6 @@ public class SendEmail {
 		try {
 
 			Message message = new MimeMessage(session);
-			//message.setFrom(new InternetAddress("coke@gmail.com"));
 			message.setRecipients(Message.RecipientType.TO,
 				InternetAddress.parse(user.getEmail())); //Change 
 			

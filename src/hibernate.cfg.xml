@@ -14,11 +14,12 @@
 		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
 		<mapping class="entity.User"/>
 		<mapping class="orm.ManageUser"/>
-		<mapping class="entity.Cart"/>
 		<mapping class="entity.Movie"/>
 		<mapping class="orm.ManageMovie"/>
 		<mapping class="entity.Ticket"/>
 		<mapping class="orm.ManageTicket"/>
+		<mapping class="entity.Promo"/>
+		<mapping class="orm.ManagePromo"/>
 	</session-factory>
 	
 </hibernate-configuration>

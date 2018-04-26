@@ -19,7 +19,7 @@ public class ManageTicket {
 	}
 	private static SessionFactory factory = hibernateUtil.getSessionFactory();
 	
-	public Integer addTicket(int showing_ID, int movie_ID, int price, String purchaser, String ticketType, int auditorium, String seat_ID)
+	public Integer addTicket(int showing_ID, int movie_ID, double price, String purchaser, String ticketType, int auditorium, String seat_ID)
 	{
 		Session session = factory.openSession();
 		Transaction tx = null;

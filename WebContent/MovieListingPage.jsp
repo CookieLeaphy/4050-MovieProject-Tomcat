@@ -111,14 +111,9 @@ else{   //Display Log Out
         <form action = "PurchaseTicket" method ="get">
         	<input type="hidden" name="movieTitle" value="<%=m.getTitle()%>">
           <div class="form-group">
-            <label for="screeningDate">Please select a date.</label>
-            <input type="date" class="form-control" name="screeningDate">
-          </div>
-          <div class="form-group">
           <!-- TODO - get list of showing and open seats from Movie m -->
             <label for="screeningTime">Screening</label>
             <select id="screeningTime" class="form-control" name = "screeningTime">
-              <option disabled selected value=""></option>
 <!--              <option>5:30</option>-->
 <!--              <option>6:00</option>-->
 <!--              <option>6:30</option>-->
@@ -231,7 +226,6 @@ else{   //Display Log Out
           <div class="form-group">
             <label for="ticketType">Ticket type</label>
             <select id="ticketType" class="form-control" name = "ticketType">
-              <option disabled selected value=""></option>
               <option value = "6">Child - $6</option>
               <option value = "9">Adult - $9</option>
               <option value = "7">Senior - $7</option>
@@ -282,7 +276,10 @@ if((session.getAttribute("connected") == null) || !((String) session.getAttribut
               </div>
             <!-- Display these fields-->
 <% }%>
-
+		  <div class="form-group">
+            <label for="promoCode">Promo Code</label>
+            <input type="text" class="form-control" id="promoCode" name="promoCode">
+          </div>
           <div class="form-group">
             <button type="submit" class="btn btn-primary">Purchase Tickets</button>
           </div>

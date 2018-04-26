@@ -34,17 +34,6 @@ public class ManageUser {
 					city, zip, country, email, phone, newsSub, promoSub, confirmation);
 			List<User> userList = (List<User>) session.createQuery("from User s where s.email='"+user.getEmail()+"'"
 													+ " or s.userName='" + user.getUserName() + "'").getResultList();
-			/*for(User tmpuser : userList) 
-			{
-				//System.out.println("This is being looped");
-				//Check for duplicate email and duplicate usernames 
-				if(tmpuser.getEmail().equals(user.getEmail()) || tmpuser.getEmail().equals(user.getEmail())) 
-				{	
-					//System.out.println(tmpuser.toString());
-					emailExists = true;
-					user = null;
-				}
-			}*/
 			if(userList.size() == 0)
 			{
 				ID = (Integer)session.save(user);
@@ -98,6 +87,46 @@ public class ManageUser {
 		try
 		{
 			String query = "FROM User";
+			tx = session.beginTransaction();
+			userList = session.createQuery(query).getResultList();
+//			return movieList;
+		}
+		catch(HibernateException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			session.close();
+		}
+		return userList;
+	}
+	
+	public List<User> getNewsPromosUsers(String np){
+		Session session = factory.openSession();
+		//@SuppressWarnings("unchecked")
+		List<User> userList = null;
+		Transaction tx = null;
+		try
+		{
+			String query = "";
+			if(np.equals("N&P"))
+			{
+				query = "FROM User s where s.newsSub=1 or s.promoSub=1";
+			}
+			else if(np.equals("N"))
+			{
+				query = "FROM User s where s.newsSub=1";			
+			}
+			else if(np.equals("P"))
+			{
+				query = "FROM User s where s.promoSub=1";				
+			}	
+			else
+			{
+				query = "FROM User";
+			}
+
 			tx = session.beginTransaction();
 			userList = session.createQuery(query).getResultList();
 //			return movieList;
@@ -168,12 +197,20 @@ public class ManageUser {
 	public void deleteUser(Integer ID)
 	{
 		Session session = factory.openSession();
+		List<Ticket> ticketList = null;
 		Transaction tx = null;
 		
 		try
 		{
 			tx = session.beginTransaction();
 			User user = (User)session.get(User.class, ID);
+			String query = "FROM Ticket s where s.purchaser='"+user.getEmail()+"'";
+			ticketList = session.createQuery(query).getResultList();
+			for(Ticket t : ticketList)
+			{
+				Ticket ticket = (Ticket)session.get(Ticket.class, t.getID());
+				session.delete(ticket);
+			}
 			session.delete(user);
 			tx.commit();
 		}

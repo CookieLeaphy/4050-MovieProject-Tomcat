@@ -108,6 +108,9 @@ else{   //Display Log Out
           <label for="validation">Validate</label>
           <input type="text" class="form-control" id="validation" name ="validation">
           <button type="submit" class="btn btn-primary" onClick="checkValidation()">Validate</button>
+          <% if(session.getAttribute("error").equals("WrongInput")) { %>
+          <h6 class = "text-danger">Invalid Validation Code </h6>
+          <% } %>
         </div>
       </form>
     </div>

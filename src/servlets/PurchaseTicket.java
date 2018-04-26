@@ -13,6 +13,8 @@ import javax.servlet.http.HttpSession;
 import entity.Movie;
 import entity.User;
 import orm.ManageTicket;
+import entity.Promo;
+import orm.ManagePromo;
 
 /**
  * Servlet implementation class PurchaseTicket
@@ -41,7 +43,25 @@ public class PurchaseTicket extends HttpServlet {
 		String [] seats = request.getParameterValues("seatSelect");
 		String ticketType = request.getParameter("ticketType");
 		String email;
-		int ticketPrice = Integer.parseInt(ticketType);
+		
+		double ticketPrice = (double)Integer.parseInt(ticketType);
+		String promoCode = request.getParameter("promoCode");
+		ManagePromo mngPromo = new ManagePromo();
+		Promo promo = mngPromo.getPromo(promoCode);
+		if(promo != null)
+		{
+			double amount = promo.getAmount();
+			if(promo.getType().equals("%"))
+			{
+				amount = (100-amount)/100;
+				ticketPrice *= amount;
+			}
+			else
+			{
+				ticketPrice -= amount;
+			}
+		}
+		
 		String screenTime = request.getParameter("screeningTime");
 		ManageTicket mngTicket = new ManageTicket();
 		User user = (User) session.getAttribute("User");
@@ -72,7 +92,7 @@ public class PurchaseTicket extends HttpServlet {
 		for(String k: seats) {
 			message+= "\n\tSeat: "+k + ": $"+ticketPrice; 
 		}
-		int sum = ticketPrice * seats.length;
+		double sum = ticketPrice * seats.length;
 		message += "\n----------"
 				+ "\n For a total of $"+ sum; 
 		send.sendMessage(email,message,3);	

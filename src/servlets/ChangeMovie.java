@@ -37,11 +37,11 @@ public class ChangeMovie extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/MovieListingPage.jsp");
-		//HttpSession session = request.getSession(); //new session
+		HttpSession session = request.getSession(); //new session
 		String title = request.getParameter("title");
 		Date releaseDate = null;
 		try {
-			releaseDate = new SimpleDateFormat("yyyy/MM/dd").parse(request.getParameter("release"));
+			releaseDate = new SimpleDateFormat("MM/dd/yyyy").parse(request.getParameter("release"));
 		} catch(ParseException e) {
 		
 		}
@@ -52,7 +52,7 @@ public class ChangeMovie extends HttpServlet {
 		String genre = request.getParameter("genre");
 		String director = request.getParameter("director");
 		String producer = request.getParameter("producer");
-		Movie m = (Movie) request.getAttribute("movie");
+		Movie m = (Movie) session.getAttribute("movie");
 		ManageMovie mngr = new ManageMovie();
 		Integer i = mngr.editMovie(m, m.getID(), rating, title, producer, director, genre, trailor, link, description, releaseDate);
 		if(i == -1) {

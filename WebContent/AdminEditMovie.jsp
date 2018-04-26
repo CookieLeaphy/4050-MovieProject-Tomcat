@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <%@page language="java" contentType="text/html" pageEncoding="UTF-8" %>
-<%@ page import="java.util.List, entity.Movie" %>
+<%@ page import="java.util.List, entity.Movie, orm.ManageMovie" %>
 <head>
 
   <meta charset="utf-8">
@@ -94,182 +94,93 @@ else{   //Display Log Out
     </div>
   </nav>
 
-  <!-- Page Content -->
-  <div class="container">
+<!-- Page Content -->
+<% 
+String stringMID = request.getParameter("param");
+int mid = Integer.parseInt(stringMID);
+ManageMovie mngMovie = new ManageMovie();
+Movie movie = mngMovie.getMovie(mid);
+session.setAttribute("movie", movie);
+%>
+
+<div class="container">
 
     <!-- Portfolio Item Heading -->
     <h1 class="my-4">Ticketeer
       <small>Edit Movie Listing</small>
     </h1>
 
-<% if(request.getAttribute("created").equals("true")){
-	Movie m = (Movie) request.getAttribute("movie");
-%>
-
     <!-- Portfolio Item Row -->
     <div class="row">
-      <div class="col">
-        <h3 class="mt-5">Manage Movie</h3>
-        <form action="ChangeMovie" method="get">
-          <div class="form-group">
-            <label for="title">Title</label>
-            <input type="text" class="form-control" name="title" value=<%= m.getTitle() %>>
-          </div>
-          <div class="form-group">
-            <label for="release">Release date</label>
-            <input type="date" class="form-control" name="release" value=<%= m.getReleaseDate() %>>
-          </div>
-          <div class="form-group">
-            <label for="poster">Poster</label>
-            <input type="text" class="form-control" name="poster" value=<%= m.getLink() %>>
-          </div>
-          <div class="form-group">
-            <label for="trailor">Trailor</label>
-            <input type="text" class="form-control" name="trailor" value=<%= m.getTrailor() %>>
-          </div>
-          <div class="form-group">
-            <label for="description">Description</label>
-            <input type="text" class="form-control text" name="description" value=<%= m.getDescription() %>>
-          </div>
-          <div class="form-group">
-            <label for="rating">Rating</label>
-            <select class="form-control" name="rating">
-              <option value="G"<%if(m.getRating().equals("G")){%> selected<%}%>>G</option>
-              <option value="PG"<%if(m.getRating().equals("PG")){%> selected<%}%>>PG</option>
-              <option value="PG-13"<%if(m.getRating().equals("PG-13")){%> selected<%}%>>PG-13</option>
-              <option value="R"<%if(m.getRating().equals("R")){%> selected<%}%>>R</option>
-              <option value="NC-17"<%if(m.getRating().equals("NC-17")){%> selected<%}%>>NC-17</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="genre">Genre</label>
-            <select class="form-control" name="genre">
-              <option disabled selected value=""></option>
-              <option value="Horror"<%if(m.getGenre().equals("Horror")){%> selected<%}%>>Horror</option>
-              <option value="Comedy"<%if(m.getGenre().equals("Comedy")){%> selected<%}%>>Comedy</option>
-              <option value="Drama"<%if(m.getGenre().equals("Drama")){%> selected<%}%>>Drama</option>
-              <option value="Action"<%if(m.getGenre().equals("Action")){%> selected<%}%>>Action</option>
-              <option value="Romance"<%if(m.getGenre().equals("Romance")){%> selected<%}%>>Romance</option>
-              <option value="Sci-Fi"<%if(m.getGenre().equals("Sci-Fi")){%> selected<%}%>>Sci-Fi</option>
-              <option value="Art"<%if(m.getGenre().equals("Art")){%> selected<%}%>>Art</option>
-              <option value="Documentary"<%if(m.getGenre().equals("Documentary")){%> selected<%}%>>Documentary</option>
-              <option value="Performance Recording"<%if(m.getGenre().equals("Performance Recording")){%> selected<%}%>>Performance Recording</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="director">Director</label>
-            <input type="text" class="form-control" id="director" value=<%= m.getDirector() %>>
-          </div>
-          <div class="form-group">
-            <label for="producer">Producer</label>
-            <input type="text" class="form-control" id="producer" value=<%= m.getProducer() %>>
-          </div>
-          <div class="form-group">
-            <button type="submit" class="btn btn-primary">Submit Changes</button>
-          </div>
-        </form>
-        <a class="btn btn-secondary" href="MovieListingPage?param=<%=m.getID()%>">View Movie Page</a>
-      </div>
-      <div class="col">
-        <h3 class="mt-5">Manage Showings</h3>
-        <table class="table table-responsive table-scrollable">
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Time</th>
-              <th>Auditorium</th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody class="table table-searchable">
-            <tr>
-              <td>1/1/2000</td>
-              <td>3:00</td>
-              <td>C</td>
-              <td>
-                <button type="button" class="btn btn-danger" onClick="deleteShowing()">Delete</button>
-              </td>
-            </tr>
-            <tr>
-              <td>1/1/2000</td>
-              <td>3:15</td>
-              <td>D</td>
-              <td>
-                <button type="button" class="btn btn-danger" onClick="deleteShowing()">Delete</button>
-              </td>
-            </tr>
-            <tr>
-              <td>1/1/2000</td>
-              <td>5:00</td>
-              <td>C</td>
-              <td>
-                <button type="button" class="btn btn-danger" onClick="deleteShowing()">Delete</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <form>
-          <div class="form-group">
-            <label for="showDate">Date</label>
-            <input type="date" class="form-control" id="showDate">
-            <label for="showTime">Time</label>
-            <input type="time" class="form-control" id="showTime">
-            <label for="auditorium">Auditorium</label>
-            <select class="form-control" id="auditorium">
-              <option disabled selected value></option>
-              <option>A</option>
-              <option>B</option>
-              <option>C</option>
-              <option>D</option>
-              <option>E</option>
-              <option>F</option>
-              <option>G</option>
-              <option>H</option>
-              <option>I</option>
-              <option>J</option>
-              <option>K</option>
-              <option>L</option>
-              <option>M</option>
-              <option>N</option>
-            </select>
-            <button type="submit" class="btn btn-primary" onClick="addShowing()">Add Showing</button>
-          </div>
-        </form>
-        <h3 class="mt-5">Manage Reviews</h3>
-        <table class="table table-responsive table-scrollable">
-          <thead>
-            <tr>
-              <th>Username</th>
-              <th>Score</th>
-              <th>Review</th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody class="table table-searchable">
-            <tr>
-              <td>Roger Ebert</td>
-              <td>4/4 Stars</td>
-              <td>hey there buddy</td>
-              <td>
-                <a class="btn" href="#">View Full</a>
-              </td>
-              <td>
-                <button type="submit" class="btn btn-danger" onClick="deleteReview()">Remove</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="col">
+      <form action="ChangeMovie" method="get">
+      <% if(request.getAttribute("error")!= null && request.getAttribute("error").equals("FailedMovieChange")) { %>
+        <h6 class = "text-danger">Invalid Fields</h6>
+      <% } %>
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text" class="form-control" name="title" value="<%= movie.getTitle() %>">
+        </div>
+        <div class="form-group">
+          <label for="release">Release date</label>
+          <input type="datetime-local" class="form-control" name="release" value="<%= movie.getReleaseDate() %>">
+        </div>
+        <div class="form-group">
+          <label for="poster">Poster</label>
+          <input type="text" class="form-control" name="link" value="<%= movie.getLink() %>">
+        </div>
+        <div class="form-group">
+          <label for="trailor">Trailer</label>
+          <input type="text" class="form-control" name="trailor" value="<%= movie.getTrailor() %>">
+        </div>
+        <div class="form-group">
+          <label for="summary">Summary</label>
+          <textarea class="form-control" rows="5" id="description" name = "description"><%= movie.getDescription() %></textarea>
+        </div>
+        <div class="form-group">
+          <label for="rating">Rating</label>
+          <select class="form-control" id="rating">
+            <option disabled selected value=""></option>
+            <option value="G">G</option>
+            <option value="PG">PG</option>
+            <option value="PG">PG-13</option>
+            <option value="R">R</option>
+            <option value="NC-17">NC-17</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="genre">Genre</label>
+          <select class="form-control" name="genre">
+            <option disabled selected value=""></option>
+            <option value="Horror">Horror</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Drama">Drama</option>
+            <option value="Action">Action</option>
+            <option value="Romance">Romance</option>
+            <option value="Sci-Fi">Sci-Fi</option>
+            <option value="Art">Art</option>
+            <option value="Documentary">Documentary</option>
+            <option value="Performance Recording">Performance Recording</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="director">Director</label>
+          <input type="text" class="form-control" name="director" value="<%= movie.getDirector() %>">
+        </div>
+        <div class="form-group">
+          <label for="producer">Producer</label>
+          <input type="text" class="form-control" name="producer" value="<%= movie.getProducer() %>">
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">Update Movie</button>
+        </div>
+      </form>
+      <!-- Related Projects Row -->
+      <h3 class="my-4"> </h3> <!--padding not necessary -->
 
-      </div>
+      <!-- /.row -->
+
     </div>
-    <!-- /.row -->
-  </div>
-
-<% } %>
+    </div>
   <!-- /.container -->
 
   <!-- Footer -->
