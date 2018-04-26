@@ -109,15 +109,16 @@ else{   //Display Log Out
         <img class="img-fluid" src=<%= m.getLink() %> alt="">
         <h3 class="my-3">Buy Tickets</h3>
         <form action = "PurchaseTicket" method ="get">
+        	<input type="hidden" name="movieTitle" value="<%=m.getTitle()%>">
           <div class="form-group">
             <label for="screeningDate">Please select a date.</label>
-            <input type="date" type="form-control" name="screeningDate">
+            <input type="date" class="form-control" name="screeningDate">
           </div>
           <div class="form-group">
           <!-- TODO - get list of showing and open seats from Movie m -->
             <label for="screeningTime">Screening</label>
             <select id="screeningTime" class="form-control" name = "screeningTime">
-              <option disabled selected value></option>
+              <option disabled selected value=""></option>
 <!--              <option>5:30</option>-->
 <!--              <option>6:00</option>-->
 <!--              <option>6:30</option>-->
@@ -230,7 +231,7 @@ else{   //Display Log Out
           <div class="form-group">
             <label for="ticketType">Ticket type</label>
             <select id="ticketType" class="form-control" name = "ticketType">
-              <option disabled selected value></option>
+              <option disabled selected value=""></option>
               <option value = "6">Child - $6</option>
               <option value = "9">Adult - $9</option>
               <option value = "7">Senior - $7</option>
@@ -247,15 +248,15 @@ if((session.getAttribute("connected") == null) || !((String) session.getAttribut
           <!-- session is NOT connected -->
           <div class="form-group">
                 <label for="email">Email address</label>
-                <input type="text" class="form-control" id="forms" name = "email">
+                <input type="text" class="form-control" id="forms" name="email">
               </div>
           <div class="form-group">
-                <label for="ccno">Credit card number </label>
-                <input type="text" class="form-control" id="forms" name = "ccno">
+                <label for="ccno">Credit card number</label>
+                <input type="text" class="form-control" id="forms" name="ccno">
               </div>
               <div class="form-group">
                 <label for="ccType">Credit card type </label>
-                <select id="ccType" class="form-control" id ="forms" name = "ccType">
+                <select id="ccType" class="form-control" id ="forms" name="ccType">
                   <option>American Express</option>
                   <option>Visa</option>
                   <option>Mastercard</option>
@@ -264,15 +265,15 @@ if((session.getAttribute("connected") == null) || !((String) session.getAttribut
               </div>
               <div class="form-group">
                 <label for="expMonth">Exp. month</label>
-                <select id="expMonth" class="form-control" id = "forms" name = "expMonth">
-                  <option disabled selected value></option>
+                <select id="expMonth" class="form-control" id = "forms" name="expMonth">
+                  <option disabled selected value=""></option>
                   <%for (int i = 1; i < 13; i++){%>
                   <option><%=i%></option>
                   <%}%> 
                 </select>
                 <label for="expYear">Exp. year</label>
-                <select id="expYear" class="form-control" id = "forms" name = "expYear">
-                  <option disabled selected value></option>
+                <select id="expYear" class="form-control" id = "forms" name="expYear">
+                  <option disabled selected value=""></option>
                   <%for (int i = 2018; i < 2035; i++){%>
                   <option><%=i%></option>
                   <%}%> 
@@ -292,7 +293,6 @@ if((session.getAttribute("connected") == null) || !((String) session.getAttribut
         <h3 class="my-3">Summary</h3>
         <!-- TODO - get summary from Movie m -->
         <p><%=m.getDescription()%></p>
-        <!--<p>After the death of his father, T'Challa returns home to the African nation of Wakanda to take his rightful place as king. When a powerful enemy suddenly reappears, T'Challa's mettle as king -- and as Black Panther -- gets tested when he's drawn into a conflict that puts the fate of Wakanda and the entire world at risk. Faced with treachery and danger, the young king must rally his allies and release the full power of Black Panther to defeat his foes and secure the safety of his people.</p> -->
         <h3 class="my-3">Details</h3>
         <ul>
           <li><b>Release date: </b>3/9/2017</li> <!-- TODO - get release date from Movie m -->

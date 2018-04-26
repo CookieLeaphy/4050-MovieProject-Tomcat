@@ -66,8 +66,8 @@ public class PurchaseTicket extends HttpServlet {
 		}
 		
 		//Append Message
-		String message = "Thank you for your purchase! "
-				+ "\n Your order of the Black Panther has been confirmed.";
+		String message = "Thank you for your purchase, "+user.getUserName()+"! "
+				+ "\n Your order of tickets for "+request.getParameter("movieTitle")+"has been confirmed.";
 		for(String k: seats) {
 			message+= "\n\tSeat: "+k + ": $"+ticketPrice; 
 		}
