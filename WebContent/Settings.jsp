@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <%@page language="java" contentType="text/html" pageEncoding="UTF-8" %>
-<%@ page import="java.util.List" %>
+<%@ page import="java.util.List, entity.User, entity.Ticket, orm.ManageTicket, orm.ManageMovie" %>
 <head>
 
   <meta charset="utf-8">
@@ -98,12 +98,22 @@ else{   //Display Log Out
   <div class="container-fluid">
     <div class="row">
       <h1 class="my-4">Ticketeer
-        <small>Example616</small>
+        <small><%= session.getAttribute("user") %></small>
       </h1>
     </div>
     <div class="row row-eq-height">
-      <div class="col">
+      <div class="col">  
         <h2 class="mt-4">Order History</h2>
+          <% ManageTicket mngTick = new ManageTicket(); %>
+          <% ManageMovie movie = new ManageMovie(); %>
+          <% User user = (User)session.getAttribute("User"); %>
+          <% System.out.println(user.toString()); %>
+		  <% List<Ticket> results = mngTick.getUserTickets(user); %>
+		  <% if(results == null){ %>
+		  	<div class="row">
+				<p>You Have not purchased any tickets.</p>
+			</div>
+		  <% } else { %> 
         <table class="table table-responsive table-scrollable">
           <thead>
             <tr>
@@ -112,35 +122,31 @@ else{   //Display Log Out
               <th>Tickets</th>
               <th>Total</th>
               <th></th>
-              <th></th>
             </tr>
           </thead>
           <tbody class="table table-searchable">
+          <% for(Ticket t : results) { %> 
             <tr>
-              <td><b>039432</b></td>
+              <td><b><%= t.getID() %></b></td>
               <td>1/1/2000</td>
               <td>
                 <table>
                   <tr>
-                    <td>3</td>
-                    <td><b>Movie Title </b>show time, auditorium, seat number, age group, price</td>
-                  </tr>
-                  <tr>
                     <td>1</td>
-                    <td><b>Movie Title </b>show time, auditorium, seat number, age group, price</td>
+                    <td><b><%=movie.getMovieTitle(t.getMovie_ID()) %> </b></td>
+                    <td>Seat: <%=t.getSeat_ID() %></td>
                   </tr>
                 </table>
               </td>
-              <td>$19.00</td>
-              <td>
-                <a class="btn" href="#">View Details</a>
-              </td>
+              <td><%= t.getPrice() %></td>
               <td>
                 <button type="button" class="btn btn-warning" onClick="requestRefund()">Request Refund</button>
               </td>
             </tr>
+            <% } %>
           </tbody>
         </table>
+          <% } %>
       </div>
       <div class="col">
         <h2 class="mt-4">Personal Info</h2>

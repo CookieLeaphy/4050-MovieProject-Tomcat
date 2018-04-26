@@ -45,14 +45,15 @@ public class PurchaseTicket extends HttpServlet {
 		String screenTime = request.getParameter("screeningTime");
 		ManageTicket mngTicket = new ManageTicket();
 		User user = (User) session.getAttribute("User");
-		//Movie movie = (Movie)session.getAttribute("");
+		Movie movie = (Movie)session.getAttribute("movie");
+		System.out.println("Ticket Purchase: "+movie.toString());
 		//For users who didn't create an account
 		if(user == null)
 		{	
 			 email = request.getParameter("email");
 			
 			for (String i: seats)
-				mngTicket.addTicket(1, ticketPrice, email, ticketType, 1, i);
+				mngTicket.addTicket(1, movie.getID(), ticketPrice, email, ticketType, 1, i);
 			//NOTE movieID IS CONTAINED IN THE showing_ID of the db
 				//				System.out.println("Seat: "+i);
 		}else {
@@ -60,14 +61,14 @@ public class PurchaseTicket extends HttpServlet {
 			System.out.println(user.toString());
 			 email = user.getEmail();
 			for (String i: seats)
-				mngTicket.addTicket(1, ticketPrice, email, ticketType, 1, i);
+				mngTicket.addTicket(1, movie.getID(), ticketPrice, email, ticketType, 1, i);
 			//Since we don't store cc information --just for show	
 			
 		}
 		
 		//Append Message
 		String message = "Thank you for your purchase! "
-				+ "\n Your order of the Black Panther has been confirmed.";
+				+ "\n Your order of the "+movie.getTitle()+" has been confirmed.";
 		for(String k: seats) {
 			message+= "\n\tSeat: "+k + ": $"+ticketPrice; 
 		}

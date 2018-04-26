@@ -1,12 +1,16 @@
 package orm;
 
+import java.util.List;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import entity.hibernateUtil;
+import entity.Movie;
 import entity.Ticket;
+import entity.User;
 
 public class ManageTicket {
 	
@@ -15,7 +19,7 @@ public class ManageTicket {
 	}
 	private static SessionFactory factory = hibernateUtil.getSessionFactory();
 	
-	public Integer addTicket(int showing_ID, int price, String purchaser, String ticketType, int auditorium, String seat_ID)
+	public Integer addTicket(int showing_ID, int movie_ID, int price, String purchaser, String ticketType, int auditorium, String seat_ID)
 	{
 		Session session = factory.openSession();
 		Transaction tx = null;
@@ -24,7 +28,7 @@ public class ManageTicket {
 		try
 		{
 			tx = session.beginTransaction();
-			Ticket ticket = new Ticket(showing_ID, price, purchaser, ticketType, auditorium, seat_ID);
+			Ticket ticket = new Ticket(showing_ID, movie_ID, price, purchaser, ticketType, auditorium, seat_ID);
 			session.save(ticket);
 			tx.commit();
 		}
@@ -61,6 +65,31 @@ public class ManageTicket {
 		}
 		
 		return ticket;
+	}
+	
+	public List<Ticket> getUserTickets(User user){
+		Session session = factory.openSession();
+		//@SuppressWarnings("unchecked")
+		List<Ticket> ticketList = null;
+		Transaction tx = null;
+		try
+		{
+			String email = user.getEmail();
+			String query = "FROM Ticket s where s.purchaser='"+email+"'";
+			tx = session.beginTransaction();
+			System.out.println("query");
+			ticketList = session.createQuery(query).getResultList();
+//			return movieList;
+		}
+		catch(HibernateException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			session.close();
+		}
+		return ticketList;
 	}
 	
 	public void deleteTicket(Integer ID)

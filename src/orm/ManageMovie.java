@@ -176,6 +176,30 @@ public class ManageMovie {
 		return movie;
 	}
 	
+	public String getMovieTitle(int ID)
+	{
+		Session session = factory.openSession();
+		Movie movie = null;
+		Transaction tx;
+		try
+		{	
+			//String query = "FROM Movie s where s.ID '"+ID+"'";
+			//tx = session.beginTransaction();
+			movie = (Movie) session.get(Movie.class, ID);//session.createQuery(query).getResultList();
+			//movie = (Movie) session.get(Movie.class, ID); //idk if this is correct. we may need to use a sql query?
+		}
+		catch(HibernateException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			session.close();
+		}
+		
+		return movie.getTitle();
+	}
+	
 	public void deleteMovie(Integer ID)
 	{
 		Session session = factory.openSession();

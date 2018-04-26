@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <%@page language="java" contentType="text/html" pageEncoding="UTF-8" %>
 <%@ page import="java.util.List" %>
+<%@ page import="entity.Ticket, orm.ManageTicket" %>
+<%@ page import="entity.Movie, orm.ManageMovie" %>
+<%@ page import="entity.User, orm.ManageUser" %>
 <head>
 
   <meta charset="utf-8">

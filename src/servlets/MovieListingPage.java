@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import entity.Movie;
 import orm.ManageMovie;
@@ -30,14 +31,15 @@ public class MovieListingPage extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
+		
 		String movieID = request.getParameter("param");
 		ManageMovie mvmn = new ManageMovie();
 		System.out.println("Movie: "+movieID);
 		Movie movie = mvmn.getMovie(Integer.parseInt(movieID));
 		System.out.println(movie.toString());
 		
-		request.setAttribute("movie", movie);
+		session.setAttribute("movie", movie);
 		
 		request.getRequestDispatcher("MovieListingPage.jsp").forward(request,response);
 	}

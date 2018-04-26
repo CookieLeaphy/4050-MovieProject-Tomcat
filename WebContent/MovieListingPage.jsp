@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <%@page language="java" contentType="text/html" pageEncoding="UTF-8" %>
 <%@ page import="java.util.List, entity.Movie" %>
-<% Movie m = (Movie) request.getAttribute("movie"); %>
+<% Movie m = (Movie) session.getAttribute("movie"); %>
 <head>
 
   <meta charset="utf-8">
