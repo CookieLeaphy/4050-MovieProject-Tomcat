@@ -30,7 +30,7 @@ public class ManageUser {
 			tx = session.beginTransaction();
 			User user = new User(user_type, userName, firstName, lastName, pass, address,
 					city, zip, country, email, phone, newsSub, promoSub, confirmation);
-			List<User> userList = session.createQuery("from User s where s.email='"+user.getEmail()+"'"
+			List<User> userList = (List<User>) session.createQuery("from User s where s.email='"+user.getEmail()+"'"
 													+ " or s.userName='" + user.getUserName() + "'").getResultList();
 			/*for(User tmpuser : userList) 
 			{
@@ -75,6 +75,32 @@ public class ManageUser {
 		try
 		{
 			user = (User)session.get(User.class, ID);
+		}
+		catch(HibernateException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			session.close();
+		}
+		
+		return user;
+	}
+	
+	public User getUserByUsername(String username)
+	{
+		Session session = factory.openSession();
+		User user = null;
+		
+		try
+		{
+			@SuppressWarnings("unchecked")
+			List<User> userList = session.createQuery("from User s where s.userName='"+username+"'").getResultList();
+			for(User tmpuser : userList) 
+			{
+				user = tmpuser;
+			}
 		}
 		catch(HibernateException e)
 		{

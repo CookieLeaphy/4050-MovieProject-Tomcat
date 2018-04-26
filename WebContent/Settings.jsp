@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <%@page language="java" contentType="text/html" pageEncoding="UTF-8" %>
-<%@ page import="java.util.List" %>
+<%@ page import="java.util.List, entity.User, orm.ManageUser" %>
 <head>
 
   <meta charset="utf-8">
@@ -94,11 +94,17 @@ else{   //Display Log Out
     </div>
   </nav>
   <!-- Page Content -->
+<%
+String usernm = (String) session.getAttribute("user");
+ManageUser mngr = new ManageUser();
+User currentUser = mngr.getUserByUsername(usernm);
+%>
+
 
   <div class="container-fluid">
     <div class="row">
       <h1 class="my-4">Ticketeer
-        <small>Example616</small>
+        <small><%= currentUser.getUserName() %></small>
       </h1>
     </div>
     <div class="row row-eq-height">
@@ -147,7 +153,7 @@ else{   //Display Log Out
         <form action = "ChangeUsername" method = "get">
           <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" class="form-control" id="username" name = "username">
+            <input type="text" class="form-control" id="username" name = "username" value=<%= currentUser.getUserName() %>>
           </div>
           <div class="form-group">
             <button type="submit" class="btn btn-primary" onClick="checkFormUsername()">Change Username</button>
@@ -156,11 +162,11 @@ else{   //Display Log Out
         <form action = "ChangeName" method = "get">
           <div class="form-group">
             <label for="firstName">First name</label>
-            <input type="text" class="form-control" id="firstName" name = "firstName">
+            <input type="text" class="form-control" id="firstName" name = "firstName" value=<%= currentUser.getFirstName() %>>
           </div>
           <div class="form-group">
             <label for="lastName">Last name</label>
-            <input type="text" class="form-control" id="lastName" name = "lastName">
+            <input type="text" class="form-control" id="lastName" name = "lastName" value=<%= currentUser.getLastName() %>>
           </div>
           <div class="form-group">
             <button type="submit" class="btn btn-primary" onClick="checkFormName()">Change Name</button>
@@ -169,11 +175,11 @@ else{   //Display Log Out
         <form action = "ChangeContactInfo" method = "get">
           <div class="form-group">
             <label for="phone">Phone number</label>
-            <input id="phone" class="form-control" name ="phone">
+            <input id="phone" class="form-control" name ="phone" value=<%= currentUser.getPhone() %>>
           </div>
           <div class="form-group">
             <label for="email">Email address</label>
-            <input type="text" class="form-control" id="email" name = "email">
+            <input type="text" class="form-control" id="email" name = "email" value=<%= currentUser.getEmail() %>>
           </div>
 	      <div class="form-group">
 	        <button type="submit" class="btn btn-primary" onClick="checkFormContact()">Change Contact Info</button>
@@ -187,72 +193,72 @@ else{   //Display Log Out
         <form>
           <div class="form-group">
             <label for="address">Street address</label>
-            <input type="text" class="form-control" id="address">
+            <input type="text" class="form-control" name="address" value=<%= currentUser.getAddress() %>>
           </div>
           <div class="form-group">
             <label for="city">City</label>
-            <input type="text" class="form-control" id="city">
+            <input type="text" class="form-control" name="city" value=<%= currentUser.getCity() %>>
           </div>
           <div class="form-group">
             <label for="stateSelect">State</label>
             <select id="stateSelect" class="form-control">
-              <option disabled selected value>--</option>
-              <option>AL</option>
-              <option>AK</option>
-              <option>AZ</option>
-              <option>AR</option>
-              <option>CA</option>
-              <option>CO</option>
-              <option>CT</option>
-              <option>DE</option>
-              <option>DC</option>
-              <option>FL</option>
-              <option>GA</option>
-              <option>HI</option>
-              <option>ID</option>
-              <option>IL</option>
-              <option>IN</option>
-              <option>IA</option>
-              <option>KS</option>
-              <option>KY</option>
-              <option>LA</option>
-              <option>ME</option>
-              <option>MT</option>
-              <option>NE</option>
-              <option>NV</option>
-              <option>NH</option>
-              <option>NJ</option>
-              <option>NM</option>
-              <option>NY</option>
-              <option>NC</option>
-              <option>ND</option>
-              <option>OH</option>
-              <option>OK</option>
-              <option>OR</option>
-              <option>MD</option>
-              <option>MA</option>
-              <option>MI</option>
-              <option>MN</option>
-              <option>MS</option>
-              <option>MO</option>
-              <option>PA</option>
-              <option>RI</option>
-              <option>SC</option>
-              <option>SD</option>
-              <option>TN</option>
-              <option>TX</option>
-              <option>UT</option>
-              <option>VT</option>
-              <option>VA</option>
-              <option>WA</option>
-              <option>WV</option>
-              <option>WI</option>
-              <option>WY</option>
+              <option disabled selected value=""></option>
+              <option value="AL">AL</option>
+              <option value="AK">AK</option>
+              <option value="AZ">AZ</option>
+              <option value="AR">AR</option>
+              <option value="CA">CA</option>
+              <option value="CO">CO</option>
+              <option value="CT">CT</option>
+              <option value="DE">DE</option>
+              <option value="DC">DC</option>
+              <option value="FL">FL</option>
+              <option value="GA">GA</option>
+              <option value="HI">HI</option>
+              <option value="ID">ID</option>
+              <option value="IL">IL</option>
+              <option value="IN">IN</option>
+              <option value="IA">IA</option>
+              <option value="KS">KS</option>
+              <option value="KY">KY</option>
+              <option value="LA">LA</option>
+              <option value="ME">ME</option>
+              <option value="MT">MT</option>
+              <option value="NE">NE</option>
+              <option value="NV">NV</option>
+              <option value="NH">NH</option>
+              <option value="NJ">NJ</option>
+              <option value="NM">NM</option>
+              <option value="NY">NY</option>
+              <option value="NC">NC</option>
+              <option value="ND">ND</option>
+              <option value="OH">OH</option>
+              <option value="OK">OK</option>
+              <option value="OR">OR</option>
+              <option value="MD">MD</option>
+              <option value="MA">MA</option>
+              <option value="MA">MI</option>
+              <option value="MN">MN</option>
+              <option value="MS">MS</option>
+              <option value="MO">MO</option>
+              <option value="PA">PA</option>
+              <option value="RI">RI</option>
+              <option value="SC">SC</option>
+              <option value="SD">SD</option>
+              <option value="TN">TN</option>
+              <option value="TX">TX</option>
+              <option value="UT">UT</option>
+              <option value="VT">VT</option>
+              <option value="VA">VA</option>
+              <option value="WA">WA</option>
+              <option value="WV">WV</option>
+              <option value="WI">WI</option>
+              <option value="WY">WY</option>
             </select>
             <label for="zip">Zip code</label>
-            <input type="text" class="form-control" id="zip">
+            <input type="text" class="form-control" name="zip" value=<%= currentUser.getZip() %>>
             <label for="country">Country</label>
-            <input type="text" class="form-control" id="country">
+            <input type="text" class="form-control" name="country" value=<%= currentUser.getCountry() %>>
           </div>
           <div class="form-group">
             <button type="submit" class="btn btn-primary" onClick="checkFormAddress()">Change Billing Address</button>
@@ -278,7 +284,7 @@ else{   //Display Log Out
           <div class="form-group">
             <label for="expMonth">Exp. month</label>
             <select id="expMonth" class="form-control">
-              <option disabled selected value>--</option>
+              <option disabled selected value=""></option>
               <option>01</option>
               <option>02</option>
               <option>03</option>
@@ -294,7 +300,7 @@ else{   //Display Log Out
             </select>
             <label for="expYear">Exp. year</label>
             <select id="expYear" class="form-control">
-              <option disabled selected value>----</option>
+              <option disabled selected value=""></option>
               <option>2018</option>
               <option>2019</option>
               <option>2020</option>
@@ -357,11 +363,11 @@ else{   //Display Log Out
         <h2 class="mt-4">Subscriptions</h2>
         <form action = "ChangeSubscriptions" method = "get">
           <div class="form-check form-check-inline">
-            <input type="checkbox" class="form-check-input" id="news" name = "news">
+            <input type="checkbox" class="form-check-input" id="news" name="news">
             <label for="news" class="form-check-label">News</label>
           </div><br>
           <div class="form-check form-check-inline">
-            <input type="checkbox" class="form-check-input" id="promotions" name = "promotions">
+            <input type="checkbox" class="form-check-input" id="promotions" name="promotions">
             <label for="promotions" class="form-check-label">Promotions</label>
           </div>
           <div class="form-group">
