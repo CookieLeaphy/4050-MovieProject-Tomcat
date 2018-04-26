@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import entity.hibernateUtil;
+import entity.Ticket;
 import entity.User;
 
 public class ManageUser {
@@ -66,7 +67,7 @@ public class ManageUser {
 		
 		return ID;
 	}
-
+	
 	public User getUser(Integer ID)
 	{
 		Session session = factory.openSession();
